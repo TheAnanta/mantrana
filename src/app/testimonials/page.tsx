@@ -97,7 +97,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Testimonials Grid */}
-      <section className="section-padding bg-lavender/15">
+      <section className="section-padding bg-lavender/35">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
@@ -146,19 +146,19 @@ export default function TestimonialsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center bg-moss/10 rounded-2xl p-8">
+            <div className="text-center bg-moss/40 rounded-2xl p-8">
               <div className="text-4xl lg:text-5xl font-bold text-moss mb-4">500+</div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Clients Helped</h3>
               <p className="text-gray-600">Individuals who have found their path to wellness and growth</p>
             </div>
 
-            <div className="text-center bg-amaranth/10 rounded-2xl p-8">
+            <div className="text-center bg-amaranth/40 rounded-2xl p-8">
               <div className="text-4xl lg:text-5xl font-bold text-amaranth mb-4">98%</div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Success Rate</h3>
               <p className="text-gray-600">Clients report significant improvement in their mental wellbeing</p>
             </div>
 
-            <div className="text-center bg-azure/20 rounded-2xl p-8">
+            <div className="text-center bg-azure/40 rounded-2xl p-8">
               <div className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">5+</div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Years Experience</h3>
               <p className="text-gray-600">Dedicated to providing professional therapy and coaching services</p>
@@ -168,7 +168,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-moss/10">
+      <section className="section-padding bg-moss/35">
         <div className="container-custom text-center">
           <div className="bg-moss rounded-3xl p-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
