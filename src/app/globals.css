@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts fallback */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* Custom font definitions */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Google Sans Regular'), local('GoogleSans-Regular');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans Display';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Google Sans Display Bold'), local('GoogleSansDisplay-Bold');
+  font-display: swap;
+}
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Google Sans', 'Inter', system-ui, sans-serif;
+    @apply text-gray-900 antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Google Sans Display', 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+  }
+}
+
+/* Custom components */
+@layer components {
+  .btn-pill {
+    @apply px-8 py-4 rounded-full font-medium transition-all duration-300 shadow-soft hover:shadow-medium transform hover:-translate-y-0.5;
+  }
+  
+  .btn-primary {
+    @apply bg-moss text-white hover:bg-moss/90;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-moss border-2 border-moss hover:bg-moss hover:text-white;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/80 border border-white/20;
+  }
+  
+  .section-padding {
+    @apply py-24 lg:py-32;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
