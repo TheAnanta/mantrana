@@ -2,19 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-
-interface Appointment {
-  id: string
-  clientName: string
-  clientEmail: string
-  clientPhone: string
-  service: string
-  date: string
-  time: string
-  status: 'scheduled' | 'completed' | 'cancelled' | 'no-show'
-  notes?: string
-  duration: number // in minutes
-}
+import { subscribeToAppointments, updateAppointment } from '@/lib/firebase-utils'
+import { Appointment } from '@/types'
 
 export default function AppointmentsPage() {
   const router = useRouter()
@@ -22,6 +11,7 @@ export default function AppointmentsPage() {
   const [filter, setFilter] = useState<'all' | 'today' | 'upcoming' | 'completed'>('all')
   const [showNewAppointmentModal, setShowNewAppointmentModal] = useState(false)
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // Auth check
@@ -31,58 +21,22 @@ export default function AppointmentsPage() {
       return
     }
 
-    // Load sample appointments
-    setAppointments([
-      {
-        id: '1',
-        clientName: 'Sarah M.',
-        clientEmail: 'sarah.m@email.com',
-        clientPhone: '+91 98765 43210',
-        service: 'Individual Therapy',
-        date: new Date().toISOString().split('T')[0],
-        time: '10:00',
-        status: 'scheduled',
-        notes: 'First-time client, anxiety issues',
-        duration: 60,
-      },
-      {
-        id: '2',
-        clientName: 'John D.',
-        clientEmail: 'john.d@email.com',
-        clientPhone: '+91 98765 43211',
-        service: 'Life Coaching',
-        date: new Date().toISOString().split('T')[0],
-        time: '14:00',
-        status: 'scheduled',
-        notes: 'Career transition planning',
-        duration: 90,
-      },
-      {
-        id: '3',
-        clientName: 'Ram & Sita K.',
-        clientEmail: 'ram.sita@email.com',
-        clientPhone: '+91 98765 43212',
-        service: 'Couples Therapy',
-        date: new Date().toISOString().split('T')[0],
-        time: '16:00',
-        status: 'scheduled',
-        notes: 'Communication issues',
-        duration: 75,
-      },
-      {
-        id: '4',
-        clientName: 'Priya S.',
-        clientEmail: 'priya.s@email.com',
-        clientPhone: '+91 98765 43213',
-        service: 'Group Workshop',
-        date: '2024-12-10',
-        time: '11:00',
-        status: 'completed',
-        notes: 'Stress management workshop',
-        duration: 120,
-      },
-    ])
+    // Subscribe to real-time appointment updates
+    const unsubscribe = subscribeToAppointments((appointmentData) => {
+      setAppointments(appointmentData)
+      setLoading(false)
+    })
+
+    return unsubscribe
   }, [router])
+
+  const handleStatusUpdate = async (appointmentId: string, newStatus: Appointment['status']) => {
+    try {
+      await updateAppointment(appointmentId, { status: newStatus })
+    } catch (error) {
+      console.error('Failed to update appointment status:', error)
+    }
+  }
 
   const getStatusColor = (status: Appointment['status']) => {
     switch (status) {
@@ -110,6 +64,35 @@ export default function AppointmentsPage() {
     }
   })
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  }
+
+  const formatTime = (timeString: string) => {
+    const [hours, minutes] = timeString.split(':')
+    const hour = parseInt(hours)
+    const ampm = hour >= 12 ? 'PM' : 'AM'
+    const hour12 = hour % 12 || 12
+    return `${hour12}:${minutes} ${ampm}`
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <div className="animate-spin h-8 w-8 border-b-2 border-moss mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading appointments...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -118,196 +101,244 @@ export default function AppointmentsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Appointments</h1>
           <p className="text-gray-600">Manage your client appointments and schedule</p>
         </div>
-        <button
-          onClick={() => setShowNewAppointmentModal(true)}
-          className="bg-moss text-white px-4 py-2 rounded-lg hover:bg-moss/90 transition-colors"
-        >
-          + New Appointment
-        </button>
+        <div className="text-sm text-gray-500">
+          Real-time updates enabled ⚡
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-white rounded-lg p-4 shadow-soft">
+          <div className="text-2xl font-bold text-gray-900">{appointments.length}</div>
+          <div className="text-sm text-gray-600">Total Appointments</div>
+        </div>
+        <div className="bg-white rounded-lg p-4 shadow-soft">
+          <div className="text-2xl font-bold text-blue-600">
+            {appointments.filter(a => a.status === 'scheduled').length}
+          </div>
+          <div className="text-sm text-gray-600">Scheduled</div>
+        </div>
+        <div className="bg-white rounded-lg p-4 shadow-soft">
+          <div className="text-2xl font-bold text-green-600">
+            {appointments.filter(a => a.status === 'completed').length}
+          </div>
+          <div className="text-sm text-gray-600">Completed</div>
+        </div>
+        <div className="bg-white rounded-lg p-4 shadow-soft">
+          <div className="text-2xl font-bold text-gray-600">
+            {appointments.filter(a => {
+              const today = new Date().toISOString().split('T')[0]
+              return a.date === today && a.status === 'scheduled'
+            }).length}
+          </div>
+          <div className="text-sm text-gray-600">Today</div>
+        </div>
       </div>
 
       {/* Filters */}
       <div className="flex space-x-4">
-        {['all', 'today', 'upcoming', 'completed'].map((filterOption) => (
+        {[
+          { key: 'all', label: 'All' },
+          { key: 'today', label: 'Today' },
+          { key: 'upcoming', label: 'Upcoming' },
+          { key: 'completed', label: 'Completed' }
+        ].map(filterOption => (
           <button
-            key={filterOption}
-            onClick={() => setFilter(filterOption as any)}
-            className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
-              filter === filterOption
+            key={filterOption.key}
+            onClick={() => setFilter(filterOption.key as any)}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              filter === filterOption.key
                 ? 'bg-moss text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            {filterOption}
+            {filterOption.label}
           </button>
         ))}
       </div>
 
       {/* Appointments List */}
-      <div className="bg-white rounded-lg shadow-soft overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">
-            {filteredAppointments.length} appointments
-          </h3>
-        </div>
-        
-        <div className="divide-y divide-gray-200">
-          {filteredAppointments.map((appointment) => (
-            <div
-              key={appointment.id}
-              className="p-6 hover:bg-gray-50 cursor-pointer"
-              onClick={() => setSelectedAppointment(appointment)}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center space-x-3">
-                    <h4 className="text-lg font-medium text-gray-900">
-                      {appointment.clientName}
-                    </h4>
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(appointment.status)}`}>
-                      {appointment.status}
-                    </span>
-                  </div>
-                  
-                  <div className="mt-1 space-y-1">
-                    <p className="text-sm text-gray-600">
-                      <span className="font-medium">Service:</span> {appointment.service}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      <span className="font-medium">Date & Time:</span> {appointment.date} at {appointment.time}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      <span className="font-medium">Duration:</span> {appointment.duration} minutes
-                    </p>
-                    {appointment.notes && (
-                      <p className="text-sm text-gray-600">
-                        <span className="font-medium">Notes:</span> {appointment.notes}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-2">
-                  <button className="text-moss hover:text-moss/80 text-sm font-medium">
-                    Edit
-                  </button>
-                  <button className="text-red-600 hover:text-red-700 text-sm font-medium">
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-          
-          {filteredAppointments.length === 0 && (
-            <div className="p-6 text-center">
-              <p className="text-gray-500">No appointments found for the selected filter.</p>
-            </div>
-          )}
-        </div>
+      <div className="bg-white rounded-lg shadow-soft">
+        {filteredAppointments.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="text-gray-400 text-6xl mb-4">📅</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No appointments found</h3>
+            <p className="text-gray-600">
+              {filter === 'all' ? 'No appointments have been booked yet.' : `No ${filter} appointments found.`}
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Client
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Service
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Date & Time
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredAppointments.map((appointment) => (
+                  <tr key={appointment.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {appointment.clientName}
+                        </div>
+                        <div className="text-sm text-gray-500">{appointment.clientEmail}</div>
+                        <div className="text-sm text-gray-500">{appointment.clientPhone}</div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{appointment.service}</div>
+                      <div className="text-sm text-gray-500">{appointment.duration} minutes</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{formatDate(appointment.date)}</div>
+                      <div className="text-sm text-gray-500">{formatTime(appointment.time)}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(appointment.status)}`}>
+                        {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex space-x-2">
+                        {appointment.status === 'scheduled' && (
+                          <>
+                            <button
+                              onClick={() => handleStatusUpdate(appointment.id, 'completed')}
+                              className="text-green-600 hover:text-green-900"
+                            >
+                              Complete
+                            </button>
+                            <button
+                              onClick={() => handleStatusUpdate(appointment.id, 'cancelled')}
+                              className="text-red-600 hover:text-red-900"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={() => handleStatusUpdate(appointment.id, 'no-show')}
+                              className="text-gray-600 hover:text-gray-900"
+                            >
+                              No Show
+                            </button>
+                          </>
+                        )}
+                        <button
+                          onClick={() => setSelectedAppointment(appointment)}
+                          className="text-moss hover:text-moss/80"
+                        >
+                          View
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
-      {/* New Appointment Modal */}
-      {showNewAppointmentModal && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Schedule New Appointment</h3>
-            
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Client Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
-                  placeholder="Enter client name"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
-                  placeholder="client@email.com"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
-                  placeholder="+91 98765 43210"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Service
-                </label>
-                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss">
-                  <option value="">Select a service</option>
-                  <option value="Individual Therapy">Individual Therapy</option>
-                  <option value="Life Coaching">Life Coaching</option>
-                  <option value="Couples Therapy">Couples Therapy</option>
-                  <option value="Group Workshop">Group Workshop</option>
-                </select>
-              </div>
-              
+      {/* Appointment Details Modal */}
+      {selectedAppointment && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">Appointment Details</h2>
+              <button
+                onClick={() => setSelectedAppointment(null)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Date
-                  </label>
-                  <input
-                    type="date"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
-                  />
+                  <label className="block text-sm font-medium text-gray-700">Client Name</label>
+                  <p className="text-sm text-gray-900">{selectedAppointment.clientName}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Time
-                  </label>
-                  <input
-                    type="time"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
-                  />
+                  <label className="block text-sm font-medium text-gray-700">Email</label>
+                  <p className="text-sm text-gray-900">{selectedAppointment.clientEmail}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Phone</label>
+                  <p className="text-sm text-gray-900">{selectedAppointment.clientPhone}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Service</label>
+                  <p className="text-sm text-gray-900">{selectedAppointment.service}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Date</label>
+                  <p className="text-sm text-gray-900">{formatDate(selectedAppointment.date)}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Time</label>
+                  <p className="text-sm text-gray-900">{formatTime(selectedAppointment.time)}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Duration</label>
+                  <p className="text-sm text-gray-900">{selectedAppointment.duration} minutes</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Status</label>
+                  <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(selectedAppointment.status)}`}>
+                    {selectedAppointment.status.charAt(0).toUpperCase() + selectedAppointment.status.slice(1)}
+                  </span>
                 </div>
               </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Notes (optional)
-                </label>
-                <textarea
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
-                  rows={3}
-                  placeholder="Add any notes or special requirements"
-                />
+
+              {selectedAppointment.notes && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+                  <p className="text-sm text-gray-900 bg-gray-50 p-3 rounded-lg">
+                    {selectedAppointment.notes}
+                  </p>
+                </div>
+              )}
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Created</label>
+                  <p className="text-sm text-gray-500">
+                    {new Date(selectedAppointment.createdAt).toLocaleString()}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Last Updated</label>
+                  <p className="text-sm text-gray-500">
+                    {new Date(selectedAppointment.updatedAt).toLocaleString()}
+                  </p>
+                </div>
               </div>
-            </form>
-            
-            <div className="flex justify-end space-x-3 mt-6">
+            </div>
+
+            <div className="mt-8 flex justify-end space-x-4">
               <button
-                onClick={() => setShowNewAppointmentModal(false)}
-                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                onClick={() => setSelectedAppointment(null)}
+                className="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
               >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  // Here you would save the appointment
-                  setShowNewAppointmentModal(false)
-                }}
-                className="px-4 py-2 bg-moss text-white rounded-lg hover:bg-moss/90 transition-colors"
-              >
-                Schedule Appointment
+                Close
               </button>
             </div>
           </div>
