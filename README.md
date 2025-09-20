@@ -230,3 +230,32 @@ Home
 * Modern booking system with automated reminders (better than Placid Minds/Nirvikalpa).
 * Packages (single & multiple sessions) visible on site.
 * Mix of **personal storytelling** (like Nirvikalpa) + **service depth** (like Placid Minds) + **professional credibility** (like Nitin Shah).
+
+## 8. Branding
+<!-- Color palette swatches -->
+<div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+  <div style="background:#F4DFE6; width:160px; padding:12px; border-radius:6px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,0.08);">
+    <div style="font-weight:700; font-size:14px; color:#333;">Lavender Blush</div>
+    <div style="font-family:monospace; color:#333;">#F4DFE6</div>
+  </div>
+
+  <div style="background:#E0A3BB; width:160px; padding:12px; border-radius:6px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,0.08);">
+    <div style="font-weight:700; font-size:14px; color:#fff;">Amaranth Pink</div>
+    <div style="font-family:monospace; color:#fff;">#E0A3BB</div>
+  </div>
+
+  <div style="background:#D6E6E7; width:160px; padding:12px; border-radius:6px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,0.08);">
+    <div style="font-weight:700; font-size:14px; color:#333;">Azure</div>
+    <div style="font-family:monospace; color:#333;">#D6E6E7</div>
+  </div>
+
+  <div style="background:#C5CC82; width:160px; padding:12px; border-radius:6px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,0.08);">
+    <div style="font-weight:700; font-size:14px; color:#333;">Citron</div>
+    <div style="font-family:monospace; color:#333;">#C5CC82</div>
+  </div>
+
+  <div style="background:#97A13B; width:160px; padding:12px; border-radius:6px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,0.08);">
+    <div style="font-weight:700; font-size:14px; color:#fff;">Moss Green</div>
+    <div style="font-family:monospace; color:#fff;">#97A13B</div>
+  </div>
+</div>
