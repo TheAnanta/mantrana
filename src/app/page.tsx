@@ -6,7 +6,7 @@ import Link from 'next/link'
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
-      <div className="absolute inset-0 bg-lavender/5"></div>
+      <div className="absolute inset-0 bg-lavender/15"></div>
       <div className="relative container-custom text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
@@ -56,7 +56,7 @@ function AboutSection() {
               Read My Story
             </Link>
           </div>
-          <div className="bg-azure/20 rounded-3xl h-96 lg:h-128 shadow-soft"></div>
+          <div className="bg-azure/25 rounded-3xl h-96 lg:h-128 shadow-soft"></div>
         </div>
       </div>
     </section>
@@ -89,7 +89,7 @@ function ServicesSection() {
   ]
 
   return (
-    <section className="section-padding bg-azure/5">
+    <section className="section-padding bg-azure/15">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -153,7 +153,7 @@ function TestimonialsSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-lavender/20 rounded-2xl p-8 shadow-soft">
+            <div key={index} className="bg-lavender/25 rounded-2xl p-8 shadow-soft">
               <div className="flex mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <svg key={i} className="w-5 h-5 text-amaranth fill-current" viewBox="0 0 20 20">
@@ -203,7 +203,7 @@ function BlogSection() {
   ]
 
   return (
-    <section className="section-padding bg-lavender/10">
+    <section className="section-padding bg-lavender/20">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -218,7 +218,7 @@ function BlogSection() {
           {blogPosts.map((post, index) => (
             <Link key={index} href={`/blog/${post.slug}`}>
               <article className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 cursor-pointer">
-                <div className="bg-azure/30 h-48 relative">
+                <div className="bg-azure/35 h-48 relative">
                   <div className="absolute bottom-4 left-4">
                     <span className="text-xs font-medium text-moss bg-white/90 px-3 py-1 rounded-full">
                       {post.category}
@@ -254,7 +254,7 @@ function BlogSection() {
 // CTA Section
 function CTASection() {
   return (
-    <section className="section-padding bg-moss/5">
+    <section className="section-padding bg-moss/10">
       <div className="container-custom text-center">
         <div className="bg-moss rounded-3xl p-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
