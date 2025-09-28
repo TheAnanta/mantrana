@@ -1,27 +1,49 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
+import { useState } from "react";
+import Link from "next/link";
+import { Elsie } from "next/font/google";
+import { usePathname } from "next/navigation";
+
+const elsie = Elsie({
+  subsets: ["latin"],
+  weight: ["400", "900"],
+  variable: "--font-elsie",
+});
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Testimonials', href: '/testimonials' },
-  { name: 'Contact', href: '/contact' },
-]
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Blog", href: "/blog" },
+  { name: "Testimonials", href: "/testimonials" },
+  { name: "Contact", href: "/contact" },
+];
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const route = usePathname();
+  const isHomePage = route === "/";
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full z-50 glass-effect">
+    <header
+      className={` top-0 w-full z-50 ${
+        isHomePage
+          ? "absolute bg-[var(--teal)]"
+          : "fixed top-0 shadow-md glass-effect"
+      }`}
+    >
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <div className="text-2xl lg:text-3xl font-bold text-moss">
+            <div
+              className={`text-2xl lg:text-3xl ${
+                isHomePage
+                  ? `text-white ${elsie.className}`
+                  : "text-moss font-bold"
+              }`}
+            >
               Mantrana
             </div>
           </Link>
@@ -32,15 +54,16 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
+                className={`${
+                  isHomePage
+                    ? "text-white/60 hover:text-white"
+                    : "text-gray-700 hover:text-moss"
+                } transition-colors duration-300 font-medium`}
               >
                 {item.name}
               </Link>
             ))}
-            <Link
-              href="/book"
-              className="btn-pill btn-primary ml-4"
-            >
+            <Link href="/book" className="btn-pill btn-secondary ml-4">
               Book a Session
             </Link>
           </div>
@@ -103,5 +126,5 @@ export default function Header() {
         )}
       </nav>
     </header>
-  )
+  );
 }
