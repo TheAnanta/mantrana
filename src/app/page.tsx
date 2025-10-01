@@ -179,7 +179,7 @@ function ServicesSection() {
 function TestimonialsSection() {
   const testimonials = [
     {
-      name: "Sarah M.",
+      name: "Aruna M.",
       text: "Mohana's guidance helped me overcome my anxiety and find peace within myself. The sessions were transformative.",
       rating: 5,
     },
@@ -365,7 +365,7 @@ export default function HomePage() {
       <AboutMantranaSection />
       <ServicesSection />
       <TestimonialsSection />
-      <BlogSection />
+      {/* <BlogSection /> */}
       <CTASection />
       <Footer />
     </main>
