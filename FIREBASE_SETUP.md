@@ -5,26 +5,31 @@ This project now includes a complete Firebase backend implementation with realti
 ## Features Implemented
 
 ✅ **Firebase Realtime Database Integration**
+
 - Real-time appointment storage and synchronization
 - User profile management
 - Automatic availability slot calculation
 
 ✅ **Google Authentication**
+
 - OAuth 2.0 login with Google
 - User session management
 - Automatic user profile creation
 
 ✅ **Appointment Booking System**
+
 - Dynamic time slot availability checking
 - Real-time slot updates
 - Multi-service support (Individual Therapy, Life Coaching, Consultation Call)
 
 ✅ **User Account Management**
+
 - Personal appointment dashboard
 - Real-time appointment status updates
 - Appointment history tracking
 
 ✅ **Admin Dashboard Enhancement**
+
 - Real-time appointment monitoring
 - Status management (scheduled, completed, cancelled, no-show)
 - Detailed appointment information
@@ -89,16 +94,19 @@ Set up the following security rules in Firebase Realtime Database:
 ## How It Works
 
 ### User Flow
+
 1. **Visit `/book`** → Select service → Choose date & time → Sign in with Google → Complete booking
 2. **Visit `/account`** → View all appointments with real-time status updates
 3. **Sign out** → Available from header menu
 
 ### Admin Flow
+
 1. **Visit `/admin/login`** → Use existing admin credentials
 2. **View `/admin/appointments`** → Real-time appointment dashboard
 3. **Manage appointments** → Update status, view details
 
 ### Real-time Features
+
 - **Slot Availability**: Automatically updates when appointments are booked/cancelled
 - **Admin Dashboard**: Live updates when new appointments are made
 - **User Account**: Real-time status changes (scheduled → completed, etc.)
@@ -111,6 +119,7 @@ Set up the following security rules in Firebase Realtime Database:
 ## Technical Implementation
 
 ### Database Structure
+
 ```
 mantrana-db/
 ├── users/
@@ -138,11 +147,13 @@ mantrana-db/
 ```
 
 ### Services Available
+
 - **Individual Therapy** (60 minutes) - ₹2,500
-- **Life Coaching** (60 minutes) - ₹3,000  
+- **Life Coaching** (60 minutes) - ₹3,000
 - **Consultation Call** (15 minutes) - Free
 
 ### Working Hours
+
 - **Monday to Sunday**: 9:00 AM to 6:00 PM
 - **Time Slots**: 30-minute intervals
 - **Automatic Conflict Detection**: Prevents double-booking
