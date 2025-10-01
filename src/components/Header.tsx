@@ -1,9 +1,11 @@
 "use client";
 
+
 import { useState } from "react";
 import Link from "next/link";
 import { Elsie } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { useAuth } from '@/contexts/AuthContext'
 
 const elsie = Elsie({
   subsets: ["latin"],
@@ -21,6 +23,17 @@ const navigation = [
 ];
 
 export default function Header() {
+
+  const { user, loading, logout } = useAuth()
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+      setIsMenuOpen(false)
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
+  }
   const route = usePathname();
   const isHomePage = route === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,9 +76,49 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Link href="/book" className="btn-pill btn-secondary ml-4">
-              Book a Session
-            </Link>
+            
+            {!loading && (
+              <>
+                {user ? (
+                  <div className="flex items-center space-x-4 ml-4">
+                    <Link
+                      href="/account"
+                      className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
+                    >
+                      My Account
+                    </Link>
+                    <Link
+                      href="/book"
+                      className="btn-pill btn-secondary"
+                    >
+                      Book Session
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-4 ml-4">
+                    <Link
+                      href="/login"
+                      className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      href="/book"
+                      className="btn-pill btn-secondary ml-4"
+                    >
+                      Book a Session
+                    </Link>
+                  </div>
+                )}
+              </>
+            )}
+
           </div>
 
           {/* Mobile menu button */}
@@ -114,13 +167,52 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                href="/book"
-                className="btn-pill btn-primary w-fit mt-4"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Book a Session
-              </Link>
+              
+              {!loading && (
+                <>
+                  {user ? (
+                    <>
+                      <Link
+                        href="/account"
+                        className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        My Account
+                      </Link>
+                      <Link
+                        href="/book"
+                        className="btn-pill btn-secondary w-fit mt-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Book Session
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2 text-left"
+                      >
+                        Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/login"
+                        className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        href="/book"
+                        className="btn-pill btn-primary w-fit mt-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Book a Session
+                      </Link>
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </div>
         )}
