@@ -1,11 +1,10 @@
 "use client";
 
-
 import { useState } from "react";
 import Link from "next/link";
 import { Elsie } from "next/font/google";
 import { usePathname } from "next/navigation";
-import { useAuth } from '@/contexts/AuthContext'
+import { useAuth } from "@/contexts/AuthContext";
 
 const elsie = Elsie({
   subsets: ["latin"],
@@ -16,24 +15,15 @@ const elsie = Elsie({
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Blog", href: "/blog" },
-  { name: "Testimonials", href: "/testimonials" },
+  // { name: "Services", href: "/services" },
+  // { name: "Blog", href: "/blog" },
+  { name: "Testimonials", href: "/#testimonials" },
   { name: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
+  const { user, loading, logout } = useAuth();
 
-  const { user, loading, logout } = useAuth()
-
-  const handleLogout = async () => {
-    try {
-      await logout()
-      setIsMenuOpen(false)
-    } catch (error) {
-      console.error('Logout error:', error)
-    }
-  }
   const route = usePathname();
   const isHomePage = route === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,49 +66,39 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            
+
             {!loading && (
               <>
                 {user ? (
                   <div className="flex items-center space-x-4 ml-4">
+                    <Link href="/book" className="btn-pill btn-secondary">
+                      Book Session
+                    </Link>
                     <Link
                       href="/account"
                       className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
                     >
-                      My Account
+                      <img
+                        src={user.photoURL}
+                        className="size-12 object-cover rounded-full"
+                      />
                     </Link>
-                    <Link
-                      href="/book"
-                      className="btn-pill btn-secondary"
-                    >
-                      Book Session
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
-                    >
-                      Sign Out
-                    </button>
                   </div>
                 ) : (
                   <div className="flex items-center space-x-4 ml-4">
                     <Link
                       href="/login"
-                      className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
+                      className="text-white border-2 btn-pill hover:bg-[#E54160] hover:border-[#E54160] transition-colors duration-300 font-medium"
                     >
                       Sign In
                     </Link>
-                    <Link
-                      href="/book"
-                      className="btn-pill btn-secondary ml-4"
-                    >
+                    <Link href="/book" className="btn-pill btn-secondary ml-4">
                       Book a Session
                     </Link>
                   </div>
                 )}
               </>
             )}
-
           </div>
 
           {/* Mobile menu button */}
@@ -167,18 +147,11 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-              
+
               {!loading && (
                 <>
                   {user ? (
                     <>
-                      <Link
-                        href="/account"
-                        className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        My Account
-                      </Link>
                       <Link
                         href="/book"
                         className="btn-pill btn-secondary w-fit mt-2"
@@ -186,12 +159,22 @@ export default function Header() {
                       >
                         Book Session
                       </Link>
-                      <button
+                      <Link
+                        href="/account"
+                        className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <img
+                          src={user.photoURL}
+                          className="size-12 object-cover rounded-full inline-block mr-2"
+                        />
+                      </Link>
+                      {/* <button
                         onClick={handleLogout}
                         className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2 text-left"
                       >
                         Sign Out
-                      </button>
+                      </button> */}
                     </>
                   ) : (
                     <>

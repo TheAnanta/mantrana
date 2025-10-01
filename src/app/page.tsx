@@ -24,14 +24,12 @@ function HeroSection() {
           <p
             className={`text-xl md:text-2xl text-white/70 mb-4 font-medium ${elsie.className}`}
           >
-            Therapy by Mohana Rupa
+            Therapy by Mohana Rupa | Thriving in Balance 🌸
           </p>
-          <p className="text-xl md:text-2xl text-white/90 mb-4 font-medium">
-            Thriving in Balance 🌸
-          </p>
-          <p className="text-lg md:text-xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
-            👩‍⚕️ Psychotherapist &amp; Behavioral Specialist<br />
-            Providing compassionate guidance through digital-age challenges, life transitions, and inner struggles—helping you navigate these to find clarity and strength.
+          <p className="text-lg text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Providing compassionate guidance through digital-age challenges,
+            life transitions, and inner struggles—helping you navigate these to
+            find clarity and strength.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
@@ -61,21 +59,43 @@ function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2
-              className={`text-4xl lg:text-5xl text-gray-900 mb-6 ${elsie.className}`}
+              className={`text-4xl lg:text-5xl text-gray-900 ${elsie.className}`}
             >
-              Who is Mohana Rupa?
+              Mohana Rupa?
             </h2>
+            <p
+              className={`text-2xl mb-6 ${elsie.className} text-[var(--teal)]`}
+            >
+              {" "}
+              Psychotherapist &amp; Behavioral Specialist
+            </p>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              Namaste! I'm Mohana Rupa Nekkanti, a Psychotherapist and Behavioural Specialist with a Ph.D. in Applied Psychology and advanced certifications in Clinical Hypnosis and Neuro-Linguistic Programming.
+              Namaste!
+              <br />
+              I'm Mohana Rupa Nekkanti, a Psychotherapist and Behavioural
+              Specialist with a Ph.D. in Applied Psychology and advanced
+              certifications in Clinical Hypnosis and Neuro-Linguistic
+              Programming.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              My journey started in engineering, where my love for problem-solving grew. But it was my curiosity about the human mind—how our thoughts, emotions, and behaviours shape our lives—that led me to Psychology. With nearly ten years of teaching experience and over five years of research, I'm passionate about helping people find balance, resilience, and clarity in their lives.
+              My journey started in engineering, where my love for
+              problem-solving grew. But it was my curiosity about the human
+              mind—how our thoughts, emotions, and behaviours shape our
+              lives—that led me to Psychology. With nearly ten years of teaching
+              experience and over five years of research, I'm passionate about
+              helping people find balance, resilience, and clarity in their
+              lives.
             </p>
             <Link href="/about" className="btn-pill btn-primary">
               Read My Story
             </Link>
           </div>
-          <div className="bg-azure/40 rounded-3xl h-96 lg:h-128 shadow-soft"></div>
+          <div className="bg-azure/40 rounded-3xl h-96 lg:h-128 shadow-soft overflow-hidden">
+            <img
+              src="/images/mohana_rupa.png"
+              className="w-full h-full object-cover object-[20%]"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -86,9 +106,16 @@ function AboutSection() {
 function AboutMantranaSection() {
   return (
     <section className="section-padding bg-white">
-      <div className="container-custom">
+      <div className="container-custom ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="bg-azure/40 rounded-3xl h-96 lg:h-128 shadow-soft"></div>
+          <div className="bg-azure/40 rounded-3xl h-96 lg:h-128 shadow-soft  overflow-hidden">
+            <img
+              src={
+                "https://miro.medium.com/v2/resize:fit:1400/1*bWFsgSVJBUlEJTCLHcD2Mw.jpeg"
+              }
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div>
             <h2
               className={`text-4xl lg:text-5xl text-gray-900 mb-6 ${elsie.className}`}
@@ -96,10 +123,20 @@ function AboutMantranaSection() {
               What is Mantrana?
             </h2>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              The name <em>Mantrana</em> is derived from Sanskrit, meaning <strong>counsel, guidance, or thoughtful conversation</strong>. It perfectly captures the essence of therapy as I see it—not about giving advice or ready-made solutions, but walking alongside you as you uncover your own clarity and direction.
+              The name <em>Mantrana</em> is derived from Sanskrit, meaning{" "}
+              <strong>counsel, guidance, or thoughtful conversation</strong>. It
+              perfectly captures the essence of therapy as I see it—not about
+              giving advice or ready-made solutions, but walking alongside you
+              as you uncover your own clarity and direction.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              At Mantrana, therapy is a dedicated space to pause, reflect, and realign. Our approach blends evidence-based techniques such as Neuro-Linguistic Programming (NLP), Hypnosis, and Cognitive Restructuring with timeless insights inspired by Indian wisdom traditions. Each session is designed to create balance—between reflection and action, challenges and strengths, inner struggles and new possibilities.
+              At Mantrana, therapy is a dedicated space to pause, reflect, and
+              realign. Our approach blends evidence-based techniques such as
+              Neuro-Linguistic Programming (NLP), Hypnosis, and Cognitive
+              Restructuring with timeless insights inspired by Indian wisdom
+              traditions. Each session is designed to create balance—between
+              reflection and action, challenges and strengths, inner struggles
+              and new possibilities.
             </p>
             <Link href="/about" className="btn-pill btn-primary">
               Read More
@@ -150,7 +187,9 @@ function ServicesSection() {
             Our Services
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            ✨ What Mantrana Offers: Support for digital addiction, stress, relationships, and personal growth through evidence-based approaches and insights inspired by Indian philosophical wisdom.
+            ✨ What Mantrana Offers: Support for digital addiction, stress,
+            relationships, and personal growth through evidence-based approaches
+            and insights inspired by Indian philosophical wisdom.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -169,11 +208,11 @@ function ServicesSection() {
             </div>
           ))}
         </div>
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <Link href="/services" className="btn-pill btn-primary">
             Explore All Services
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );
@@ -200,7 +239,7 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-white" id="testimonials">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -237,11 +276,11 @@ function TestimonialsSection() {
             </div>
           ))}
         </div>
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <Link href="/testimonials" className="btn-pill btn-secondary">
             Read More Testimonials
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );
