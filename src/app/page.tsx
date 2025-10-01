@@ -14,6 +14,7 @@ function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center">
       <div className="absolute inset-0 bg-[url('/images/hero-bg.png')] bg-cover"></div>
+      <div className="absolute -z-10 inset-0 bg-[var(--teal)] bg-cover"></div>
 
       <div className="relative container-custom text-center">
         <div className="max-w-4xl mx-auto">
