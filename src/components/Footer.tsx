@@ -41,15 +41,13 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="text-3xl font-bold text-moss mb-4">Mantrana</div>
             <p className="text-gray-600 text-lg leading-relaxed mb-6 max-w-md">
-              Professional therapy, counselling, and coaching services by Mohana
-              Rupa. Your journey to mental wellness and inner clarity begins
-              here.
+              Psychotherapist &amp; Behavioral Specialist. Providing compassionate guidance through digital-age challenges, life transitions, and inner struggles—helping you find clarity and strength.
             </p>
             <div className="text-sm text-gray-500">
               <p className="mb-2">
                 &copy; 2024 Mantrana by Mohana Rupa. All rights reserved.
               </p>
-              <p>Guidance • Clarity • Healing</p>
+              <p>Thriving in Balance • Guidance • Clarity</p>
             </div>
           </div>
 
