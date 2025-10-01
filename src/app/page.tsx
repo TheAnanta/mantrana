@@ -13,7 +13,8 @@ const elsie = Elsie({
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center">
-      <div className="absolute inset-0 bg-[var(--teal)]"></div>
+      <div className="absolute inset-0 bg-[url('/images/hero-bg.png')] bg-cover"></div>
+
       <div className="relative container-custom text-center">
         <div className="max-w-4xl mx-auto">
           <h1
@@ -47,6 +48,10 @@ function HeroSection() {
           </div>
         </div>
       </div>
+      <img
+        src="/images/rupa_doodle.png"
+        className="absolute bottom-16 right-0 w-32 md:w-48 lg:w-64"
+      />
     </section>
   );
 }
