@@ -5,7 +5,7 @@ const navigation = {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
-    // { name: 'Blog', href: '/blog' },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ],
   legal: [
@@ -41,7 +41,10 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="text-3xl font-bold text-moss mb-4">Mantrana</div>
             <p className="text-gray-600 text-lg leading-relaxed mb-6 max-w-md">
-              Psychotherapist &amp; Behavioral Specialist. Providing compassionate guidance through digital-age challenges, life transitions, and inner struggles—helping you find clarity and strength.
+              Psychotherapist &amp; Behavioral Specialist. Providing
+              compassionate guidance through digital-age challenges, life
+              transitions, and inner struggles—helping you find clarity and
+              strength.
             </p>
             <div className="text-sm text-gray-500">
               <p className="mb-2">

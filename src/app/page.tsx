@@ -414,7 +414,7 @@ export default function HomePage() {
       <AboutMantranaSection />
       <ServicesSection />
       <TestimonialsSection />
-      {/* <BlogSection /> */}
+      <BlogSection />
       <CTASection />
       <Footer />
     </main>
