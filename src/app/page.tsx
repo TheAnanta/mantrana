@@ -117,7 +117,7 @@ function AboutMantranaSection() {
           <div className="bg-azure/40 rounded-3xl h-96 lg:h-128 shadow-soft  overflow-hidden">
             <img
               src={
-                "https://miro.medium.com/v2/resize:fit:1400/1*bWFsgSVJBUlEJTCLHcD2Mw.jpeg"
+                "/images/indian_mental_health.jpg"
               }
               className="w-full h-full object-cover"
             />
