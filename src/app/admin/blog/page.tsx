@@ -46,7 +46,7 @@ export default function BlogManagementPage() {
         publishedAt: '2024-11-15',
         author: 'Mohana Rupa',
         readTime: '5 min read',
-        image: '/api/placeholder/400/250',
+        image: '/images/anxiety-stress-management.png',
         tags: ['anxiety', 'stress-management', 'mental-health']
       },
       {
@@ -60,7 +60,7 @@ export default function BlogManagementPage() {
         publishedAt: '2024-11-12',
         author: 'Mohana Rupa',
         readTime: '7 min read',
-        image: '/api/placeholder/400/250',
+        image: '/images/mindfulness-relationships.png',
         tags: ['mindfulness', 'relationships', 'communication']
       },
       {

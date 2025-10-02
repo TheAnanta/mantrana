@@ -18,6 +18,7 @@ interface BlogPost {
   }
   tags: string[]
   aiSummary: string
+  image: string
 }
 
 // Sample blog post data - in a real app this would come from a CMS or API
@@ -81,7 +82,8 @@ const getBlogPost = (slug: string): BlogPost | null => {
         bio: 'Mohana Rupa is a licensed therapist and certified life coach with over 8 years of experience helping individuals overcome anxiety, depression, and life challenges.'
       },
       tags: ['anxiety', 'stress management', 'mental health', 'mindfulness', 'coping strategies'],
-      aiSummary: 'This article provides a comprehensive guide to understanding and managing anxiety through evidence-based techniques including breathing exercises, mindfulness, and cognitive restructuring. It emphasizes the importance of daily routines and professional support when needed.'
+      aiSummary: 'This article provides a comprehensive guide to understanding and managing anxiety through evidence-based techniques including breathing exercises, mindfulness, and cognitive restructuring. It emphasizes the importance of daily routines and professional support when needed.',
+      image: '/images/anxiety-stress-management.png'
     }
   }
   
@@ -178,8 +180,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="py-8">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-azure/30 h-96 rounded-2xl relative overflow-hidden">
-              <div className="absolute inset-0 bg-azure/50"></div>
+            <div className="h-96 rounded-2xl overflow-hidden">
+              <img 
+                src={post.image} 
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
