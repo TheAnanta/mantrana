@@ -302,6 +302,7 @@ function BlogSection() {
       category: "Mental Health",
       readTime: "5 min read",
       slug: "understanding-anxiety-managing-daily-stress",
+      image: "/images/anxiety-stress-management.png",
     },
     {
       title: "The Power of Mindfulness in Relationships",
@@ -310,6 +311,7 @@ function BlogSection() {
       category: "Relationships",
       readTime: "7 min read",
       slug: "power-of-mindfulness-in-relationships",
+      image: "/images/mindfulness-relationships.png",
     },
     {
       title: "Building Resilience: Tools for Life's Challenges",
@@ -318,6 +320,7 @@ function BlogSection() {
       category: "Personal Growth",
       readTime: "6 min read",
       slug: "building-resilience-tools-for-challenges",
+      image: "/images/resilience-personal-growth.png",
     },
   ];
 
@@ -337,7 +340,12 @@ function BlogSection() {
           {blogPosts.map((post, index) => (
             <Link key={index} href={`/blog/${post.slug}`}>
               <article className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 cursor-pointer">
-                <div className="bg-azure/45 h-48 relative">
+                <div className="h-48 relative overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute bottom-4 left-4">
                     <span className="text-xs font-medium text-moss bg-white/90 px-3 py-1 rounded-full">
                       {post.category}
