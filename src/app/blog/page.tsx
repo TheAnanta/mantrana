@@ -34,7 +34,7 @@ const blogPosts: BlogPost[] = [
       name: 'Mohana Rupa',
       role: 'Licensed Therapist & Coach'
     },
-    image: '/api/placeholder/400/250'
+    image: '/images/anxiety-stress-management.png'
   },
   {
     slug: 'power-of-mindfulness-in-relationships',
@@ -47,7 +47,7 @@ const blogPosts: BlogPost[] = [
       name: 'Mohana Rupa',
       role: 'Licensed Therapist & Coach'
     },
-    image: '/api/placeholder/400/250'
+    image: '/images/mindfulness-relationships.png'
   },
   {
     slug: 'building-resilience-tools-for-challenges',
@@ -60,7 +60,7 @@ const blogPosts: BlogPost[] = [
       name: 'Mohana Rupa',
       role: 'Licensed Therapist & Coach'
     },
-    image: '/api/placeholder/400/250'
+    image: '/images/resilience-personal-growth.png'
   },
   {
     slug: 'emotional-intelligence-workplace-success',
@@ -73,7 +73,7 @@ const blogPosts: BlogPost[] = [
       name: 'Mohana Rupa',
       role: 'Licensed Therapist & Coach'
     },
-    image: '/api/placeholder/400/250'
+    image: '/images/emotional-intelligence-workplace.png'
   },
   {
     slug: 'healing-trauma-gentle-approaches',
@@ -86,7 +86,7 @@ const blogPosts: BlogPost[] = [
       name: 'Mohana Rupa',
       role: 'Licensed Therapist & Coach'
     },
-    image: '/api/placeholder/400/250'
+    image: '/images/healing-trauma.png'
   },
   {
     slug: 'setting-healthy-boundaries',
@@ -99,7 +99,7 @@ const blogPosts: BlogPost[] = [
       name: 'Mohana Rupa',
       role: 'Licensed Therapist & Coach'
     },
-    image: '/api/placeholder/400/250'
+    image: '/images/healthy-boundaries.png'
   }
 ]
 
@@ -149,8 +149,12 @@ export default function BlogPage() {
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <article className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
                   {/* Featured Image */}
-                  <div className="bg-azure/30 h-48 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-azure/50 to-lavender/50"></div>
+                  <div className="h-48 relative overflow-hidden">
+                    <img 
+                      src={post.image} 
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
                     <div className="absolute bottom-4 left-4">
                       <span className="text-xs font-medium text-moss bg-white/90 px-3 py-1 rounded-full">
                         {post.category}
