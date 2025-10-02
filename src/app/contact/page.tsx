@@ -169,7 +169,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-1">Phone</h3>
-                    <p className="text-gray-600">+91 98765 43210</p>
+                    <p className="text-gray-600">+91 8328438589</p>
                     <p className="text-sm text-gray-500">Available Mon-Fri, 9 AM - 6 PM IST</p>
                   </div>
                 </div>
@@ -180,8 +180,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-1">WhatsApp</h3>
-                    <p className="text-gray-600">+91 98765 43210</p>
-                    <Link href="https://wa.me/919876543210" className="text-moss hover:text-moss/80 text-sm">
+                    <p className="text-gray-600">+91 8328438589</p>
+                    <Link href="https://wa.me/918328438589" className="text-moss hover:text-moss/80 text-sm">
                       Send WhatsApp Message →
                     </Link>
                   </div>
@@ -209,7 +209,7 @@ export default function ContactPage() {
                   <Link href="mailto:hello@mantrana.com" className="btn-pill btn-secondary w-full text-center block">
                     Send Email
                   </Link>
-                  <Link href="https://wa.me/919876543210" className="btn-pill btn-secondary w-full text-center block">
+                  <Link href="https://wa.me/918328438589" className="btn-pill btn-secondary w-full text-center block">
                     WhatsApp Chat
                   </Link>
                 </div>
