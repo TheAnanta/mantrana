@@ -22,6 +22,7 @@ const config: Config = {
         azure: '#D6E6E7',
         citron: '#C5CC82',
         moss: '#97A13B',
+        teal: '#80a39b',
       },
       fontFamily: {
         'google-sans': ['Google Sans', 'system-ui', 'sans-serif'],
