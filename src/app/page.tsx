@@ -24,9 +24,9 @@ function HeroSection() {
             Mantrana
           </h1>
           <p
-            className={`text-xl md:text-2xl text-white/70 mb-4 font-medium ${elsie.className}`}
+            className={`text-xl md:text-2xl text-white/70 mb-12 font-medium ${elsie.className}`}
           >
-            Therapy by Mohana Rupa | Thriving in Balance 🌸
+            Therapy by Mohana Rupa
           </p>
           <p className="text-lg text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
             Providing compassionate guidance through digital-age challenges,
@@ -65,32 +65,22 @@ function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2
-              className={`text-4xl lg:text-5xl text-gray-900 ${elsie.className}`}
+              className={`text-4xl lg:text-5xl text-gray-900 mb-6 ${elsie.className}`}
             >
-              Mohana Rupa?
+              Mohana Rupa Nekkanti
             </h2>
             <p
               className={`text-2xl mb-6 ${elsie.className} text-[var(--teal)]`}
             >
-              {" "}
               Psychotherapist &amp; Behavioral Specialist
             </p>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
               Namaste!
               <br />
-              I'm Mohana Rupa Nekkanti, a Psychotherapist and Behavioural
-              Specialist with a Ph.D. in Applied Psychology and advanced
-              certifications in Clinical Hypnosis and Neuro-Linguistic
-              Programming.
+              I am Mohana Rupa Nekkanti, founder of Mantrana therapy. I am a Psychotherapist and Behavioural Specialist with a Ph.D. in Applied Psychology and advanced certifications in Clinical Hypnosis and Neuro-Linguistic Programming.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              My journey started in engineering, where my love for
-              problem-solving grew. But it was my curiosity about the human
-              mind—how our thoughts, emotions, and behaviours shape our
-              lives—that led me to Psychology. With nearly ten years of teaching
-              experience and over five years of research, I'm passionate about
-              helping people find balance, resilience, and clarity in their
-              lives.
+              As a Behavioral Specialist, I help individuals reshape unhelpful patterns—whether it's digital habits, stress responses, or relationship dynamics—so they can live with greater balance and clarity.
             </p>
             <Link href="/about" className="btn-pill btn-primary">
               Read My Story
@@ -237,11 +227,6 @@ function TestimonialsSection() {
       text: "Professional, compassionate, and incredibly insightful. My life coaching sessions have changed my perspective completely.",
       rating: 5,
     },
-    {
-      name: "Priya S.",
-      text: "The workshops are amazing! I learned practical tools for managing stress and building better relationships.",
-      rating: 5,
-    },
   ];
 
   return (
@@ -256,7 +241,7 @@ function TestimonialsSection() {
             transformation through our services.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}

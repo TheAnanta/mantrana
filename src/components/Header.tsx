@@ -14,8 +14,8 @@ const elsie = Elsie({
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  // { name: "Services", href: "/services" },
+  { name: "About", href: "/about", hasDropdown: true },
+  { name: "Services", href: "/services" },
   { name: "Blog", href: "/blog" },
   { name: "Testimonials", href: "/#testimonials" },
   { name: "Contact", href: "/contact" },
@@ -27,6 +27,7 @@ export default function Header() {
   const route = usePathname();
   const isHomePage = route === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
 
   return (
     <header
@@ -41,30 +42,68 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <div
-              className={`text-2xl lg:text-3xl ${
+              className={`text-lg lg:text-xl ${
                 isHomePage
                   ? `text-white ${elsie.className}`
                   : "text-moss font-bold"
               }`}
             >
-              Mantrana
+              Mantrana – Therapy by Mohana Rupa
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`${
-                  isHomePage
-                    ? "text-white/60 hover:text-white"
-                    : "text-gray-700 hover:text-moss"
-                } transition-colors duration-300 font-medium`}
-              >
-                {item.name}
-              </Link>
+              item.hasDropdown ? (
+                <div 
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => setAboutDropdownOpen(true)}
+                  onMouseLeave={() => setAboutDropdownOpen(false)}
+                >
+                  <button
+                    className={`${
+                      isHomePage
+                        ? "text-white/60 hover:text-white"
+                        : "text-gray-700 hover:text-moss"
+                    } transition-colors duration-300 font-medium flex items-center`}
+                  >
+                    {item.name}
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {aboutDropdownOpen && (
+                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-lg py-2 z-50">
+                      <Link
+                        href="/about#about-me"
+                        className="block px-4 py-2 text-gray-700 hover:bg-moss/10 hover:text-moss transition-colors"
+                      >
+                        About Me
+                      </Link>
+                      <Link
+                        href="/about#about-mantrana"
+                        className="block px-4 py-2 text-gray-700 hover:bg-moss/10 hover:text-moss transition-colors"
+                      >
+                        About Mantrana Therapy
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`${
+                    isHomePage
+                      ? "text-white/60 hover:text-white"
+                      : "text-gray-700 hover:text-moss"
+                  } transition-colors duration-300 font-medium`}
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
 
             {!loading && (

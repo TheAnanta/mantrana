@@ -31,7 +31,7 @@ export default function AboutPage() {
       </section>
 
       {/* Personal Journey Section */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-white" id="about-me">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div className="bg-gradient-to-br from-azure to-lavender rounded-3xl h-96 lg:h-128 shadow-soft">
@@ -47,49 +47,56 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  Namaste! I'm Mohana Rupa Nekkanti, a Psychotherapist and
-                  Behavioural Specialist with a Ph.D. in Applied Psychology and
-                  advanced certifications in Clinical Hypnosis and
-                  Neuro-Linguistic Programming. I'm passionate about helping
-                  people find balance, resilience, and clarity in their lives.
+                  Namaste! I am Mohana Rupa Nekkanti, founder of Mantrana therapy. I am a Psychotherapist and Behavioural Specialist with a Ph.D. in Applied Psychology and advanced certifications in Clinical Hypnosis and Neuro-Linguistic Programming.
                 </p>
                 <p>
-                  My journey started in engineering, where my love for
-                  problem-solving grew. But it was my curiosity about the human
-                  mind—how our thoughts, emotions, and behaviours shape our
-                  lives—that led me to Psychology. This path allows me to
-                  combine insight, research, and compassion to truly make a
-                  difference.
+                  As a Behavioral Specialist, I help individuals reshape unhelpful patterns—whether it's digital habits, stress responses, or relationship dynamics—so they can live with greater balance and clarity.
                 </p>
+                <Link href="#my-story" className="btn-pill btn-primary inline-block">
+                  Read My Story
+                </Link>
               </div>
             </div>
-            <p>
-              Having faced my own struggles with overthinking and navigating
-              life quietly, I understand how hard it can be to reach out for
-              support. That's why I created Mantrana, my therapy practice—a
-              welcoming, safe space where individuals can explore their
-              challenges, gain clarity, and build strength.
-            </p>
-            <p>
-              With nearly ten years of teaching experience and over five years
-              of research in Applied Psychology, I've worked closely with young
-              adults and recognize the need for compassionate, non-judgmental
-              support. My approach blends evidence-based techniques like Neuro
-              Linguistic Programming, Clinical Hypnosis, and Cognitive
-              restructuring with an inclination towards blending wisdom from
-              Bharateeya Knowledge Systems and Indian philosophy.
-            </p>
-            <p>
-              When I'm not working, I love reading, traveling, watching films,
-              and exploring new ideas—activities that inspire me and enrich my
-              connection with those I work with.
-            </p>
+          </div>
+          
+          <div className="mt-16" id="my-story">
+            <div className="space-y-6 text-lg text-gray-600 leading-relaxed max-w-4xl">
+              <p>
+                My journey started in engineering, where my love for
+                problem-solving grew. But it was my curiosity about the human
+                mind—how our thoughts, emotions, and behaviours shape our
+                lives—that led me to Psychology. This path allows me to
+                combine insight, research, and compassion to truly make a
+                difference.
+              </p>
+              <p>
+                Having faced my own struggles with overthinking and navigating
+                life quietly, I understand how hard it can be to reach out for
+                support. That's why I created Mantrana, my therapy practice—a
+                welcoming, safe space where individuals can explore their
+                challenges, gain clarity, and build strength.
+              </p>
+              <p>
+                With nearly ten years of teaching experience and over five years
+                of research in Applied Psychology, I've worked closely with young
+                adults and recognize the need for compassionate, non-judgmental
+                support. My approach blends evidence-based techniques like Neuro
+                Linguistic Programming, Clinical Hypnosis, and Cognitive
+                restructuring with an inclination towards blending wisdom from
+                Bharateeya Knowledge Systems and Indian philosophy.
+              </p>
+              <p>
+                When I'm not working, I love reading, traveling, watching films,
+                and exploring new ideas—activities that inspire me and enrich my
+                connection with those I work with.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Philosophy Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50" id="about-mantrana">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -164,11 +171,9 @@ export default function AboutPage() {
                   </h3>
                   <ul className="space-y-2 text-gray-600">
                     <li>• Ph.D. in Applied Psychology</li>
-                    <li>• Advanced Certification in Clinical Hypnosis</li>
-                    <li>
-                      • Certification in Neuro-Linguistic Programming (NLP)
-                    </li>
-                    <li>• Background in Engineering</li>
+                    <li>• Master Practitioner in Neuro Linguistic Programming</li>
+                    <li>• Master Practitioner in Cognitive Hypnotic Psychotherapy</li>
+                    <li>• Published research papers in internationally recognized, peer-reviewed journals (Scopus-indexed) and presented at academic conferences</li>
                   </ul>
                 </div>
 
@@ -181,6 +186,7 @@ export default function AboutPage() {
                     <li>• Over 5 years of research in Applied Psychology</li>
                     <li>• Specialized work with young adults</li>
                     <li>• Founder of Mantrana therapy practice</li>
+                    <li>• One month On Site Substance Use Treatment Orientation Program (STOP) at Centre for Addiction Medicine (CAM), NIMHANS, Bengaluru</li>
                   </ul>
                 </div>
               </div>
@@ -188,37 +194,58 @@ export default function AboutPage() {
 
             <div>
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
-                Approach & Specializations
+                Specialized Areas
               </h2>
+              <div className="space-y-6 text-lg text-gray-600 leading-relaxed mb-6">
+                <p>
+                  As a Behavioural Specialist, I work with individuals to understand and transform patterns of thought and action that may be holding them back. Many behaviors can be reshaped with the right guidance. Some areas I focus on include:
+                </p>
+              </div>
               <div className="space-y-4">
                 <div className="bg-gray-50 rounded-xl p-6">
                   <h3 className="font-bold text-gray-900 mb-2">
-                    Evidence-Based Techniques
+                    Digital and Social Media Habits
                   </h3>
                   <p className="text-gray-600">
-                    Neuro-Linguistic Programming (NLP), Clinical Hypnosis, and
-                    Cognitive Restructuring
+                    Reducing screen time, managing online distractions, and building healthier tech use.
                   </p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6">
                   <h3 className="font-bold text-gray-900 mb-2">
-                    Integrated Wisdom
+                    Stress and Anxiety Responses
                   </h3>
                   <p className="text-gray-600">
-                    Insights from Bharateeya Knowledge Systems and Indian
-                    philosophical traditions
+                    Learning new ways to cope with challenges and pressure.
                   </p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6">
                   <h3 className="font-bold text-gray-900 mb-2">
-                    Specialized Areas
+                    Unhelpful Thinking Patterns
                   </h3>
                   <p className="text-gray-600">
-                    Digital-age challenges, stress management, life transitions,
-                    and personal growth
+                    Breaking cycles of overthinking, procrastination, or negative self-talk.
+                  </p>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-6">
+                  <h3 className="font-bold text-gray-900 mb-2">
+                    Relationship and Communication Habits
+                  </h3>
+                  <p className="text-gray-600">
+                    Improving how you connect, respond, and express yourself.
+                  </p>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-6">
+                  <h3 className="font-bold text-gray-900 mb-2">
+                    Lifestyle Choices
+                  </h3>
+                  <p className="text-gray-600">
+                    Cultivating routines that support balance, well-being, and resilience.
                   </p>
                 </div>
               </div>
+              <p className="text-gray-600 leading-relaxed mt-6">
+                These are just examples—any behaviour that creates distress, imbalance, or limits growth can be explored and modified in therapy.
+              </p>
             </div>
           </div>
         </div>
