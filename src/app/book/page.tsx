@@ -1,143 +1,161 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useAuth } from '@/contexts/AuthContext'
-import { useRouter } from 'next/navigation'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import Link from 'next/link'
-import { TimeSlot, Service } from '@/types'
+import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Link from "next/link";
+import { TimeSlot, Service } from "@/types";
 
 export default function BookPage() {
-  const { user, loading } = useAuth()
-  const router = useRouter()
-  const [selectedService, setSelectedService] = useState<Service | null>(null)
-  const [selectedDate, setSelectedDate] = useState('')
-  const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null)
-  const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([])
-  const [loadingSlots, setLoadingSlots] = useState(false)
+  const { user, loading } = useAuth();
+  const router = useRouter();
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
+  const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
   const [bookingForm, setBookingForm] = useState({
-    clientName: '',
-    clientEmail: '',
-    clientPhone: '',
-    notes: ''
-  })
-  const [isBooking, setIsBooking] = useState(false)
-  const [bookingSuccess, setBookingSuccess] = useState(false)
-  const [error, setError] = useState('')
+    clientName: "",
+    clientEmail: "",
+    clientPhone: "",
+    notes: "",
+  });
+  const [isBooking, setIsBooking] = useState(false);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const services: Service[] = [
     {
-      id: 'individual-therapy',
-      title: 'Individual Therapy',
+      id: "individual-therapy",
+      title: "Individual Therapy",
       duration: 60,
-      price: '₹2,500',
-      description: 'One-on-one therapy session for personal growth and mental wellness.',
-      features: ['Personalized approach', 'Confidential environment', 'Follow-up resources'],
+      price: "₹2,500",
+      description:
+        "One-on-one therapy session for personal growth and mental wellness.",
+      features: [
+        "Personalized approach",
+        "Confidential environment",
+        "Follow-up resources",
+      ],
     },
     {
-      id: 'life-coaching',
-      title: 'Life Coaching',
+      id: "life-coaching",
+      title: "Life Coaching",
       duration: 60,
-      price: '₹3,000',
-      description: 'Goal-oriented coaching for career and personal development.',
-      features: ['Action-oriented approach', 'Goal setting framework', 'Progress tracking'],
+      price: "₹3,000",
+      description:
+        "Goal-oriented coaching for career and personal development.",
+      features: [
+        "Action-oriented approach",
+        "Goal setting framework",
+        "Progress tracking",
+      ],
     },
     {
-      id: 'consultation-call',
-      title: 'Consultation Call',
+      id: "consultation-call",
+      title: "Consultation Call",
       duration: 15,
-      price: 'Free',
-      description: 'Discovery call to discuss your needs and answer questions.',
-      features: ['No commitment', 'Ask questions', 'Learn about services'],
+      price: "Free",
+      description: "Discovery call to discuss your needs and answer questions.",
+      features: ["No commitment", "Ask questions", "Learn about services"],
       popular: true,
     },
-  ]
+  ];
 
   const packages = [
     {
-      name: '3-Session Package',
-      price: '₹6,750',
-      originalPrice: '₹7,500',
-      sessions: '3 sessions',
-      savings: '10% discount',
-      description: 'Perfect for focused work on specific goals',
+      name: "3-Session Package",
+      price: "₹6,750",
+      originalPrice: "₹7,500",
+      sessions: "3 sessions",
+      savings: "10% discount",
+      description: "Perfect for focused work on specific goals",
     },
     {
-      name: '5-Session Package',
-      price: '₹10,000',
-      originalPrice: '₹12,500',
-      sessions: '5 sessions',
-      savings: '20% discount',
-      description: 'Ideal for comprehensive personal development',
+      name: "5-Session Package",
+      price: "₹10,000",
+      originalPrice: "₹12,500",
+      sessions: "5 sessions",
+      savings: "20% discount",
+      description: "Ideal for comprehensive personal development",
       popular: true,
     },
     {
-      name: '10-Session Package',
-      price: '₹18,000',
-      originalPrice: '₹25,000',
-      sessions: '10 sessions',
-      savings: '28% discount',
-      description: 'Best value for long-term transformation',
+      name: "10-Session Package",
+      price: "₹18,000",
+      originalPrice: "₹25,000",
+      sessions: "10 sessions",
+      savings: "28% discount",
+      description: "Best value for long-term transformation",
     },
-  ]
+  ];
 
   useEffect(() => {
-    if (user && bookingForm.clientName === '') {
-      setBookingForm(prev => ({
+    if (user && bookingForm.clientName === "") {
+      setBookingForm((prev) => ({
         ...prev,
-        clientName: user.displayName || '',
-        clientEmail: user.email || ''
-      }))
+        clientName: user.displayName || "",
+        clientEmail: user.email || "",
+      }));
     }
-  }, [user])
+  }, [user]);
 
   useEffect(() => {
     if (selectedService && selectedDate) {
-      fetchAvailableSlots()
+      fetchAvailableSlots();
     }
-  }, [selectedService, selectedDate])
+  }, [selectedService, selectedDate]);
 
   const fetchAvailableSlots = async () => {
-    if (!selectedService || !selectedDate) return
+    if (!selectedService || !selectedDate) return;
 
-    setLoadingSlots(true)
+    setLoadingSlots(true);
     try {
-      const response = await fetch(`/api/slots?date=${selectedDate}&service=${selectedService.title}`)
-      const data = await response.json()
-      
+      const response = await fetch(
+        `/api/slots?date=${selectedDate}&service=${selectedService.title}`
+      );
+      const data = await response.json();
+
       if (data.success) {
-        setAvailableSlots(data.slots)
+        setAvailableSlots(data.slots);
       } else {
-        setError(data.error || 'Failed to fetch available slots')
+        setError(data.error || "Failed to fetch available slots");
       }
     } catch (error) {
-      console.error('Error fetching slots:', error)
-      setError('Failed to fetch available slots')
+      console.error("Error fetching slots:", error);
+      setError("Failed to fetch available slots");
     } finally {
-      setLoadingSlots(false)
+      setLoadingSlots(false);
     }
-  }
+  };
 
   const handleBooking = async () => {
     if (!user) {
-      router.push('/login')
-      return
+      router.push("/login");
+      return;
     }
 
-    if (!selectedService || !selectedSlot || !bookingForm.clientName || !bookingForm.clientEmail || !bookingForm.clientPhone) {
-      setError('Please fill in all required fields')
-      return
+    if (
+      !selectedService ||
+      !selectedSlot ||
+      !bookingForm.clientName ||
+      !bookingForm.clientEmail ||
+      !bookingForm.clientPhone
+    ) {
+      setError("Please fill in all required fields");
+      return;
     }
 
-    setIsBooking(true)
-    setError('')
+    setIsBooking(true);
+    setError("");
 
     try {
-      const response = await fetch('/api/appointments', {
-        method: 'POST',
+      const response = await fetch("/api/appointments", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: user.uid,
@@ -148,48 +166,48 @@ export default function BookPage() {
           clientName: bookingForm.clientName,
           clientEmail: bookingForm.clientEmail,
           clientPhone: bookingForm.clientPhone,
-          notes: bookingForm.notes
+          notes: bookingForm.notes,
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
-        setBookingSuccess(true)
+        setBookingSuccess(true);
         // Reset form
-        setSelectedService(null)
-        setSelectedDate('')
-        setSelectedSlot(null)
+        setSelectedService(null);
+        setSelectedDate("");
+        setSelectedSlot(null);
         setBookingForm({
-          clientName: user.displayName || '',
-          clientEmail: user.email || '',
-          clientPhone: '',
-          notes: ''
-        })
+          clientName: user.displayName || "",
+          clientEmail: user.email || "",
+          clientPhone: "",
+          notes: "",
+        });
       } else {
-        setError(data.error || 'Failed to book appointment')
+        setError(data.error || "Failed to book appointment");
       }
     } catch (error) {
-      console.error('Booking error:', error)
-      setError('Failed to book appointment. Please try again.')
+      console.error("Booking error:", error);
+      setError("Failed to book appointment. Please try again.");
     } finally {
-      setIsBooking(false)
+      setIsBooking(false);
     }
-  }
+  };
 
   const getMinDate = () => {
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    return tomorrow.toISOString().split('T')[0]
-  }
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split("T")[0];
+  };
 
   const formatTime = (timeString: string) => {
-    const [hours, minutes] = timeString.split(':')
-    const hour = parseInt(hours)
-    const ampm = hour >= 12 ? 'PM' : 'AM'
-    const hour12 = hour % 12 || 12
-    return `${hour12}:${minutes} ${ampm}`
-  }
+    const [hours, minutes] = timeString.split(":");
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const hour12 = hour % 12 || 12;
+    return `${hour12}:${minutes} ${ampm}`;
+  };
 
   if (loading) {
     return (
@@ -203,7 +221,7 @@ export default function BookPage() {
         </div>
         <Footer />
       </main>
-    )
+    );
   }
 
   return (
@@ -211,12 +229,12 @@ export default function BookPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-moss to-citron text-white">
+      <section className="pt-40 py-16 bg-moss/30 text-moss">
         <div className="container-custom text-center">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">
             Book Your Session
           </h1>
-          <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl lg:text-2xl text-black/60 max-w-3xl mx-auto leading-relaxed">
             Start your journey towards mental wellness and personal growth
           </p>
         </div>
@@ -227,13 +245,16 @@ export default function BookPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-soft p-8 text-center">
               <div className="text-green-500 text-6xl mb-4">✅</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Booking Confirmed!</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                Booking Confirmed!
+              </h2>
               <p className="text-gray-600 mb-6">
-                Your appointment has been successfully booked. You will receive a confirmation email shortly.
+                Your appointment has been successfully booked. You will receive
+                a confirmation email shortly.
               </p>
               <div className="flex gap-4 justify-center">
                 <button
-                  onClick={() => router.push('/account')}
+                  onClick={() => router.push("/account")}
                   className="bg-moss text-white px-6 py-2 rounded-lg hover:bg-moss/90 transition-colors"
                 >
                   View My Appointments
@@ -270,9 +291,11 @@ export default function BookPage() {
                     key={service.id}
                     className={`bg-white rounded-2xl shadow-soft p-8 text-center border-2 transition-all cursor-pointer ${
                       selectedService?.id === service.id
-                        ? 'border-moss bg-moss/5'
-                        : 'border-transparent hover:border-gray-200'
-                    } ${service.popular ? 'ring-2 ring-moss ring-opacity-50' : ''}`}
+                        ? "border-moss bg-moss/5"
+                        : "border-transparent hover:border-gray-200"
+                    } ${
+                      service.popular ? "ring-2 ring-moss ring-opacity-50" : ""
+                    }`}
                     onClick={() => setSelectedService(service)}
                   >
                     {service.popular && (
@@ -280,15 +303,21 @@ export default function BookPage() {
                         Most Popular
                       </div>
                     )}
-                    
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
+
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      {service.title}
+                    </h3>
                     <div className="mb-4">
-                      <span className="text-3xl font-bold text-moss">{service.price}</span>
-                      <div className="text-gray-500 mt-1">{service.duration} minutes</div>
+                      <span className="text-3xl font-bold text-moss">
+                        {service.price}
+                      </span>
+                      <div className="text-gray-500 mt-1">
+                        {service.duration} minutes
+                      </div>
                     </div>
-                    
+
                     <p className="text-gray-600 mb-6">{service.description}</p>
-                    
+
                     <ul className="text-left text-sm text-gray-600 space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center">
@@ -321,13 +350,15 @@ export default function BookPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                       {/* Date Selection */}
                       <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Select Date</h3>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                          Select Date
+                        </h3>
                         <input
                           type="date"
                           value={selectedDate}
                           onChange={(e) => {
-                            setSelectedDate(e.target.value)
-                            setSelectedSlot(null)
+                            setSelectedDate(e.target.value);
+                            setSelectedSlot(null);
                           }}
                           min={getMinDate()}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
@@ -336,12 +367,16 @@ export default function BookPage() {
 
                       {/* Time Slots */}
                       <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Available Times</h3>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                          Available Times
+                        </h3>
                         {selectedDate ? (
                           loadingSlots ? (
                             <div className="text-center py-8">
                               <div className="animate-spin h-6 w-6 border-b-2 border-moss mx-auto mb-2"></div>
-                              <p className="text-gray-600">Loading available slots...</p>
+                              <p className="text-gray-600">
+                                Loading available slots...
+                              </p>
                             </div>
                           ) : availableSlots.length > 0 ? (
                             <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto">
@@ -351,8 +386,8 @@ export default function BookPage() {
                                   onClick={() => setSelectedSlot(slot)}
                                   className={`px-4 py-2 rounded-lg text-sm transition-colors ${
                                     selectedSlot?.time === slot.time
-                                      ? 'bg-moss text-white'
-                                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                                      ? "bg-moss text-white"
+                                      : "bg-gray-100 hover:bg-gray-200 text-gray-700"
                                   }`}
                                 >
                                   {formatTime(slot.time)}
@@ -394,27 +429,39 @@ export default function BookPage() {
                   <div className="bg-white rounded-2xl shadow-soft p-8">
                     {/* Booking Summary */}
                     <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                      <h3 className="font-semibold text-gray-900 mb-4">Booking Summary</h3>
+                      <h3 className="font-semibold text-gray-900 mb-4">
+                        Booking Summary
+                      </h3>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span className="text-gray-600">Service:</span>
-                          <span className="font-medium">{selectedService.title}</span>
+                          <span className="font-medium">
+                            {selectedService.title}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-gray-600">Date:</span>
-                          <span className="font-medium">{new Date(selectedSlot.date).toLocaleDateString()}</span>
+                          <span className="font-medium">
+                            {new Date(selectedSlot.date).toLocaleDateString()}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-gray-600">Time:</span>
-                          <span className="font-medium">{formatTime(selectedSlot.time)}</span>
+                          <span className="font-medium">
+                            {formatTime(selectedSlot.time)}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-gray-600">Duration:</span>
-                          <span className="font-medium">{selectedService.duration} minutes</span>
+                          <span className="font-medium">
+                            {selectedService.duration} minutes
+                          </span>
                         </div>
                         <div className="flex justify-between pt-2 border-t">
                           <span className="text-gray-600">Price:</span>
-                          <span className="font-semibold text-moss">{selectedService.price}</span>
+                          <span className="font-semibold text-moss">
+                            {selectedService.price}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -422,7 +469,11 @@ export default function BookPage() {
                     {!user && (
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                         <p className="text-blue-800 text-sm">
-                          Please <Link href="/login" className="underline font-medium">sign in</Link> to complete your booking.
+                          Please{" "}
+                          <Link href="/login" className="underline font-medium">
+                            sign in
+                          </Link>{" "}
+                          to complete your booking.
                         </p>
                       </div>
                     )}
@@ -442,7 +493,12 @@ export default function BookPage() {
                         <input
                           type="text"
                           value={bookingForm.clientName}
-                          onChange={(e) => setBookingForm(prev => ({ ...prev, clientName: e.target.value }))}
+                          onChange={(e) =>
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              clientName: e.target.value,
+                            }))
+                          }
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
                           placeholder="Enter your full name"
                           required
@@ -456,7 +512,12 @@ export default function BookPage() {
                         <input
                           type="email"
                           value={bookingForm.clientEmail}
-                          onChange={(e) => setBookingForm(prev => ({ ...prev, clientEmail: e.target.value }))}
+                          onChange={(e) =>
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              clientEmail: e.target.value,
+                            }))
+                          }
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
                           placeholder="Enter your email address"
                           required
@@ -470,7 +531,12 @@ export default function BookPage() {
                         <input
                           type="tel"
                           value={bookingForm.clientPhone}
-                          onChange={(e) => setBookingForm(prev => ({ ...prev, clientPhone: e.target.value }))}
+                          onChange={(e) =>
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              clientPhone: e.target.value,
+                            }))
+                          }
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
                           placeholder="Enter your phone number"
                           required
@@ -483,7 +549,12 @@ export default function BookPage() {
                         </label>
                         <textarea
                           value={bookingForm.notes}
-                          onChange={(e) => setBookingForm(prev => ({ ...prev, notes: e.target.value }))}
+                          onChange={(e) =>
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              notes: e.target.value,
+                            }))
+                          }
                           rows={4}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
                           placeholder="Any specific topics you'd like to discuss or questions you have..."
@@ -497,9 +568,25 @@ export default function BookPage() {
                       >
                         {isBooking ? (
                           <div className="flex items-center justify-center">
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            <svg
+                              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
                             </svg>
                             Booking...
                           </div>
@@ -531,7 +618,9 @@ export default function BookPage() {
                   <div
                     key={index}
                     className={`bg-white rounded-2xl shadow-soft p-8 text-center ${
-                      pkg.popular ? 'ring-2 ring-moss ring-opacity-50 relative' : ''
+                      pkg.popular
+                        ? "ring-2 ring-moss ring-opacity-50 relative"
+                        : ""
                     }`}
                   >
                     {pkg.popular && (
@@ -541,22 +630,36 @@ export default function BookPage() {
                         </span>
                       </div>
                     )}
-                    
+
                     <div className="text-center mb-6">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                        {pkg.name}
+                      </h3>
                       <div className="mb-2">
-                        <span className="text-3xl font-bold text-moss">{pkg.price}</span>
-                        <span className="text-lg text-gray-400 line-through ml-2">{pkg.originalPrice}</span>
+                        <span className="text-3xl font-bold text-moss">
+                          {pkg.price}
+                        </span>
+                        <span className="text-lg text-gray-400 line-through ml-2">
+                          {pkg.originalPrice}
+                        </span>
                       </div>
-                      <div className="text-green-600 font-medium">{pkg.savings}</div>
+                      <div className="text-green-600 font-medium">
+                        {pkg.savings}
+                      </div>
                       <div className="text-gray-500 mt-1">{pkg.sessions}</div>
                     </div>
-                    
-                    <p className="text-gray-600 mb-6 text-center">{pkg.description}</p>
-                    
-                    <button className={`btn-pill w-full text-center ${
-                      pkg.popular ? 'btn-primary' : 'btn-secondary'
-                    }`}>
+
+                    <p className="text-gray-600 mb-6 text-center">
+                      {pkg.description}
+                    </p>
+
+                    <button
+                      className={`btn-pill w-full text-center ${
+                        pkg.popular
+                          ? "btn-primary bg-moss"
+                          : "btn-secondary bg-moss/10 text-moss hover:bg-moss/20"
+                      }`}
+                    >
                       Choose {pkg.name}
                     </button>
                   </div>
@@ -569,5 +672,5 @@ export default function BookPage() {
 
       <Footer />
     </main>
-  )
+  );
 }

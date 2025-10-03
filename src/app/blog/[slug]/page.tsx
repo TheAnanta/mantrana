@@ -1,33 +1,34 @@
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import Link from 'next/link'
-import AISummaryToggle from '@/components/AISummaryToggle'
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Link from "next/link";
+import AISummaryToggle from "@/components/AISummaryToggle";
 
 interface BlogPost {
-  slug: string
-  title: string
-  excerpt: string
-  content: string
-  category: string
-  readTime: string
-  publishedAt: string
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  readTime: string;
+  publishedAt: string;
   author: {
-    name: string
-    role: string
-    bio: string
-  }
-  tags: string[]
-  aiSummary: string
-  image: string
+    name: string;
+    role: string;
+    bio: string;
+  };
+  tags: string[];
+  aiSummary: string;
+  image: string;
 }
 
 // Sample blog post data - in a real app this would come from a CMS or API
 const getBlogPost = (slug: string): BlogPost | null => {
   const posts: Record<string, BlogPost> = {
-    'understanding-anxiety-managing-daily-stress': {
-      slug: 'understanding-anxiety-managing-daily-stress',
-      title: 'Understanding Anxiety: A Guide to Managing Daily Stress',
-      excerpt: 'Learn practical techniques to manage anxiety and create a more peaceful daily routine with evidence-based strategies.',
+    "understanding-anxiety-managing-daily-stress": {
+      slug: "understanding-anxiety-managing-daily-stress",
+      title: "Understanding Anxiety: A Guide to Managing Daily Stress",
+      excerpt:
+        "Learn practical techniques to manage anxiety and create a more peaceful daily routine with evidence-based strategies.",
       content: `
         <p>Anxiety affects millions of people worldwide, yet many struggle to find effective ways to manage their daily stress. In this comprehensive guide, we'll explore practical, evidence-based techniques that can help you develop a more peaceful relationship with anxiety.</p>
 
@@ -73,41 +74,52 @@ const getBlogPost = (slug: string): BlogPost | null => {
 
         <p>Remember, managing anxiety is a journey, not a destination. Be patient with yourself as you develop these new skills and habits.</p>
       `,
-      category: 'Mental Health',
-      readTime: '5 min read',
-      publishedAt: 'Nov 15, 2024',
+      category: "Mental Health",
+      readTime: "5 min read",
+      publishedAt: "Nov 15, 2024",
       author: {
-        name: 'Mohana Rupa',
-        role: 'Licensed Therapist & Coach',
-        bio: 'Mohana Rupa is a licensed therapist and certified life coach with over 8 years of experience helping individuals overcome anxiety, depression, and life challenges.'
+        name: "Mohana Rupa",
+        role: "Licensed Therapist & Coach",
+        bio: "Mohana Rupa is a licensed therapist and certified life coach with over 8 years of experience helping individuals overcome anxiety, depression, and life challenges.",
       },
-      tags: ['anxiety', 'stress management', 'mental health', 'mindfulness', 'coping strategies'],
-      aiSummary: 'This article provides a comprehensive guide to understanding and managing anxiety through evidence-based techniques including breathing exercises, mindfulness, and cognitive restructuring. It emphasizes the importance of daily routines and professional support when needed.',
-      image: '/images/anxiety-stress-management.png'
-    }
-  }
-  
-  return posts[slug] || null
-}
+      tags: [
+        "anxiety",
+        "stress management",
+        "mental health",
+        "mindfulness",
+        "coping strategies",
+      ],
+      aiSummary:
+        "This article provides a comprehensive guide to understanding and managing anxiety through evidence-based techniques including breathing exercises, mindfulness, and cognitive restructuring. It emphasizes the importance of daily routines and professional support when needed.",
+      image: "/images/anxiety-stress-management.png",
+    },
+  };
+
+  return posts[slug] || null;
+};
 
 const relatedPosts = [
   {
-    slug: 'power-of-mindfulness-in-relationships',
-    title: 'The Power of Mindfulness in Relationships',
-    category: 'Relationships',
-    readTime: '7 min read'
+    slug: "power-of-mindfulness-in-relationships",
+    title: "The Power of Mindfulness in Relationships",
+    category: "Relationships",
+    readTime: "7 min read",
   },
   {
-    slug: 'building-resilience-tools-for-challenges',
-    title: 'Building Resilience: Tools for Life\'s Challenges',
-    category: 'Personal Growth',
-    readTime: '6 min read'
-  }
-]
+    slug: "building-resilience-tools-for-challenges",
+    title: "Building Resilience: Tools for Life's Challenges",
+    category: "Personal Growth",
+    readTime: "6 min read",
+  },
+];
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const post = getBlogPost(slug)
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
 
   if (!post) {
     return (
@@ -115,8 +127,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <Header />
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-            <p className="text-gray-600 mb-8">The blog post you're looking for doesn't exist.</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Post Not Found
+            </h1>
+            <p className="text-gray-600 mb-8">
+              The blog post you're looking for doesn't exist.
+            </p>
             <Link href="/blog" className="btn-pill btn-primary">
               Back to Blog
             </Link>
@@ -124,22 +140,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
         <Footer />
       </main>
-    )
+    );
   }
 
   return (
     <main>
       <Header />
-      
+
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-white">
+      <section className="pt-32 pb-8 bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
-              <Link href="/" className="hover:text-moss transition-colors">Home</Link>
+              <Link href="/" className="hover:text-moss transition-colors">
+                Home
+              </Link>
               <span>/</span>
-              <Link href="/blog" className="hover:text-moss transition-colors">Blog</Link>
+              <Link href="/blog" className="hover:text-moss transition-colors">
+                Blog
+              </Link>
               <span>/</span>
               <span className="text-gray-900">{post.title}</span>
             </nav>
@@ -177,12 +197,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </section>
 
       {/* Featured Image */}
-      <section className="py-8">
+      <section>
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div className="h-96 rounded-2xl overflow-hidden">
-              <img 
-                src={post.image} 
+            <div className="h-96 lg:h-[500px] rounded-2xl overflow-hidden">
+              <img
+                src={post.image}
                 alt={post.title}
                 className="w-full h-full object-cover"
               />
@@ -195,7 +215,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="py-16 bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div 
+            <div
               className="prose prose-lg max-w-none 
                 prose-headings:text-gray-900 prose-headings:font-bold 
                 prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:leading-tight
@@ -229,9 +249,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <span className="text-moss font-semibold text-lg">MR</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{post.author.name}</h3>
-                  <p className="text-moss font-medium mb-3">{post.author.role}</p>
-                  <p className="text-gray-700 leading-relaxed">{post.author.bio}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {post.author.name}
+                  </h3>
+                  <p className="text-moss font-medium mb-3">
+                    {post.author.role}
+                  </p>
+                  <p className="text-gray-700 leading-relaxed">
+                    {post.author.bio}
+                  </p>
                 </div>
               </div>
             </div>
@@ -243,20 +269,40 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="py-8 bg-gray-50">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <Link 
+            <Link
               href="/blog"
               className="flex items-center gap-3 text-moss hover:text-moss/80 transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               <span className="font-medium">Back to Blog</span>
             </Link>
 
             <div className="flex gap-4">
               <button className="p-3 bg-white rounded-full shadow-soft hover:shadow-medium transition-all">
-                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                <svg
+                  className="w-5 h-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                  />
                 </svg>
               </button>
             </div>
@@ -268,7 +314,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="py-16 bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Related Posts</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">
+              Related Posts
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {relatedPosts.map((relatedPost) => (
                 <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
@@ -285,9 +333,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         {relatedPost.title}
                       </h3>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-500">{relatedPost.readTime}</span>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <span className="text-sm text-gray-500">
+                          {relatedPost.readTime}
+                        </span>
+                        <svg
+                          className="w-5 h-5 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -301,5 +361,5 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       <Footer />
     </main>
-  )
+  );
 }

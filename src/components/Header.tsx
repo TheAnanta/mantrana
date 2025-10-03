@@ -159,13 +159,26 @@ export default function Header() {
                   <div className="flex items-center space-x-4 ml-4">
                     <Link
                       href="/login"
-                      className="text-white border-2 btn-pill hover:bg-[#E54160] hover:border-[#E54160] transition-colors duration-300 font-medium"
+                      className={
+                        !isHomePage || isScrolledBeyondThreshold
+                          ? "text-black border-2 !text-sm p-3 px-6 rounded-full hover:bg-black/10 transition-colors duration-300 font-medium"
+                          : "text-white border-2 !text-sm p-3 px-6 rounded-full hover:bg-black/10 transition-colors duration-300 font-medium"
+                      }
                     >
                       Sign In
                     </Link>
-                    <Link href="/book" className="btn-pill btn-secondary ml-4">
-                      Book a Session
-                    </Link>
+                    {(!isHomePage || isScrolledBeyondThreshold) && (
+                      <Link
+                        href="/book"
+                        className={
+                          !isHomePage
+                            ? "!text-sm p-3 px-6 hover:bg-amaranth bg-[#D56989] rounded-full text-white ml-4  transition-colors duration-300 font-medium"
+                            : "!text-sm p-3 px-6 bg-teal rounded-full text-white ml-4"
+                        }
+                      >
+                        Book a Session
+                      </Link>
+                    )}
                   </div>
                 )}
               </>
