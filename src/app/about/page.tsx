@@ -42,32 +42,35 @@ export default function AboutPage() {
               />
             </div>
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
+              <h2 className="text-4xl lg:text-5xl text-gray-900 mb-8 font-elsie">
                 Meet Mohana Rupa Nekkanti
               </h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  Namaste! I am Mohana Rupa Nekkanti, founder of Mantrana therapy. I am a Psychotherapist and Behavioural Specialist with a Ph.D. in Applied Psychology and advanced certifications in Clinical Hypnosis and Neuro-Linguistic Programming.
+                  Namaste!
+                  <br />I am Mohana Rupa Nekkanti, founder of Mantrana therapy.
+                  I am a Psychotherapist and Behavioural Specialist with a Ph.D.
+                  in Applied Psychology and advanced certifications in Clinical
+                  Hypnosis and Neuro-Linguistic Programming.
                 </p>
                 <p>
-                  As a Behavioral Specialist, I help individuals reshape unhelpful patterns—whether it's digital habits, stress responses, or relationship dynamics—so they can live with greater balance and clarity.
+                  As a Behavioral Specialist, I help individuals reshape
+                  unhelpful patterns—whether it's digital habits, stress
+                  responses, or relationship dynamics—so they can live with
+                  greater balance and clarity.
                 </p>
-                <Link href="#my-story" className="btn-pill btn-primary inline-block">
-                  Read My Story
-                </Link>
               </div>
             </div>
           </div>
-          
+
           <div className="mt-16" id="my-story">
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed max-w-4xl">
               <p>
                 My journey started in engineering, where my love for
                 problem-solving grew. But it was my curiosity about the human
                 mind—how our thoughts, emotions, and behaviours shape our
-                lives—that led me to Psychology. This path allows me to
-                combine insight, research, and compassion to truly make a
-                difference.
+                lives—that led me to Psychology. This path allows me to combine
+                insight, research, and compassion to truly make a difference.
               </p>
               <p>
                 Having faced my own struggles with overthinking and navigating
@@ -78,12 +81,12 @@ export default function AboutPage() {
               </p>
               <p>
                 With nearly ten years of teaching experience and over five years
-                of research in Applied Psychology, I've worked closely with young
-                adults and recognize the need for compassionate, non-judgmental
-                support. My approach blends evidence-based techniques like Neuro
-                Linguistic Programming, Clinical Hypnosis, and Cognitive
-                restructuring with an inclination towards blending wisdom from
-                Bharateeya Knowledge Systems and Indian philosophy.
+                of research in Applied Psychology, I've worked closely with
+                young adults and recognize the need for compassionate,
+                non-judgmental support. My approach blends evidence-based
+                techniques like Neuro Linguistic Programming, Clinical Hypnosis,
+                and Cognitive restructuring with an inclination towards blending
+                wisdom from Bharateeya Knowledge Systems and Indian philosophy.
               </p>
               <p>
                 When I'm not working, I love reading, traveling, watching films,
@@ -171,9 +174,17 @@ export default function AboutPage() {
                   </h3>
                   <ul className="space-y-2 text-gray-600">
                     <li>• Ph.D. in Applied Psychology</li>
-                    <li>• Master Practitioner in Neuro Linguistic Programming</li>
-                    <li>• Master Practitioner in Cognitive Hypnotic Psychotherapy</li>
-                    <li>• Published research papers in internationally recognized, peer-reviewed journals (Scopus-indexed) and presented at academic conferences</li>
+                    <li>
+                      • Master Practitioner in Neuro Linguistic Programming
+                    </li>
+                    <li>
+                      • Master Practitioner in Cognitive Hypnotic Psychotherapy
+                    </li>
+                    <li>
+                      • Published research papers in internationally recognized,
+                      peer-reviewed journals (Scopus-indexed) and presented at
+                      academic conferences
+                    </li>
                   </ul>
                 </div>
 
@@ -186,7 +197,11 @@ export default function AboutPage() {
                     <li>• Over 5 years of research in Applied Psychology</li>
                     <li>• Specialized work with young adults</li>
                     <li>• Founder of Mantrana therapy practice</li>
-                    <li>• One month On Site Substance Use Treatment Orientation Program (STOP) at Centre for Addiction Medicine (CAM), NIMHANS, Bengaluru</li>
+                    <li>
+                      • One month On Site Substance Use Treatment Orientation
+                      Program (STOP) at Centre for Addiction Medicine (CAM),
+                      NIMHANS, Bengaluru
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -198,7 +213,10 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed mb-6">
                 <p>
-                  As a Behavioural Specialist, I work with individuals to understand and transform patterns of thought and action that may be holding them back. Many behaviors can be reshaped with the right guidance. Some areas I focus on include:
+                  As a Behavioural Specialist, I work with individuals to
+                  understand and transform patterns of thought and action that
+                  may be holding them back. Many behaviors can be reshaped with
+                  the right guidance. Some areas I focus on include:
                 </p>
               </div>
               <div className="space-y-4">
@@ -207,7 +225,8 @@ export default function AboutPage() {
                     Digital and Social Media Habits
                   </h3>
                   <p className="text-gray-600">
-                    Reducing screen time, managing online distractions, and building healthier tech use.
+                    Reducing screen time, managing online distractions, and
+                    building healthier tech use.
                   </p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6">
@@ -223,7 +242,8 @@ export default function AboutPage() {
                     Unhelpful Thinking Patterns
                   </h3>
                   <p className="text-gray-600">
-                    Breaking cycles of overthinking, procrastination, or negative self-talk.
+                    Breaking cycles of overthinking, procrastination, or
+                    negative self-talk.
                   </p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6">
@@ -239,12 +259,15 @@ export default function AboutPage() {
                     Lifestyle Choices
                   </h3>
                   <p className="text-gray-600">
-                    Cultivating routines that support balance, well-being, and resilience.
+                    Cultivating routines that support balance, well-being, and
+                    resilience.
                   </p>
                 </div>
               </div>
               <p className="text-gray-600 leading-relaxed mt-6">
-                These are just examples—any behaviour that creates distress, imbalance, or limits growth can be explored and modified in therapy.
+                These are just examples—any behaviour that creates distress,
+                imbalance, or limits growth can be explored and modified in
+                therapy.
               </p>
             </div>
           </div>

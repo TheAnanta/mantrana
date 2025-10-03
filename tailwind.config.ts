@@ -18,7 +18,7 @@ const config: Config = {
           400: '#97A13B', // Moss Green (10% - accent)
         },
         lavender: '#F4DFE6',
-        amaranth: '#E0A3BB', 
+        amaranth: '#E0A3BB',
         azure: '#D6E6E7',
         citron: '#C5CC82',
         moss: '#97A13B',
@@ -26,6 +26,7 @@ const config: Config = {
       fontFamily: {
         'google-sans': ['Google Sans', 'system-ui', 'sans-serif'],
         'google-sans-display': ['Google Sans Display', 'system-ui', 'sans-serif'],
+        'elsie': ['var(--font-elsie)', 'serif'],
       },
       spacing: {
         '18': '4.5rem',

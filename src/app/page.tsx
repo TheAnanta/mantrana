@@ -67,7 +67,7 @@ function AboutSection() {
             <h2
               className={`text-4xl lg:text-5xl text-gray-900 mb-6 ${elsie.className}`}
             >
-              Mohana Rupa Nekkanti
+              Meet Mohana Rupa Nekkanti
             </h2>
             <p
               className={`text-2xl mb-6 ${elsie.className} text-[var(--teal)]`}
@@ -76,11 +76,16 @@ function AboutSection() {
             </p>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
               Namaste!
-              <br />
-              I am Mohana Rupa Nekkanti, founder of Mantrana therapy. I am a Psychotherapist and Behavioural Specialist with a Ph.D. in Applied Psychology and advanced certifications in Clinical Hypnosis and Neuro-Linguistic Programming.
+              <br />I am Mohana Rupa Nekkanti, founder of Mantrana therapy. I am
+              a Psychotherapist and Behavioural Specialist with a Ph.D. in
+              Applied Psychology and advanced certifications in Clinical
+              Hypnosis and Neuro-Linguistic Programming.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              As a Behavioral Specialist, I help individuals reshape unhelpful patterns—whether it's digital habits, stress responses, or relationship dynamics—so they can live with greater balance and clarity.
+              As a Behavioral Specialist, I help individuals reshape unhelpful
+              patterns—whether it's digital habits, stress responses, or
+              relationship dynamics—so they can live with greater balance and
+              clarity.
             </p>
             <Link href="/about" className="btn-pill btn-primary">
               Read My Story
@@ -106,9 +111,7 @@ function AboutMantranaSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="bg-azure/40 rounded-3xl h-96 lg:h-128 shadow-soft  overflow-hidden">
             <img
-              src={
-                "/images/indian_mental_health.jpg"
-              }
+              src={"/images/indian_mental_health.jpg"}
               className="w-full h-full object-cover"
             />
           </div>
@@ -326,8 +329,8 @@ function BlogSection() {
             <Link key={index} href={`/blog/${post.slug}`}>
               <article className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 cursor-pointer">
                 <div className="h-48 relative overflow-hidden">
-                  <img 
-                    src={post.image} 
+                  <img
+                    src={post.image}
                     alt={post.title}
                     className="w-full h-full object-cover"
                   />

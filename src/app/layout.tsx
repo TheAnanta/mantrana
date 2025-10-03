@@ -1,7 +1,6 @@
-
-import type { Metadata } from 'next'
-import { AuthProvider } from '@/contexts/AuthContext'
-import { Plus_Jakarta_Sans } from "next/font/google";
+import type { Metadata } from "next";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { Plus_Jakarta_Sans, Elsie } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
@@ -10,6 +9,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
 });
 
+const elsie = Elsie({
+  subsets: ["latin"],
+  weight: ["400", "900"],
+  variable: "--font-elsie",
+});
 
 export const metadata: Metadata = {
   title: "Mantrana by Mohana Rupa | Professional Therapy & Counselling",
@@ -35,13 +39,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
-        
-
-      <body className={`${plusJakartaSans.className} min-h-screen bg-white`}>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+      <body
+        className={`${plusJakartaSans.className} ${elsie.variable} min-h-screen bg-white`}
+      >
+        <AuthProvider>{children}</AuthProvider>
 
         <Analytics />
       </body>

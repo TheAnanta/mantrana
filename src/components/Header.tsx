@@ -27,7 +27,6 @@ export default function Header() {
   const route = usePathname();
   const isHomePage = route === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
 
   return (
     <header
@@ -54,28 +53,33 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
+            {navigation.map((item) =>
               item.hasDropdown ? (
-                <div 
-                  key={item.name}
-                  className="relative"
-                  onMouseEnter={() => setAboutDropdownOpen(true)}
-                  onMouseLeave={() => setAboutDropdownOpen(false)}
-                >
+                <div key={item.name} className="relative group">
                   <button
                     className={`${
                       isHomePage
-                        ? "text-white/60 hover:text-white"
-                        : "text-gray-700 hover:text-moss"
+                        ? "text-white/60 hover:text-white group-hover:text-white"
+                        : "text-gray-700 hover:text-moss group-hover:text-moss"
                     } transition-colors duration-300 font-medium flex items-center`}
                   >
                     {item.name}
-                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    <svg
+                      className="w-4 h-4 ml-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </button>
-                  {aboutDropdownOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-lg py-2 z-50">
+                  <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="w-56 bg-white rounded-xl shadow-lg py-2 border border-gray-100">
                       <Link
                         href="/about#about-me"
                         className="block px-4 py-2 text-gray-700 hover:bg-moss/10 hover:text-moss transition-colors"
@@ -89,7 +93,7 @@ export default function Header() {
                         About Mantrana Therapy
                       </Link>
                     </div>
-                  )}
+                  </div>
                 </div>
               ) : (
                 <Link
@@ -104,7 +108,7 @@ export default function Header() {
                   {item.name}
                 </Link>
               )
-            ))}
+            )}
 
             {!loading && (
               <>
