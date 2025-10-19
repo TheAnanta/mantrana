@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { Plus_Jakarta_Sans, Elsie } from "next/font/google";
+import { Plus_Jakarta_Sans, Raleway } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
@@ -9,9 +9,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
 });
 
-const elsie = Elsie({
+const elsie = Raleway({
   subsets: ["latin"],
-  weight: ["400", "900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-elsie",
 });
 

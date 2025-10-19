@@ -236,8 +236,8 @@ export default function BookPage() {
             Book Your Session
           </h1>
           <p className="text-xl lg:text-2xl text-black/60 max-w-3xl mx-auto leading-relaxed">
-            Begin with Clarity. Your first 40-minute session is only ₹299/— 
-            a gentle step to understand your needs and plan your path forward.
+            Begin with Clarity. Your first 40-minute session is only ₹299/— a
+            gentle step to understand your needs and plan your path forward.
           </p>
           <p className="text-lg text-black/50 mt-4">
             Sessions available from 10:00 AM to 7:00 PM
@@ -606,7 +606,7 @@ export default function BookPage() {
             </section>
           )}
 
-          {/* Packages Section */}
+          {/* Packages Section
           <section className="section-padding bg-gray-50">
             <div className="container-custom">
               <div className="text-center mb-16">
@@ -671,7 +671,7 @@ export default function BookPage() {
                 ))}
               </div>
             </div>
-          </section>
+          </section> */}
         </>
       )}
 

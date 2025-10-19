@@ -59,7 +59,9 @@ export default function Header() {
               xmlns="http://www.w3.org/2000/svg"
               version="1.2"
               viewBox="0 0 434 523"
-              className={`size-10`}
+              className={`size-10 ${
+                isHomePage && !isScrolledBeyondThreshold ? "invisible" : ""
+              }`}
               style={{
                 fill: isHomePage
                   ? isScrolledBeyondThreshold
@@ -160,9 +162,18 @@ export default function Header() {
               <>
                 {user ? (
                   <div className="flex items-center space-x-4 ml-4">
-                    <Link href="/book" className="btn-pill btn-secondary">
-                      Book Session
-                    </Link>
+                    {(!isHomePage || isScrolledBeyondThreshold) && (
+                      <Link
+                        href="/book"
+                        className={
+                          !isHomePage
+                            ? "!text-sm p-3 px-6 hover:bg-amaranth bg-[#D56989] rounded-full text-white ml-4  transition-colors duration-300 font-medium"
+                            : "!text-sm p-3 px-6 bg-teal rounded-full text-white ml-4"
+                        }
+                      >
+                        Book a Session
+                      </Link>
+                    )}
                     <Link
                       href="/account"
                       className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
@@ -170,6 +181,7 @@ export default function Header() {
                       <img
                         src={user.photoURL}
                         className="size-12 object-cover rounded-full"
+                        referrerPolicy="no-referrer"
                       />
                     </Link>
                   </div>
