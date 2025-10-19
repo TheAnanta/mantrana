@@ -21,6 +21,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
   const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
   const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   const [bookingForm, setBookingForm] = useState({
     clientName: "",
     clientEmail: "",
@@ -177,6 +178,55 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
     return `${startTime} - ${endTime}`;
   };
 
+  // Calendar helper functions
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startDayOfWeek = firstDay.getDay();
+    
+    return { daysInMonth, startDayOfWeek, year, month };
+  };
+
+  const isToday = (date: Date) => {
+    const today = new Date();
+    return date.getDate() === today.getDate() &&
+           date.getMonth() === today.getMonth() &&
+           date.getFullYear() === today.getFullYear();
+  };
+
+  const isDateAvailable = (date: Date) => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+    return date >= tomorrow;
+  };
+
+  const isDateSelected = (date: Date) => {
+    if (!selectedDate) return false;
+    const selected = new Date(selectedDate);
+    return date.getDate() === selected.getDate() &&
+           date.getMonth() === selected.getMonth() &&
+           date.getFullYear() === selected.getFullYear();
+  };
+
+  const handleDateClick = (date: Date) => {
+    if (!isDateAvailable(date)) return;
+    const dateString = date.toISOString().split('T')[0];
+    setSelectedDate(dateString);
+  };
+
+  const previousMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+  };
+
   const handleClose = () => {
     setCurrentStep("date-time-selection");
     setSelectedDate("");
@@ -262,20 +312,90 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                   </p>
 
                   <div className="grid grid-cols-1 gap-8">
-                    {/* Date Selector */}
+                    {/* Custom Calendar */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
-                        Select Date
-                      </label>
-                      <input
-                        type="date"
-                        value={selectedDate}
-                        onChange={(e) => {
-                          setSelectedDate(e.target.value);
-                        }}
-                        min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
-                      />
+                      <div className="bg-white rounded-lg border border-gray-200 p-4">
+                        {/* Calendar Header */}
+                        <div className="flex items-center justify-between mb-6">
+                          <button
+                            onClick={previousMonth}
+                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                          >
+                            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                          </button>
+                          <h3 className="text-lg font-semibold text-gray-900">
+                            {currentMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                          </h3>
+                          <button
+                            onClick={nextMonth}
+                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                          >
+                            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        </div>
+
+                        {/* Day Labels */}
+                        <div className="grid grid-cols-7 gap-2 mb-2">
+                          {["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"].map((day) => (
+                            <div key={day} className="text-center text-xs font-semibold text-gray-600 py-2">
+                              {day}
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Calendar Days */}
+                        <div className="grid grid-cols-7 gap-2">
+                          {(() => {
+                            const { daysInMonth, startDayOfWeek, year, month } = getDaysInMonth(currentMonth);
+                            const days = [];
+                            
+                            // Adjust startDayOfWeek: Sunday = 0, but we want Monday = 0
+                            const adjustedStart = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
+                            
+                            // Empty cells before first day
+                            for (let i = 0; i < adjustedStart; i++) {
+                              days.push(<div key={`empty-${i}`} className="aspect-square" />);
+                            }
+                            
+                            // Days of the month
+                            for (let day = 1; day <= daysInMonth; day++) {
+                              const date = new Date(year, month, day);
+                              const isAvailable = isDateAvailable(date);
+                              const isTodayDate = isToday(date);
+                              const isSelected = isDateSelected(date);
+                              
+                              days.push(
+                                <button
+                                  key={day}
+                                  onClick={() => handleDateClick(date)}
+                                  disabled={!isAvailable}
+                                  className={`
+                                    aspect-square rounded-full flex items-center justify-center text-sm font-medium transition-all
+                                    ${isSelected 
+                                      ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                                      : isAvailable
+                                      ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                                      : 'text-gray-400 cursor-not-allowed'
+                                    }
+                                    ${isTodayDate && !isSelected ? 'ring-2 ring-blue-600 ring-offset-2' : ''}
+                                  `}
+                                >
+                                  {day}
+                                  {isTodayDate && !isSelected && (
+                                    <span className="absolute bottom-1 w-1 h-1 bg-blue-600 rounded-full"></span>
+                                  )}
+                                </button>
+                              );
+                            }
+                            
+                            return days;
+                          })()}
+                        </div>
+                      </div>
                     </div>
 
                     {/* Time Slots */}
