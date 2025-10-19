@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Gilroy Font Family */
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/2767161cafcb4aff-s.p.woff2') format('woff2'),
+       url('/fonts/2d784c2a010765ed-s.p.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/3bd8ea601b5f757a-s.p.woff2') format('woff2'),
+       url('/fonts/4409add9d9dd8f67-s.p.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/5cd4d8a164ea5e90-s.p.woff2') format('woff2'),
+       url('/fonts/7538d40b3ee19e6c-s.p.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/afb5bc5e2253b08d-s.p.woff2') format('woff2'),
+       url('/fonts/c961240f6e0cb057-s.p.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   --teal: #80a39b;
 }

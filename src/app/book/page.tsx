@@ -1,30 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BookingDialog from "@/components/BookingDialog";
 import Link from "next/link";
-import { TimeSlot, Service } from "@/types";
+import { Service } from "@/types";
 
 export default function BookPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
-  const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
-  const [loadingSlots, setLoadingSlots] = useState(false);
-  const [bookingForm, setBookingForm] = useState({
-    clientName: "",
-    clientEmail: "",
-    clientPhone: "",
-    notes: "",
-  });
-  const [isBooking, setIsBooking] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
-  const [error, setError] = useState("");
+
+  const handleServiceClick = (service: Service) => {
+    setSelectedService(service);
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setSelectedService(null);
+  };
 
   const services: Service[] = [
     {
@@ -92,123 +92,6 @@ export default function BookPage() {
       description: "Best value for long-term transformation",
     },
   ];
-
-  useEffect(() => {
-    if (user && bookingForm.clientName === "") {
-      setBookingForm((prev) => ({
-        ...prev,
-        clientName: user.displayName || "",
-        clientEmail: user.email || "",
-      }));
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (selectedService && selectedDate) {
-      fetchAvailableSlots();
-    }
-  }, [selectedService, selectedDate]);
-
-  const fetchAvailableSlots = async () => {
-    if (!selectedService || !selectedDate) return;
-
-    setLoadingSlots(true);
-    try {
-      const response = await fetch(
-        `/api/slots?date=${selectedDate}&service=${selectedService.title}`
-      );
-      const data = await response.json();
-
-      if (data.success) {
-        setAvailableSlots(data.slots);
-      } else {
-        setError(data.error || "Failed to fetch available slots");
-      }
-    } catch (error) {
-      console.error("Error fetching slots:", error);
-      setError("Failed to fetch available slots");
-    } finally {
-      setLoadingSlots(false);
-    }
-  };
-
-  const handleBooking = async () => {
-    if (!user) {
-      router.push("/login");
-      return;
-    }
-
-    if (
-      !selectedService ||
-      !selectedSlot ||
-      !bookingForm.clientName ||
-      !bookingForm.clientEmail ||
-      !bookingForm.clientPhone
-    ) {
-      setError("Please fill in all required fields");
-      return;
-    }
-
-    setIsBooking(true);
-    setError("");
-
-    try {
-      const response = await fetch("/api/appointments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: user.uid,
-          service: selectedService.title,
-          date: selectedSlot.date,
-          time: selectedSlot.time,
-          duration: selectedSlot.duration,
-          clientName: bookingForm.clientName,
-          clientEmail: bookingForm.clientEmail,
-          clientPhone: bookingForm.clientPhone,
-          notes: bookingForm.notes,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setBookingSuccess(true);
-        // Reset form
-        setSelectedService(null);
-        setSelectedDate("");
-        setSelectedSlot(null);
-        setBookingForm({
-          clientName: user.displayName || "",
-          clientEmail: user.email || "",
-          clientPhone: "",
-          notes: "",
-        });
-      } else {
-        setError(data.error || "Failed to book appointment");
-      }
-    } catch (error) {
-      console.error("Booking error:", error);
-      setError("Failed to book appointment. Please try again.");
-    } finally {
-      setIsBooking(false);
-    }
-  };
-
-  const getMinDate = () => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return tomorrow.toISOString().split("T")[0];
-  };
-
-  const formatTime = (timeString: string) => {
-    const [hours, minutes] = timeString.split(":");
-    const hour = parseInt(hours);
-    const ampm = hour >= 12 ? "PM" : "AM";
-    const hour12 = hour % 12 || 12;
-    return `${hour12}:${minutes} ${ampm}`;
-  };
 
   if (loading) {
     return (
@@ -294,14 +177,9 @@ export default function BookPage() {
                 {services.map((service) => (
                   <div
                     key={service.id}
-                    className={`bg-white rounded-2xl shadow-soft p-8 text-center border-2 transition-all cursor-pointer ${
-                      selectedService?.id === service.id
-                        ? "border-moss bg-moss/5"
-                        : "border-transparent hover:border-gray-200"
-                    } ${
+                    className={`bg-white rounded-2xl shadow-soft p-8 text-center border-2 transition-all ${
                       service.popular ? "ring-2 ring-moss ring-opacity-50" : ""
-                    }`}
-                    onClick={() => setSelectedService(service)}
+                    } border-transparent hover:border-gray-200`}
                   >
                     {service.popular && (
                       <div className="inline-block bg-moss text-white text-sm px-3 py-1 rounded-full mb-4">
@@ -323,7 +201,7 @@ export default function BookPage() {
 
                     <p className="text-gray-600 mb-6">{service.description}</p>
 
-                    <ul className="text-left text-sm text-gray-600 space-y-2">
+                    <ul className="text-left text-sm text-gray-600 space-y-2 mb-6">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center">
                           <span className="text-moss mr-2">✓</span>
@@ -331,280 +209,18 @@ export default function BookPage() {
                         </li>
                       ))}
                     </ul>
+
+                    <button
+                      onClick={() => handleServiceClick(service)}
+                      className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                    >
+                      Schedule
+                    </button>
                   </div>
                 ))}
               </div>
             </div>
           </section>
-
-          {/* Date and Time Selection */}
-          {selectedService && (
-            <section className="section-padding bg-gray-50">
-              <div className="container-custom">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                    Select Date & Time
-                  </h2>
-                  <p className="text-gray-600">
-                    Choose your preferred date and available time slot
-                  </p>
-                </div>
-
-                <div className="max-w-4xl mx-auto">
-                  <div className="bg-white rounded-2xl shadow-soft p-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                      {/* Date Selection */}
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                          Select Date
-                        </h3>
-                        <input
-                          type="date"
-                          value={selectedDate}
-                          onChange={(e) => {
-                            setSelectedDate(e.target.value);
-                            setSelectedSlot(null);
-                          }}
-                          min={getMinDate()}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
-                        />
-                      </div>
-
-                      {/* Time Slots */}
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                          Available Times
-                        </h3>
-                        {selectedDate ? (
-                          loadingSlots ? (
-                            <div className="text-center py-8">
-                              <div className="animate-spin h-6 w-6 border-b-2 border-moss mx-auto mb-2"></div>
-                              <p className="text-gray-600">
-                                Loading available slots...
-                              </p>
-                            </div>
-                          ) : availableSlots.length > 0 ? (
-                            <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto">
-                              {availableSlots.map((slot, idx) => (
-                                <button
-                                  key={idx}
-                                  onClick={() => setSelectedSlot(slot)}
-                                  className={`px-4 py-2 rounded-lg text-sm transition-colors ${
-                                    selectedSlot?.time === slot.time
-                                      ? "bg-moss text-white"
-                                      : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                                  }`}
-                                >
-                                  {formatTime(slot.time)}
-                                </button>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className="text-center py-8 text-gray-500">
-                              No available slots for this date
-                            </div>
-                          )
-                        ) : (
-                          <div className="text-center py-8 text-gray-500">
-                            Please select a date first
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Booking Form */}
-          {selectedService && selectedSlot && (
-            <section className="section-padding">
-              <div className="container-custom">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                    Complete Your Booking
-                  </h2>
-                  <p className="text-gray-600">
-                    Please provide your details to confirm the appointment
-                  </p>
-                </div>
-
-                <div className="max-w-2xl mx-auto">
-                  <div className="bg-white rounded-2xl shadow-soft p-8">
-                    {/* Booking Summary */}
-                    <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                      <h3 className="font-semibold text-gray-900 mb-4">
-                        Booking Summary
-                      </h3>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Service:</span>
-                          <span className="font-medium">
-                            {selectedService.title}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Date:</span>
-                          <span className="font-medium">
-                            {new Date(selectedSlot.date).toLocaleDateString()}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Time:</span>
-                          <span className="font-medium">
-                            {formatTime(selectedSlot.time)}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Duration:</span>
-                          <span className="font-medium">
-                            {selectedService.duration} minutes
-                          </span>
-                        </div>
-                        <div className="flex justify-between pt-2 border-t">
-                          <span className="text-gray-600">Price:</span>
-                          <span className="font-semibold text-moss">
-                            {selectedService.price}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {!user && (
-                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                        <p className="text-blue-800 text-sm">
-                          Please{" "}
-                          <Link href="/login" className="underline font-medium">
-                            sign in
-                          </Link>{" "}
-                          to complete your booking.
-                        </p>
-                      </div>
-                    )}
-
-                    {error && (
-                      <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                        <p className="text-red-800 text-sm">{error}</p>
-                      </div>
-                    )}
-
-                    {/* Booking Form */}
-                    <div className="space-y-6">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Full Name *
-                        </label>
-                        <input
-                          type="text"
-                          value={bookingForm.clientName}
-                          onChange={(e) =>
-                            setBookingForm((prev) => ({
-                              ...prev,
-                              clientName: e.target.value,
-                            }))
-                          }
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
-                          placeholder="Enter your full name"
-                          required
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Email Address *
-                        </label>
-                        <input
-                          type="email"
-                          value={bookingForm.clientEmail}
-                          onChange={(e) =>
-                            setBookingForm((prev) => ({
-                              ...prev,
-                              clientEmail: e.target.value,
-                            }))
-                          }
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
-                          placeholder="Enter your email address"
-                          required
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Phone Number *
-                        </label>
-                        <input
-                          type="tel"
-                          value={bookingForm.clientPhone}
-                          onChange={(e) =>
-                            setBookingForm((prev) => ({
-                              ...prev,
-                              clientPhone: e.target.value,
-                            }))
-                          }
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
-                          placeholder="Enter your phone number"
-                          required
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Additional Notes (Optional)
-                        </label>
-                        <textarea
-                          value={bookingForm.notes}
-                          onChange={(e) =>
-                            setBookingForm((prev) => ({
-                              ...prev,
-                              notes: e.target.value,
-                            }))
-                          }
-                          rows={4}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moss focus:border-transparent"
-                          placeholder="Any specific topics you'd like to discuss or questions you have..."
-                        ></textarea>
-                      </div>
-
-                      <button
-                        onClick={handleBooking}
-                        disabled={!user || isBooking}
-                        className="w-full bg-moss text-white py-4 rounded-lg font-semibold hover:bg-moss/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                      >
-                        {isBooking ? (
-                          <div className="flex items-center justify-center">
-                            <svg
-                              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                            >
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                              ></circle>
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                              ></path>
-                            </svg>
-                            Booking...
-                          </div>
-                        ) : (
-                          `Confirm Booking - ${selectedService.price}`
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
 
           {/* Packages Section
           <section className="section-padding bg-gray-50">
@@ -673,6 +289,15 @@ export default function BookPage() {
             </div>
           </section> */}
         </>
+      )}
+
+      {/* Booking Dialog */}
+      {selectedService && (
+        <BookingDialog
+          isOpen={isDialogOpen}
+          onClose={handleCloseDialog}
+          service={selectedService}
+        />
       )}
 
       <Footer />
