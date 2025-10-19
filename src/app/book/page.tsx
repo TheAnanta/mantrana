@@ -28,40 +28,41 @@ export default function BookPage() {
 
   const services: Service[] = [
     {
-      id: "individual-therapy",
-      title: "Individual Therapy",
+      id: "first-session",
+      title: "First Session",
+      duration: 40,
+      price: "₹299",
+      description:
+        "Your first 40-minute session — a gentle step to understand your needs and plan your path forward.",
+      features: [
+        "Understand your needs",
+        "Plan your therapy journey",
+        "No long-term commitment",
+      ],
+      popular: true,
+    },
+    {
+      id: "regular-session",
+      title: "Regular Session",
       duration: 60,
       price: "₹2,500",
       description:
-        "One-on-one therapy session for personal growth and mental wellness.",
+        "Standard 60-minute therapy session for continued support and growth.",
       features: [
         "Personalized approach",
         "Confidential environment",
         "Follow-up resources",
       ],
     },
-    {
-      id: "life-coaching",
-      title: "Life Coaching",
-      duration: 60,
-      price: "₹3,000",
-      description:
-        "Goal-oriented coaching for career and personal development.",
-      features: [
-        "Action-oriented approach",
-        "Goal setting framework",
-        "Progress tracking",
-      ],
-    },
-    {
-      id: "consultation-call",
-      title: "Consultation Call",
-      duration: 15,
-      price: "Free",
-      description: "Discovery call to discuss your needs and answer questions.",
-      features: ["No commitment", "Ask questions", "Learn about services"],
-      popular: true,
-    },
+    // {
+    //   id: "consultation-call",
+    //   title: "Consultation Call",
+    //   duration: 15,
+    //   price: "Free",
+    //   description: "Discovery call to discuss your needs and answer questions.",
+    //   features: ["No commitment", "Ask questions", "Learn about services"],
+    //   popular: true,
+    // },
   ];
 
   const packages = [
@@ -235,7 +236,11 @@ export default function BookPage() {
             Book Your Session
           </h1>
           <p className="text-xl lg:text-2xl text-black/60 max-w-3xl mx-auto leading-relaxed">
-            Start your journey towards mental wellness and personal growth
+            Begin with Clarity. Your first 40-minute session is only ₹299/— 
+            a gentle step to understand your needs and plan your path forward.
+          </p>
+          <p className="text-lg text-black/50 mt-4">
+            Sessions available from 10:00 AM to 7:00 PM
           </p>
         </div>
       </section>
@@ -300,7 +305,7 @@ export default function BookPage() {
                   >
                     {service.popular && (
                       <div className="inline-block bg-moss text-white text-sm px-3 py-1 rounded-full mb-4">
-                        Most Popular
+                        Start Here
                       </div>
                     )}
 
