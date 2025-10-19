@@ -25,9 +25,10 @@ const config: Config = {
         teal: '#80a39b',
       },
       fontFamily: {
-        'google-sans': ['Google Sans', 'system-ui', 'sans-serif'],
-        'google-sans-display': ['Google Sans Display', 'system-ui', 'sans-serif'],
-        'elsie': ['var(--font-elsie)', 'serif'],
+        'gilroy': ['Gilroy', 'system-ui', 'sans-serif'],
+        'google-sans': ['Gilroy', 'system-ui', 'sans-serif'],
+        'google-sans-display': ['Gilroy', 'system-ui', 'sans-serif'],
+        'elsie': ['Gilroy', 'serif'],
       },
       spacing: {
         '18': '4.5rem',

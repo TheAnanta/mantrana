@@ -2,15 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Elsie } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-
-const elsie = Elsie({
-  subsets: ["latin"],
-  weight: ["400", "900"],
-  variable: "--font-elsie",
-});
 
 const navigation = [
   { name: "Home", href: "/" },
