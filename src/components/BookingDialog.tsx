@@ -207,7 +207,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
 
   const isDateSelected = (date: Date) => {
     if (!selectedDate) return false;
-    const selected = new Date(selectedDate);
+    const selected = new Date(selectedDate + 'T00:00:00');
     return date.getDate() === selected.getDate() &&
            date.getMonth() === selected.getMonth() &&
            date.getFullYear() === selected.getFullYear();
@@ -215,7 +215,10 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
 
   const handleDateClick = (date: Date) => {
     if (!isDateAvailable(date)) return;
-    const dateString = date.toISOString().split('T')[0];
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const dateString = `${year}-${month}-${day}`;
     setSelectedDate(dateString);
   };
 
@@ -374,7 +377,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                                   onClick={() => handleDateClick(date)}
                                   disabled={!isAvailable}
                                   className={`
-                                    aspect-square rounded-full flex items-center justify-center text-sm font-medium transition-all
+                                    aspect-square rounded-full flex items-center justify-center text-sm font-medium transition-all relative
                                     ${isSelected 
                                       ? 'bg-blue-600 text-white hover:bg-blue-700' 
                                       : isAvailable
@@ -386,7 +389,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                                 >
                                   {day}
                                   {isTodayDate && !isSelected && (
-                                    <span className="absolute bottom-1 w-1 h-1 bg-blue-600 rounded-full"></span>
+                                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></span>
                                   )}
                                 </button>
                               );
