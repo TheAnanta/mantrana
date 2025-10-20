@@ -6,12 +6,13 @@ import Link from "next/link";
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center">
-      <div className="absolute inset-0 bg-[url('/images/hero-bg.png')] bg-cover"></div>
+      {/* <div className="absolute inset-0 bg-[url('/images/hero-bg.png')] bg-cover"></div> */}
+      <div className="absolute inset-0 bg-[url('/images/diwali-backdrop-d.png')] bg-cover"></div>
       <div className="absolute -z-10 inset-0 bg-[var(--teal)] bg-cover"></div>
 
       <div className="relative container-custom text-center">
-        <div className="max-w-4xl mx-auto">
-          <Link href="/" className="flex-shrink-0">
+        <div className="max-w-4xl mx-auto lg:translate-x-4">
+          <div className="flex-shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.2"
@@ -31,11 +32,13 @@ function HeroSection() {
                 <path
                   id="Path 1"
                   className="s1"
+                  fillOpacity={0.3}
                   d="m236.5 274.6c-3.85 1.98-7.3 4.11-7.68 4.75-0.37 0.63 0.33 2.27 1.56 3.65 1.22 1.37 2.53 3.4 2.91 4.5 0.56 1.66 1.74 2.06 6.95 2.34 3.44 0.18 8.85 0.41 12.01 0.5 3.16 0.09 5.75-0.18 5.75-0.59 0-0.41 0.45-0.52 1-0.25 0.55 0.27 1.01 0.16 1.01-0.25 0.01-0.41-1.38-3-3.09-5.75-1.7-2.75-4.86-6.69-7.01-8.75-2.15-2.06-4.47-3.75-5.16-3.75-0.69 0.01-4.4 1.63-8.25 3.6z"
                 />
                 <path
                   id="Path 2"
                   className="s0"
+                  fillOpacity={0.5}
                   d="m207.48 126l-7.98 8c12.4 12.41 16.23 16.02 16.5 16.02 0.28 0.01 4.01-3.26 8.29-7.26 4.29-3.99 7.78-7.94 7.76-8.76-0.02-0.82-3.3-4.76-7.29-8.74-3.99-3.99-7.72-7.25-8.28-7.25-0.57-0.01-4.62 3.59-9 7.99z"
                 />
               </g>
@@ -44,14 +47,14 @@ function HeroSection() {
                           d="m78 23 3.87 11.25c2.13 6.19 8.77 25.31 14.75 42.5 5.99 17.18 11.22 31.24 11.63 31.25.41 0 1.02-1.01 1.35-2.25.33-1.24.76-2.92.96-3.75.19-.83 6.36-18.82 27.05-78.5l22.7-.25c17.76-.2 22.62.02 22.35 1-.19.69-1.77 1.59-3.5 2-1.86.44-3.98 1.99-5.16 3.75-1.95 2.92-2 4.67-2 128l3.5 3.5c1.93 1.93 4.4 3.5 5.5 3.5 1.1 0 2 .45 2 1 0 .64-10.67 1-30 1s-30-.36-30-1c0-.55.67-1 1.5-1s2.74-.61 4.25-1.36c1.51-.75 3.54-3 4.5-5 1.61-3.36 1.73-8.18 1.25-121.01l-21.8 62.93c-12 34.62-22.21 63.62-22.7 64.44-.49.83-1.06 1.28-1.27 1-.21-.27-10.24-29.07-44.23-127.5l-.23 39c-.2 32.58 0 39.25 1.19 40.5.78.83 2.16 3.3 3.07 5.5.91 2.2 1.63 6.48 1.61 9.5-.04 3.76-.8 6.93-2.41 10-1.29 2.48-2.98 4.5-3.76 4.5-.77 0-2.42-1.8-3.66-4-1.24-2.2-2.54-6.02-2.89-8.5-.39-2.75-.11-6.24.72-8.97.75-2.46 2.15-5.5 3.11-6.75 1.61-2.1 1.73-5.55 1.5-43.53-.24-39.5-.34-41.4-2.3-44.75-1.49-2.56-3.17-3.84-6.25-4.75-2.31-.69-4.2-1.7-4.2-2.25 0-.64 8.67-1 48-1zM21.5 132c2.26-.01 6.18 1.04 9 2.42 4.1 2 5.3 3.21 6.69 6.76.93 2.38 2.4 4.88 3.25 5.57.86.69 1.33 1.7 1.06 2.25-.28.55-1.96 1.03-3.75 1.06-2.71.06-2.92.21-1.25.91 1.1.47 4.92 3.82 8.5 7.45 5.09 5.17 7.15 6.61 9.5 6.63 1.71.02 3.62-.73 4.45-1.76.8-.98 1.45-2.69 1.45-3.79s-.65-2.81-1.45-3.79c-.84-1.05-2.71-1.77-4.45-1.73-1.69.03-3.99 1.04-5.26 2.29-1.79 1.76-2.53 1.97-3.5 1-.98-.97-.83-1.67.76-3.36 1.1-1.18 2.9-2.51 4-2.96 1.81-.75 1.77-.83-.5-.86-1.38-.02-2.84-.27-3.25-.56-.41-.29.71-3.3 2.5-6.69 2.77-5.26 3.98-6.51 8.25-8.49 2.75-1.28 6.91-2.33 9.25-2.34 2.43-.01 4.5.52 4.83 1.24.32.69-.09 2.6-.91 4.25-.82 1.65-2.77 4.19-4.33 5.64-1.56 1.45-4.3 3.36-6.09 4.25-1.79.88-4.04 1.64-5 1.69-.96.04-.25.6 1.57 1.25 1.83.64 4.21 2.3 5.3 3.67 1.08 1.38 1.96 3.85 1.96 5.5-.01 1.65-.93 4.24-2.05 5.75-1.71 2.32-2.77 2.75-6.78 2.78-4.52.02-5.12-.32-12.25-6.98-5.38-5.03-8.26-7.02-10.18-7.03-1.47-.01-3.38.66-4.25 1.48-.86.83-1.56 2.51-1.54 3.75.01 1.24.8 3.05 1.75 4.03.94.98 2.84 1.76 4.22 1.73 1.37-.03 3.5-1.06 4.73-2.28 1.54-1.54 2.78-1.99 4-1.46 1.58.69 1.45 1.08-1.23 3.77-2.47 2.47-3.8 2.99-7.5 2.96-3.27-.03-5.12-.65-6.78-2.27-1.61-1.58-2.27-3.39-2.27-6.23 0-2.86.65-4.62 2.27-6.18 1.26-1.19 3.63-2.5 8.28-3.63l-4-1.14c-2.2-.62-5.46-2.13-7.25-3.34-1.79-1.22-4.49-4.28-6-6.81-2.34-3.91-2.53-4.72-1.25-5.48.82-.49 3.3-.9 5.5-.92zm6.84-11c.64.01 2.62.91 4.41 2 2.97 1.83 3.25 2.44 3.25 7 0 2.75-.23 5-.5 5-.28 0-2.19-.87-4.25-1.93-2.25-1.16-4.05-2.96-4.5-4.5-.41-1.41-.48-3.69-.16-5.07.32-1.37 1.11-2.5 1.75-2.5zm31.41.04c.84-.03 1.25 1.6 1.25 4.96 0 4.91-.08 5.04-4.25 6.97-2.34 1.08-4.3 1.87-4.37 1.75-.06-.12-.4-2.36-.75-4.97-.62-4.7-.59-4.77 3.12-6.71 2.06-1.07 4.31-1.97 5-2z"
                         /> */}
             </svg>
-          </Link>
+          </div>
           <h1
             className={`mt-4 mb-2 text-3xl md:text-4xl lg:text-5xl text-white tracking-wider font-elsie uppercase font-medium`}
           >
             Mantrana
           </h1>
           <p
-            className={`text-xl md:text-2xl text-white/70 mb-12 font-elsie uppercase`}
+            className={`text-xl md:text-2xl text-white/70 mb-6 font-elsie uppercase`}
           >
             Therapy by Mohana Rupa
           </p>
@@ -63,13 +66,13 @@ function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/book"
-              className="btn-pill btn-primary text-lg px-10 py-5"
+              className="bg-white text-[#8d2a65] rounded-full font-semibold text-lg px-10 py-5"
             >
               Book a Session
             </Link>
             <Link
               href="/about"
-              className="btn-pill btn-secondary text-lg px-10 py-5"
+              className="border-2 rounded-full text-white text-lg px-10 py-5"
             >
               Learn More
             </Link>
@@ -77,8 +80,8 @@ function HeroSection() {
         </div>
       </div>
       <img
-        src="/images/rupa_doodle.png"
-        className="absolute bottom-16 right-0 w-32 md:w-48 lg:w-64"
+        src="/images/rupa_doodle.svg"
+        className="absolute top-40 right-0 w-32 md:w-48 lg:w-64"
       />
     </section>
   );
@@ -131,7 +134,7 @@ function AboutSection() {
 // About Preview Section
 function AboutMantranaSection() {
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding lg:pt-0 bg-white">
       <div className="container-custom ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="bg-azure/40 rounded-3xl h-96 lg:h-128 shadow-soft  overflow-hidden">
@@ -269,10 +272,7 @@ function TestimonialsSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-lavender/40 rounded-2xl p-8 shadow-soft"
-            >
+            <div key={index} className="bg-lavender/40 rounded-2xl p-8">
               <div className="flex mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <svg
@@ -394,26 +394,26 @@ function BlogSection() {
 // CTA Section
 function CTASection() {
   return (
-    <section className="section-padding bg-moss/35">
+    <section className="section-padding bg-lavender">
       <div className="container-custom text-center">
-        <div className="bg-moss rounded-3xl p-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+        <div className="rounded-3xl p-16">
+          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
             Begin Your Journey Today
           </h2>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xl text-black/90 max-w-2xl mx-auto mb-12 leading-relaxed">
             Take the first step towards healing, growth, and inner clarity. Book
             a session or start with a free consultation call.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/book"
-              className="btn-pill bg-white text-moss hover:bg-gray-50 text-lg px-10 py-5"
+              className="btn-pill text-white btn-primary border-[#D56989] font-semibold border-2 text-lg px-10 py-5"
             >
               Book a Session
             </Link>
             <Link
               href="/contact"
-              className="btn-pill border-2 border-white text-white hover:bg-white hover:text-moss text-lg px-10 py-5"
+              className="btn-pill border-2 border-[#D56989] text-[#D56989] font-semibold text-lg px-10 py-5"
             >
               Get in Touch
             </Link>

@@ -15,6 +15,8 @@ export default function ServicesPage() {
       title: "Individual Therapy",
       subtitle: "Understanding patterns. Building balance. Creating change.",
       icon: "🧠",
+      image:
+        "https://addictiontreatmentcentersofmd.com/wp-content/uploads/2024/05/Personal-Growth-and-Transformation-836x1024.jpg",
       description:
         "Every behaviour tells a story — shaped by our thoughts, emotions, and life experiences. In therapy, we explore these patterns together to understand what drives them and how they impact your well-being. Whether it's overthinking, people-pleasing, emotional overwhelm, or difficulty managing relationships, change begins with awareness and guided practice.",
       content: `As a behavioural specialist, I work with evidence-based approaches to help you recognize unhelpful patterns, strengthen self-regulation, and develop healthier coping responses. Our sessions are designed to foster emotional clarity, inner balance, and behavioural flexibility — so you can respond to life with confidence rather than react from habit.
@@ -36,6 +38,8 @@ Therapy can be both a mirror and a map — reflecting where you are and guiding 
       title: "Couples Therapy",
       subtitle: "From reaction to understanding. From conflict to connection.",
       icon: "💕",
+      image:
+        "https://images.bannerbear.com/direct/4mGpW3zwpg0ZK0AxQw/requests/000/093/756/418/P523LdrvK61p4P89z7nypx4jW/df0c9bb41807e1652aa088131c1f555caad7f21b.jpg",
       description:
         "Relationships often mirror our deepest patterns — how we communicate, express needs, handle stress, or seek validation. Over time, unspoken expectations, emotional distance, or repeated misunderstandings can quietly erode connection.",
       content: `Through a behavioural approach, couples therapy helps partners understand not just what they are fighting about, but how they are relating to each other. We explore emotional triggers, communication styles, and the underlying patterns that fuel conflict or silence. Together, we learn new ways to respond rather than react — creating space for empathy, respect, and trust to grow again.
@@ -57,6 +61,8 @@ Couples therapy can be a journey back to understanding — where each partner le
       title: "Behavioural Coaching",
       subtitle: "From awareness to action. From intention to change.",
       icon: "🎯",
+      image:
+        "https://www.therapytreatmentteam.com/wp-content/uploads/2023/04/Couples-Therapy-1-683x1024.jpg",
       description:
         "Lasting change doesn't happen by willpower alone — it begins with understanding why we do what we do. Behavioural coaching bridges that gap between knowing and doing. It helps you move from insight to practice, translating self-awareness into consistent, meaningful action.",
       content: `This space is designed for individuals who want to break unhelpful habits, build emotional regulation, and align their everyday actions with their goals and values. Whether it's managing procrastination, improving communication, setting boundaries, or cultivating self-discipline, coaching supports you in creating steady, sustainable shifts in your thoughts, emotions, and behaviours.
@@ -77,6 +83,8 @@ Behavioural coaching isn't about quick fixes — it's about conscious transforma
       title: "Therapy for Digital Well-being",
       subtitle: "Reclaim focus. Restore balance. Redefine connection.",
       icon: "📱",
+      image:
+        "https://img.freepik.com/free-photo/married-interracial-couple-using-smartphone-home-multi-ethnic-partners-talking-while-looking-modern-device-sitting-couch-living-room-mixed-race-people-with-technology_482257-28762.jpg?semt=ais_hybrid&w=740&q=80",
       description:
         "In a world that's always online, it's easy to lose touch with our inner stillness. Constant scrolling, endless notifications, and digital comparison can slowly shape our thoughts, moods, and even our sense of self. What begins as connection can often turn into exhaustion — mentally, emotionally, and socially.",
       content: `As a behavioural specialist with research expertise in social media and digital addiction, I help individuals understand the psychology behind their screen use — what drives it, how it affects focus, mood, sleep, and relationships, and how to consciously reshape those habits.
@@ -98,6 +106,8 @@ This therapy is not about disconnecting from technology — it's about reconnect
       title: "Trainings and Workshops",
       subtitle: "Learn, Reflect, Transform — together",
       icon: "👥",
+      image:
+        "https://www.accelerate.uk.com/wp-content/uploads/2016/11/iStock-531933576.jpg",
       description:
         "Trainings and workshops are thoughtfully designed spaces where participants come together to learn, engage, and grow under expert guidance. Each session blends meaningful discussions, interactive activities, and hands-on learning experiences that help participants internalize new skills and insights.",
       content: `Participants may take part in reflective exercises, group collaborations, and role-play practices that make the learning process dynamic and experiential. The environment remains supportive and participative—encouraging curiosity, sharing, and self-discovery.
@@ -112,6 +122,8 @@ By the end of the program, individuals leave not only with practical tools and c
       title: "Community Mental Wellness Advocacy",
       subtitle: "Because mental health is everyone's responsibility.",
       icon: "🌍",
+      image:
+        "https://www.verywellmind.com/thmb/21kFKDdAa9QbpqqwY8vrRpq085U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1223682335-acbb9dd4607a4630951f59e9c06db6c1.jpg",
       description:
         "At Mantrana Therapy, we believe in the power of community to foster mental wellness for all its members. Community mental wellness advocacy involves active efforts to support, promote, and improve mental health within communities. This includes raising awareness, reducing stigma, influencing policies, and building supportive, inclusive environments where everyone can thrive emotionally and mentally.",
       content: `In today's fast-paced digital world, where face-to-face communication and verbal interactions are often reduced, mental health challenges are becoming increasingly complex. As behavioural specialists, we understand the critical importance of nurturing authentic, meaningful human connections and providing tailored behavioural support that addresses these modern challenges.
@@ -166,10 +178,11 @@ We are open to collaborate with individuals, groups, and organizations passionat
               Healing begins with understanding.
             </p>
             <p className="text-lg text-gray-600 mt-6 leading-relaxed max-w-3xl mx-auto">
-              In this fast-paced digital world, where mental well-being is often overlooked, 
-              Mantrana offers a space for reflection, dialogue, and growth. Our services are 
-              thoughtfully designed to help individuals, couples, and communities find balance — 
-              within themselves, their relationships, and their daily lives.
+              In this fast-paced digital world, where mental well-being is often
+              overlooked, Mantrana offers a space for reflection, dialogue, and
+              growth. Our services are thoughtfully designed to help
+              individuals, couples, and communities find balance — within
+              themselves, their relationships, and their daily lives.
             </p>
           </div>
         </div>
@@ -243,7 +256,12 @@ We are open to collaborate with individuals, groups, and organizations passionat
                 </div>
 
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                  <div className="bg-gradient-to-br from-amaranth/70 to-lavender rounded-3xl h-64 lg:h-[540px] shadow-soft"></div>
+                  <div className="bg-gradient-to-br from-amaranth/70 to-lavender rounded-3xl h-64 lg:h-[540px] overflow-hidden">
+                    <img
+                      src={service.image}
+                      className="w-full h-full object-cover object-top"
+                    />{" "}
+                  </div>
                 </div>
               </div>
             ))}
@@ -259,8 +277,8 @@ We are open to collaborate with individuals, groups, and organizations passionat
               Booking
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Begin with Clarity. Your first 40-minute session is only ₹299/— 
-              a gentle step to understand your needs and plan your path forward.
+              Begin with Clarity. Your first 40-minute session is only ₹299/— a
+              gentle step to understand your needs and plan your path forward.
             </p>
           </div>
 
@@ -316,10 +334,11 @@ We are open to collaborate with individuals, groups, and organizations passionat
               </div>
             ))}
           </div>
-          
+
           <div className="text-center mt-8">
             <p className="text-gray-600">
-              <strong>Timings:</strong> Sessions available from 10:00 AM to 7:00 PM
+              <strong>Timings:</strong> Sessions available from 10:00 AM to 7:00
+              PM
             </p>
           </div>
         </div>

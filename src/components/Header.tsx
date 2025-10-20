@@ -73,11 +73,13 @@ export default function Header() {
                 <path
                   id="Path 1"
                   className="s1"
+                  fillOpacity={0.3}
                   d="m236.5 274.6c-3.85 1.98-7.3 4.11-7.68 4.75-0.37 0.63 0.33 2.27 1.56 3.65 1.22 1.37 2.53 3.4 2.91 4.5 0.56 1.66 1.74 2.06 6.95 2.34 3.44 0.18 8.85 0.41 12.01 0.5 3.16 0.09 5.75-0.18 5.75-0.59 0-0.41 0.45-0.52 1-0.25 0.55 0.27 1.01 0.16 1.01-0.25 0.01-0.41-1.38-3-3.09-5.75-1.7-2.75-4.86-6.69-7.01-8.75-2.15-2.06-4.47-3.75-5.16-3.75-0.69 0.01-4.4 1.63-8.25 3.6z"
                 />
                 <path
                   id="Path 2"
                   className="s0"
+                  fillOpacity={0.5}
                   d="m207.48 126l-7.98 8c12.4 12.41 16.23 16.02 16.5 16.02 0.28 0.01 4.01-3.26 8.29-7.26 4.29-3.99 7.78-7.94 7.76-8.76-0.02-0.82-3.3-4.76-7.29-8.74-3.99-3.99-7.72-7.25-8.28-7.25-0.57-0.01-4.62 3.59-9 7.99z"
                 />
               </g>
@@ -98,7 +100,7 @@ export default function Header() {
                       isHomePage
                         ? isScrolledBeyondThreshold
                           ? "text-black/60 hover:text-teal group-hover:text-teal"
-                          : "text-white/60 hover:text-white group-hover:text-white"
+                          : "text-black/60 hover:text-black group-hover:text-black hidden"
                         : "text-gray-700 hover:text-moss group-hover:text-moss"
                     } transition-colors duration-300 font-medium flex items-center`}
                   >
@@ -142,7 +144,7 @@ export default function Header() {
                     isHomePage
                       ? isScrolledBeyondThreshold
                         ? "text-black/60 hover:text-teal"
-                        : "text-white/60 hover:text-white"
+                        : "text-black/60 hover:text-black hidden"
                       : "text-gray-700 hover:text-moss"
                   } transition-colors duration-300 font-medium`}
                 >
@@ -150,6 +152,117 @@ export default function Header() {
                 </Link>
               )
             )}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`p-2 mr-auto rounded-md text-white/60 hover:text-white focus:outline-none ${
+                !isMenuOpen ? "" : "invisible"
+              } ${isHomePage && !isScrolledBeyondThreshold ? "" : "hidden"}`}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+
+            <div
+              className={`p-12 lg:flex flex-col hidden w-full max-w-xl h-screen bg-white fixed top-0 transition-all duration-300 z-40 ${
+                isMenuOpen ? "-left-8" : "-left-[38rem]"
+              }`}
+            >
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className={`p-2 mr-auto rounded-md text-black/60 hover:text-black focus:outline-none ${
+                  isMenuOpen ? "" : "invisible"
+                }`}
+              >
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+              {navigation.map((item) =>
+                item.hasDropdown ? (
+                  <div key={item.name} className="relative group my-6">
+                    <Link
+                      href={"/about"}
+                      className={`${
+                        isHomePage
+                          ? isScrolledBeyondThreshold
+                            ? "text-black/60 hover:text-teal group-hover:text-teal"
+                            : "text-black/60 hover:text-black group-hover:text-black"
+                          : "text-gray-700 hover:text-moss group-hover:text-moss"
+                      } transition-colors duration-300 text-xl font-semibold flex items-center`}
+                    >
+                      {item.name}
+                    </Link>
+                    <div className="pl-4">
+                      <Link
+                        href="/about#about-me"
+                        className="block px-4 py-4 mt-4 text-gray-700 hover:text-teal transition-colors font-semibold"
+                      >
+                        About Me
+                      </Link>
+                      <Link
+                        href="/about#about-mantrana"
+                        className="block px-4 py-6 pb-0 text-gray-700 hover:text-teal transition-colors font-semibold"
+                      >
+                        About Mantrana Therapy
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`${
+                      isHomePage
+                        ? isScrolledBeyondThreshold
+                          ? "text-black/60 hover:text-teal"
+                          : "text-black/60 hover:text-black"
+                        : "text-gray-700 hover:text-moss"
+                    } transition-colors duration-300 my-6 text-xl font-semibold`}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              )}
+            </div>
 
             {!loading && (
               <>
