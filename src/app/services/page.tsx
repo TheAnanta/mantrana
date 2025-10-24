@@ -140,26 +140,14 @@ We are open to collaborate with individuals, groups, and organizations passionat
       name: "First Session",
       price: "₹299",
       description:
-        "Your first 40-minute session — a gentle step to understand your needs and plan your path forward.",
+        "Your first 30-minute session — a gentle step to understand your needs and plan your path forward.",
       features: [
-        "40-minute session",
+        "30-minute session",
         "Understand your needs",
         "Plan your therapy journey",
         "No long-term commitment",
       ],
       popular: true,
-    },
-    {
-      name: "Regular Session",
-      price: "₹2,500",
-      description:
-        "Standard 60-minute therapy session for continued support and growth.",
-      features: [
-        "60-minute session",
-        "Personalized approach",
-        "Follow-up resources",
-        "Flexible scheduling",
-      ],
     },
   ];
 
@@ -277,12 +265,12 @@ We are open to collaborate with individuals, groups, and organizations passionat
               Booking
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Begin with Clarity. Your first 40-minute session is only ₹299/— a
+              Begin with Clarity. Your first 30-minute session is only ₹299/— a
               gentle step to understand your needs and plan your path forward.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 gap-8 max-w-lg mx-auto">
             {packages.map((pkg, index) => (
               <div
                 key={index}
