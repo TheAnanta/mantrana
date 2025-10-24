@@ -30,29 +30,16 @@ export default function BookPage() {
     {
       id: "first-session",
       title: "First Session",
-      duration: 40,
+      duration: 30,
       price: "₹299",
       description:
-        "Your first 40-minute session — a gentle step to understand your needs and plan your path forward.",
+        "Your first 30-minute session — a gentle step to understand your needs and plan your path forward.",
       features: [
         "Understand your needs",
         "Plan your therapy journey",
         "No long-term commitment",
       ],
       popular: true,
-    },
-    {
-      id: "regular-session",
-      title: "Regular Session",
-      duration: 60,
-      price: "₹2,500",
-      description:
-        "Standard 60-minute therapy session for continued support and growth.",
-      features: [
-        "Personalized approach",
-        "Confidential environment",
-        "Follow-up resources",
-      ],
     },
     // {
     //   id: "consultation-call",
@@ -119,7 +106,7 @@ export default function BookPage() {
             Book Your Session
           </h1>
           <p className="text-xl lg:text-2xl text-black/60 max-w-3xl mx-auto leading-relaxed">
-            Begin with Clarity. Your first 40-minute session is only ₹299/— a
+            Begin with Clarity. Your first 30-minute session is only ₹299/— a
             gentle step to understand your needs and plan your path forward.
           </p>
           <p className="text-lg text-black/50 mt-4">
@@ -173,7 +160,7 @@ export default function BookPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 gap-8 max-w-md mx-auto">
                 {services.map((service) => (
                   <div
                     key={service.id}
