@@ -233,7 +233,7 @@ export default function BookPage() {
                           : "bg-blue-600 text-white hover:bg-blue-700"
                       }`}
                     >
-                      {service.disabled ? "Currently Unavailable" : "Schedule"}
+                      {service.disabled ? "Book Offline" : "Schedule"}
                     </button>
                   </div>
                 ))}

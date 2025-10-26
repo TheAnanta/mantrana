@@ -333,7 +333,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
                     disabled
                     className="btn-pill w-full text-center block bg-gray-300 text-gray-500 cursor-not-allowed"
                   >
-                    Currently Unavailable
+                    Book Offline
                   </button>
                 ) : (
                   <Link
