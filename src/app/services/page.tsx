@@ -140,9 +140,9 @@ We are open to collaborate with individuals, groups, and organizations passionat
       name: "First Session",
       price: "₹299",
       description:
-        "Your first 40-minute session — a gentle step to understand your needs and plan your path forward.",
+        "Your first 30-minute session — a gentle step to understand your needs and plan your path forward.",
       features: [
-        "40-minute session",
+        "30-minute session",
         "Understand your needs",
         "Plan your therapy journey",
         "No long-term commitment",
@@ -151,7 +151,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
     },
     {
       name: "Regular Session",
-      price: "₹2,500",
+      price: "",
       description:
         "Standard 60-minute therapy session for continued support and growth.",
       features: [
@@ -160,6 +160,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
         "Follow-up resources",
         "Flexible scheduling",
       ],
+      disabled: true,
     },
   ];
 
@@ -277,7 +278,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
               Booking
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Begin with Clarity. Your first 40-minute session is only ₹299/— a
+              Begin with Clarity. Your first 30-minute session is only ₹299/— a
               gentle step to understand your needs and plan your path forward.
             </p>
           </div>
@@ -290,7 +291,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
                   pkg.popular
                     ? "ring-2 ring-moss shadow-medium transform scale-105"
                     : ""
-                }`}
+                } ${pkg.disabled ? "opacity-75" : ""}`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -305,9 +306,15 @@ We are open to collaborate with individuals, groups, and organizations passionat
                     {pkg.name}
                   </h3>
                   <div className="mb-3">
-                    <span className="text-3xl font-bold text-moss">
-                      {pkg.price}
-                    </span>
+                    {pkg.price ? (
+                      <span className="text-3xl font-bold text-moss">
+                        {pkg.price}
+                      </span>
+                    ) : (
+                      <span className="text-lg font-medium text-gray-500">
+                        Contact for pricing
+                      </span>
+                    )}
                   </div>
                   <p className="text-gray-600">{pkg.description}</p>
                 </div>
@@ -321,16 +328,25 @@ We are open to collaborate with individuals, groups, and organizations passionat
                   ))}
                 </ul>
 
-                <Link
-                  href="/book"
-                  className={`btn-pill w-full text-center block ${
-                    pkg.popular
-                      ? "btn-primary bg-moss "
-                      : "btn-secondary bg-moss/30 text-moss"
-                  }`}
-                >
-                  Choose This Package
-                </Link>
+                {pkg.disabled ? (
+                  <button
+                    disabled
+                    className="btn-pill w-full text-center block bg-gray-300 text-gray-500 cursor-not-allowed"
+                  >
+                    Book Offline
+                  </button>
+                ) : (
+                  <Link
+                    href="/book"
+                    className={`btn-pill w-full text-center block ${
+                      pkg.popular
+                        ? "btn-primary bg-moss "
+                        : "btn-secondary bg-moss/30 text-moss"
+                    }`}
+                  >
+                    Choose This Package
+                  </Link>
+                )}
               </div>
             ))}
           </div>

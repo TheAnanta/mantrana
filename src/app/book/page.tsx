@@ -30,10 +30,10 @@ export default function BookPage() {
     {
       id: "first-session",
       title: "First Session",
-      duration: 40,
+      duration: 30,
       price: "₹299",
       description:
-        "Your first 40-minute session — a gentle step to understand your needs and plan your path forward.",
+        "Your first 30-minute session — a gentle step to understand your needs and plan your path forward.",
       features: [
         "Understand your needs",
         "Plan your therapy journey",
@@ -45,7 +45,7 @@ export default function BookPage() {
       id: "regular-session",
       title: "Regular Session",
       duration: 60,
-      price: "₹2,500",
+      price: "",
       description:
         "Standard 60-minute therapy session for continued support and growth.",
       features: [
@@ -53,6 +53,7 @@ export default function BookPage() {
         "Confidential environment",
         "Follow-up resources",
       ],
+      disabled: true,
     },
     // {
     //   id: "consultation-call",
@@ -119,7 +120,7 @@ export default function BookPage() {
             Book Your Session
           </h1>
           <p className="text-xl lg:text-2xl text-black/60 max-w-3xl mx-auto leading-relaxed">
-            Begin with Clarity. Your first 40-minute session is only ₹299/— a
+            Begin with Clarity. Your first 30-minute session is only ₹299/— a
             gentle step to understand your needs and plan your path forward.
           </p>
           <p className="text-lg text-black/50 mt-4">
@@ -173,13 +174,13 @@ export default function BookPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 {services.map((service) => (
                   <div
                     key={service.id}
                     className={`bg-white rounded-2xl shadow-soft p-8 text-center border-2 transition-all ${
                       service.popular ? "ring-2 ring-moss ring-opacity-50" : ""
-                    } border-transparent hover:border-gray-200`}
+                    } ${service.disabled ? "opacity-75" : ""} border-transparent hover:border-gray-200`}
                   >
                     {service.popular && (
                       <div className="inline-block bg-moss text-white text-sm px-3 py-1 rounded-full mb-4">
@@ -191,12 +192,25 @@ export default function BookPage() {
                       {service.title}
                     </h3>
                     <div className="mb-4">
-                      <span className="text-3xl font-bold text-moss">
-                        {service.price}
-                      </span>
-                      <div className="text-gray-500 mt-1">
-                        {service.duration} minutes
-                      </div>
+                      {service.price ? (
+                        <>
+                          <span className="text-3xl font-bold text-moss">
+                            {service.price}
+                          </span>
+                          <div className="text-gray-500 mt-1">
+                            {service.duration} minutes
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-lg font-medium text-gray-500">
+                            Contact for pricing
+                          </span>
+                          <div className="text-gray-500 mt-1">
+                            {service.duration} minutes
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     <p className="text-gray-600 mb-6">{service.description}</p>
@@ -211,10 +225,15 @@ export default function BookPage() {
                     </ul>
 
                     <button
-                      onClick={() => handleServiceClick(service)}
-                      className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                      onClick={() => !service.disabled && handleServiceClick(service)}
+                      disabled={service.disabled}
+                      className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
+                        service.disabled
+                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                          : "bg-blue-600 text-white hover:bg-blue-700"
+                      }`}
                     >
-                      Schedule
+                      {service.disabled ? "Book Offline" : "Schedule"}
                     </button>
                   </div>
                 ))}
