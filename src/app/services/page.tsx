@@ -149,6 +149,19 @@ We are open to collaborate with individuals, groups, and organizations passionat
       ],
       popular: true,
     },
+    {
+      name: "Regular Session",
+      price: "",
+      description:
+        "Standard 60-minute therapy session for continued support and growth.",
+      features: [
+        "60-minute session",
+        "Personalized approach",
+        "Follow-up resources",
+        "Flexible scheduling",
+      ],
+      disabled: true,
+    },
   ];
 
   return (
@@ -270,7 +283,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 max-w-lg mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {packages.map((pkg, index) => (
               <div
                 key={index}
@@ -278,7 +291,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
                   pkg.popular
                     ? "ring-2 ring-moss shadow-medium transform scale-105"
                     : ""
-                }`}
+                } ${pkg.disabled ? "opacity-75" : ""}`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -293,9 +306,15 @@ We are open to collaborate with individuals, groups, and organizations passionat
                     {pkg.name}
                   </h3>
                   <div className="mb-3">
-                    <span className="text-3xl font-bold text-moss">
-                      {pkg.price}
-                    </span>
+                    {pkg.price ? (
+                      <span className="text-3xl font-bold text-moss">
+                        {pkg.price}
+                      </span>
+                    ) : (
+                      <span className="text-lg font-medium text-gray-500">
+                        Contact for pricing
+                      </span>
+                    )}
                   </div>
                   <p className="text-gray-600">{pkg.description}</p>
                 </div>
@@ -309,16 +328,25 @@ We are open to collaborate with individuals, groups, and organizations passionat
                   ))}
                 </ul>
 
-                <Link
-                  href="/book"
-                  className={`btn-pill w-full text-center block ${
-                    pkg.popular
-                      ? "btn-primary bg-moss "
-                      : "btn-secondary bg-moss/30 text-moss"
-                  }`}
-                >
-                  Choose This Package
-                </Link>
+                {pkg.disabled ? (
+                  <button
+                    disabled
+                    className="btn-pill w-full text-center block bg-gray-300 text-gray-500 cursor-not-allowed"
+                  >
+                    Currently Unavailable
+                  </button>
+                ) : (
+                  <Link
+                    href="/book"
+                    className={`btn-pill w-full text-center block ${
+                      pkg.popular
+                        ? "btn-primary bg-moss "
+                        : "btn-secondary bg-moss/30 text-moss"
+                    }`}
+                  >
+                    Choose This Package
+                  </Link>
+                )}
               </div>
             ))}
           </div>

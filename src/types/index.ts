@@ -37,6 +37,7 @@ export interface Service {
   description: string
   features: string[]
   popular?: boolean
+  disabled?: boolean
 }
 
 export interface BookingData {

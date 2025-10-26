@@ -41,6 +41,20 @@ export default function BookPage() {
       ],
       popular: true,
     },
+    {
+      id: "regular-session",
+      title: "Regular Session",
+      duration: 60,
+      price: "",
+      description:
+        "Standard 60-minute therapy session for continued support and growth.",
+      features: [
+        "Personalized approach",
+        "Confidential environment",
+        "Follow-up resources",
+      ],
+      disabled: true,
+    },
     // {
     //   id: "consultation-call",
     //   title: "Consultation Call",
@@ -160,13 +174,13 @@ export default function BookPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-8 max-w-md mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 {services.map((service) => (
                   <div
                     key={service.id}
                     className={`bg-white rounded-2xl shadow-soft p-8 text-center border-2 transition-all ${
                       service.popular ? "ring-2 ring-moss ring-opacity-50" : ""
-                    } border-transparent hover:border-gray-200`}
+                    } ${service.disabled ? "opacity-75" : ""} border-transparent hover:border-gray-200`}
                   >
                     {service.popular && (
                       <div className="inline-block bg-moss text-white text-sm px-3 py-1 rounded-full mb-4">
@@ -178,12 +192,25 @@ export default function BookPage() {
                       {service.title}
                     </h3>
                     <div className="mb-4">
-                      <span className="text-3xl font-bold text-moss">
-                        {service.price}
-                      </span>
-                      <div className="text-gray-500 mt-1">
-                        {service.duration} minutes
-                      </div>
+                      {service.price ? (
+                        <>
+                          <span className="text-3xl font-bold text-moss">
+                            {service.price}
+                          </span>
+                          <div className="text-gray-500 mt-1">
+                            {service.duration} minutes
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-lg font-medium text-gray-500">
+                            Contact for pricing
+                          </span>
+                          <div className="text-gray-500 mt-1">
+                            {service.duration} minutes
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     <p className="text-gray-600 mb-6">{service.description}</p>
@@ -198,10 +225,15 @@ export default function BookPage() {
                     </ul>
 
                     <button
-                      onClick={() => handleServiceClick(service)}
-                      className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                      onClick={() => !service.disabled && handleServiceClick(service)}
+                      disabled={service.disabled}
+                      className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
+                        service.disabled
+                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                          : "bg-blue-600 text-white hover:bg-blue-700"
+                      }`}
                     >
-                      Schedule
+                      {service.disabled ? "Currently Unavailable" : "Schedule"}
                     </button>
                   </div>
                 ))}
