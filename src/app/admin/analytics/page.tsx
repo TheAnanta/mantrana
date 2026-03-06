@@ -102,7 +102,7 @@ export default function AnalyticsPage() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="animate-spin h-8 w-8 border-b-2 border-moss mx-auto"></div>
+          <div className="animate-spin h-8 w-8 border-b-2 border-teal mx-auto"></div>
           <p className="mt-2 text-gray-600">Loading analytics...</p>
         </div>
       </div>
@@ -114,7 +114,7 @@ export default function AnalyticsPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Analytics</h1>
+          <h1 className="text-2xl font-bold text-charcoal font-awesome-serif">Analytics</h1>
           <p className="text-gray-600">Track your website performance and user engagement</p>
         </div>
         <div className="flex space-x-2">
@@ -122,11 +122,10 @@ export default function AnalyticsPage() {
             <button
               key={range}
               onClick={() => setTimeRange(range)}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                timeRange === range
-                  ? 'bg-moss text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-              }`}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${timeRange === range
+                  ? 'bg-teal text-white'
+                  : 'bg-white text-charcoal/70 border border-teal/20 hover:bg-teal/5'
+                }`}
             >
               {range === '7d' ? 'Last 7 days' : range === '30d' ? 'Last 30 days' : 'Last 90 days'}
             </button>
@@ -139,8 +138,8 @@ export default function AnalyticsPage() {
         <div className="bg-white p-6 rounded-lg shadow-soft">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Page Views</p>
-              <p className="text-2xl font-bold text-gray-900">{data.pageViews.thisMonth.toLocaleString()}</p>
+              <p className="text-sm font-medium text-charcoal/60">Page Views</p>
+              <p className="text-2xl font-bold text-charcoal">{data.pageViews.thisMonth.toLocaleString()}</p>
             </div>
             <div className="p-3 bg-blue-100 rounded-full">
               <span className="text-2xl">👁️</span>
@@ -157,8 +156,8 @@ export default function AnalyticsPage() {
         <div className="bg-white p-6 rounded-lg shadow-soft">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Visitors</p>
-              <p className="text-2xl font-bold text-gray-900">{data.visitors.thisMonth.toLocaleString()}</p>
+              <p className="text-sm font-medium text-charcoal/60">Visitors</p>
+              <p className="text-2xl font-bold text-charcoal">{data.visitors.thisMonth.toLocaleString()}</p>
             </div>
             <div className="p-3 bg-green-100 rounded-full">
               <span className="text-2xl">👥</span>
@@ -175,10 +174,10 @@ export default function AnalyticsPage() {
         <div className="bg-white p-6 rounded-lg shadow-soft">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Appointments</p>
-              <p className="text-2xl font-bold text-gray-900">{data.conversions.appointments}</p>
+              <p className="text-sm font-medium text-charcoal/60">Appointments</p>
+              <p className="text-2xl font-bold text-charcoal">{data.conversions.appointments}</p>
             </div>
-            <div className="p-3 bg-moss/20 rounded-full">
+            <div className="p-3 bg-teal/20 rounded-full">
               <span className="text-2xl">📅</span>
             </div>
           </div>
@@ -190,8 +189,8 @@ export default function AnalyticsPage() {
         <div className="bg-white p-6 rounded-lg shadow-soft">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Contact Forms</p>
-              <p className="text-2xl font-bold text-gray-900">{data.conversions.contactForms}</p>
+              <p className="text-sm font-medium text-charcoal/60">Contact Forms</p>
+              <p className="text-2xl font-bold text-charcoal">{data.conversions.contactForms}</p>
             </div>
             <div className="p-3 bg-purple-100 rounded-full">
               <span className="text-2xl">📧</span>
@@ -206,18 +205,18 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Pages */}
         <div className="bg-white p-6 rounded-lg shadow-soft">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Top Pages</h3>
+          <h3 className="text-lg font-medium text-charcoal mb-4">Top Pages</h3>
           <div className="space-y-4">
             {data.topPages.map((page, index) => (
               <div key={page.page} className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <span className="text-sm font-medium text-gray-500">#{index + 1}</span>
-                  <span className="text-sm font-medium text-gray-900">{page.page}</span>
+                  <span className="text-sm font-medium text-charcoal/40">#{index + 1}</span>
+                  <span className="text-sm font-medium text-charcoal">{page.page}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-24 bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-moss h-2 rounded-full" 
+                    <div
+                      className="bg-teal h-2 rounded-full"
                       style={{ width: `${page.percentage}%` }}
                     ></div>
                   </div>
@@ -232,18 +231,18 @@ export default function AnalyticsPage() {
 
         {/* Traffic Sources */}
         <div className="bg-white p-6 rounded-lg shadow-soft">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Traffic Sources</h3>
+          <h3 className="text-lg font-medium text-charcoal mb-4">Traffic Sources</h3>
           <div className="space-y-4">
             {data.topSources.map((source, index) => (
               <div key={source.source} className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <span className="text-sm font-medium text-gray-500">#{index + 1}</span>
-                  <span className="text-sm font-medium text-gray-900">{source.source}</span>
+                  <span className="text-sm font-medium text-charcoal/40">#{index + 1}</span>
+                  <span className="text-sm font-medium text-charcoal">{source.source}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-24 bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-amaranth h-2 rounded-full" 
+                    <div
+                      className="bg-terracotta h-2 rounded-full"
                       style={{ width: `${source.percentage}%` }}
                     ></div>
                   </div>
@@ -259,17 +258,17 @@ export default function AnalyticsPage() {
 
       {/* Monthly Trend Chart (Simple Bar Chart) */}
       <div className="bg-white p-6 rounded-lg shadow-soft">
-        <h3 className="text-lg font-medium text-gray-900 mb-6">Monthly Trends</h3>
+        <h3 className="text-lg font-medium text-charcoal mb-6">Monthly Trends</h3>
         <div className="flex items-end justify-between h-48 space-x-2">
           {data.monthlyData.map((month, index) => {
             const maxViews = Math.max(...data.monthlyData.map(m => m.views))
             const height = (month.views / maxViews) * 100
-            
+
             return (
               <div key={month.month} className="flex-1 flex flex-col items-center">
                 <div className="flex-1 flex flex-col justify-end">
-                  <div 
-                    className="bg-moss rounded-t w-full min-h-[4px] relative group cursor-pointer"
+                  <div
+                    className="bg-teal rounded-t w-full min-h-[4px] relative group cursor-pointer"
                     style={{ height: `${height}%` }}
                   >
                     <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
@@ -289,20 +288,20 @@ export default function AnalyticsPage() {
       {/* Additional Insights */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-soft">
-          <h4 className="font-medium text-gray-900 mb-2">Bounce Rate</h4>
-          <div className="text-2xl font-bold text-gray-900">42.3%</div>
+          <h4 className="font-medium text-charcoal mb-2">Bounce Rate</h4>
+          <div className="text-2xl font-bold text-charcoal">42.3%</div>
           <div className="text-sm text-green-600">↓ 5.2% vs last month</div>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-soft">
-          <h4 className="font-medium text-gray-900 mb-2">Avg. Session Duration</h4>
-          <div className="text-2xl font-bold text-gray-900">3m 42s</div>
+          <h4 className="font-medium text-charcoal mb-2">Avg. Session Duration</h4>
+          <div className="text-2xl font-bold text-charcoal">3m 42s</div>
           <div className="text-sm text-green-600">↑ 18s vs last month</div>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-soft">
-          <h4 className="font-medium text-gray-900 mb-2">Newsletter Signups</h4>
-          <div className="text-2xl font-bold text-gray-900">{data.conversions.newsletterSignups}</div>
+          <h4 className="font-medium text-charcoal mb-2">Newsletter Signups</h4>
+          <div className="text-2xl font-bold text-charcoal">{data.conversions.newsletterSignups}</div>
           <div className="text-sm text-green-600">↑ 12% vs last month</div>
         </div>
       </div>

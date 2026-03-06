@@ -13,11 +13,11 @@ export default function RefundPolicyPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-lavender via-white to-azure">
+      <section className="pt-32 pb-16 bg-background">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Refund <span className="text-moss">Policy</span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 font-awesome-serif">
+              Refund <span className="text-teal">Policy</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
               Fair and transparent refund guidelines for our services
@@ -36,7 +36,7 @@ export default function RefundPolicyPage() {
 
             <div className="space-y-12">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Our Commitment
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -49,12 +49,12 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Individual Session Refunds
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Cancellation with 24+ Hours Notice
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -66,7 +66,7 @@ export default function RefundPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Cancellation with Less Than 24 Hours Notice
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -78,7 +78,7 @@ export default function RefundPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       No-Show Policy
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -93,12 +93,12 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Session Package Refunds
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Before First Session
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -109,7 +109,7 @@ export default function RefundPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       After Starting Package
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -123,7 +123,7 @@ export default function RefundPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Package Expiration
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -137,7 +137,7 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Therapist-Initiated Cancellations
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -147,7 +147,7 @@ export default function RefundPolicyPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       You will be notified as soon as possible
                     </span>
@@ -175,7 +175,7 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Emergency and Exceptional Circumstances
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -184,7 +184,7 @@ export default function RefundPolicyPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600 mb-4">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>Medical emergencies requiring hospitalization</span>
                   </li>
                   <li className="flex items-start">
@@ -209,12 +209,12 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Refund Processing
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Timeline
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -225,7 +225,7 @@ export default function RefundPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Refund Method
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -235,7 +235,7 @@ export default function RefundPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Requesting a Refund
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -249,7 +249,7 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Non-Refundable Services
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -257,7 +257,7 @@ export default function RefundPolicyPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Completed therapy sessions that were attended
                     </span>
@@ -285,7 +285,7 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Dissatisfaction with Services
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -301,7 +301,7 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Payment Disputes
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -314,7 +314,7 @@ export default function RefundPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Changes to This Policy
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -327,8 +327,8 @@ export default function RefundPolicyPage() {
                 </p>
               </div>
 
-              <div className="bg-lavender/20 rounded-2xl p-8 mt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <div className="bg-teal/10 rounded-2xl p-8 mt-12">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Questions About Refunds?
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">

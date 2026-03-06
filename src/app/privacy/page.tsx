@@ -13,11 +13,11 @@ export default function PrivacyPolicyPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-lavender via-white to-azure">
+      <section className="pt-32 pb-16 bg-background">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Privacy <span className="text-moss">Policy</span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 font-awesome-serif">
+              Privacy <span className="text-teal">Policy</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
               Your privacy and confidentiality are our top priorities
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
 
             <div className="space-y-12">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Introduction
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -49,12 +49,12 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Information We Collect
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Personal Information
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -65,7 +65,7 @@ export default function PrivacyPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Health Information
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Technical Information
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -91,37 +91,37 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   How We Use Your Information
                 </h2>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       To provide therapy and counselling services tailored to
                       your needs
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       To schedule and manage appointments and communicate with
                       you
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>To process payments and maintain billing records</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       To improve our services and develop new therapeutic
                       approaches
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       To comply with legal and professional obligations
                     </span>
@@ -130,7 +130,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Confidentiality and Data Security
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -139,25 +139,25 @@ export default function PrivacyPolicyPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Encrypted storage and transmission of sensitive data
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Secure video conferencing platforms for online sessions
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Limited access to your information on a need-to-know basis
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Regular security audits and updates to our systems
                     </span>
@@ -166,7 +166,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Information Sharing
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -176,23 +176,23 @@ export default function PrivacyPolicyPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>With your explicit written consent</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       When required by law or legal proceedings
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       To prevent imminent harm to you or others
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       With trusted service providers who assist in delivering
                       our services (under strict confidentiality agreements)
@@ -202,7 +202,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Your Rights
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -211,33 +211,33 @@ export default function PrivacyPolicyPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Access and review your personal and health information
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Request corrections to inaccurate or incomplete information
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Request deletion of your information (subject to legal and
                       professional retention requirements)
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>Withdraw consent for certain uses of your data</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Data Retention
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -250,7 +250,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Cookies and Tracking
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -262,7 +262,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Changes to This Policy
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -273,8 +273,8 @@ export default function PrivacyPolicyPage() {
                 </p>
               </div>
 
-              <div className="bg-lavender/20 rounded-2xl p-8 mt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <div className="bg-teal/10 rounded-2xl p-8 mt-12">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Contact Us
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">

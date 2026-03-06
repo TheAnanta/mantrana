@@ -29,12 +29,11 @@ export default function AdminLayout({
     <div className="min-h-screen bg-gray-50">
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:inset-0`}
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:inset-0`}
       >
         <div className="flex flex-col justify-center pt-8 h-16 px-4">
-          <h1 className="text-xl font-bold text-moss">Mantrana</h1>
+          <h1 className="text-xl font-bold text-teal font-awesome-serif">Mantrana</h1>
           <p className="text-sm opacity-50 font-semibold">Admin</p>
         </div>
 
@@ -46,11 +45,10 @@ export default function AdminLayout({
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors ${
-                    isActive
-                      ? "bg-moss/10 text-moss"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                  }`}
+                  className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors ${isActive
+                      ? "bg-teal/10 text-teal"
+                      : "text-charcoal/60 hover:bg-teal/5 hover:text-charcoal"
+                    }`}
                   onClick={() => setIsSidebarOpen(false)}
                 >
                   <span className="mr-3 text-lg">{item.icon}</span>
@@ -64,14 +62,14 @@ export default function AdminLayout({
             <div className="px-2 space-y-1">
               <Link
                 href="/"
-                className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-charcoal/60 hover:bg-teal/5 hover:text-charcoal"
                 target="_blank"
               >
                 <span className="mr-3 text-lg">🏠</span>
                 View Website
               </Link>
               <button
-                className="w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                className="w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md text-charcoal/60 hover:bg-teal/5 hover:text-charcoal"
                 onClick={() => {
                   // Simple logout - in a real app, this would clear auth tokens
                   if (confirm("Are you sure you want to logout?")) {
@@ -101,7 +99,7 @@ export default function AdminLayout({
         <div className="sticky top-0 z-10 flex h-16 bg-white shadow">
           <button
             type="button"
-            className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-moss lg:hidden"
+            className="px-4 border-r border-teal/10 text-charcoal/40 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal lg:hidden"
             onClick={() => setIsSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
@@ -122,7 +120,7 @@ export default function AdminLayout({
 
           <div className="flex-1 px-4 flex justify-between items-center">
             <div className="flex-1 flex">
-              <h2 className="text-2xl font-semibold text-gray-900">
+              <h2 className="text-2xl font-semibold text-charcoal font-awesome-serif">
                 {navigation.find((item) => item.href === pathname)?.name ||
                   "Admin Panel"}
               </h2>
@@ -131,8 +129,8 @@ export default function AdminLayout({
               <div className="relative">
                 <div className="flex items-center space-x-3">
                   <span className="text-sm text-gray-700">Welcome, Mohana</span>
-                  <div className="h-8 w-8 bg-moss/20 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-medium text-moss">MR</span>
+                  <div className="h-8 w-8 bg-teal/20 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-medium text-teal">MR</span>
                   </div>
                 </div>
               </div>

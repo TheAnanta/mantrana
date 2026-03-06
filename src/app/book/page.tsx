@@ -113,45 +113,46 @@ export default function BookPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-40 py-16 bg-moss/30 text-moss">
-        <div className="container-custom text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+      <section className="pt-40 py-16 bg-background relative overflow-hidden">
+        <div className="container-custom text-center relative z-10">
+          <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-4 uppercase">Let's Connect</div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl text-charcoal mb-6 font-awesome-serif uppercase tracking-widest">
             Book Your Session
           </h1>
-          <p className="text-xl lg:text-2xl text-black/60 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed max-w-3xl mx-auto mb-4">
             Begin with Clarity. Your first 40-minute session is only ₹299/— a
             gentle step to understand your needs and plan your path forward.
           </p>
-          <p className="text-lg text-black/50 mt-4">
+          <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
             Sessions available from 10:00 AM to 7:00 PM
           </p>
         </div>
       </section>
 
       {bookingSuccess && (
-        <section className="py-8 bg-green-50">
+        <section className="py-16 bg-white border-y border-charcoal/5">
           <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-soft p-8 text-center">
-              <div className="text-green-500 text-6xl mb-4">✅</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="max-w-2xl mx-auto bg-background rounded-[30px] shadow-soft p-12 text-center border border-charcoal/5">
+              <div className="text-emerald text-6xl mb-6">✅</div>
+              <h2 className="text-3xl font-awesome-serif text-charcoal mb-4 uppercase tracking-wide">
                 Booking Confirmed!
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-sm font-montserrat text-charcoal/70 font-medium mb-8">
                 Your appointment has been successfully booked. You will receive
                 a confirmation email shortly.
               </p>
-              <div className="flex gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={() => router.push("/account")}
-                  className="bg-moss text-white px-6 py-2 rounded-lg hover:bg-moss/90 transition-colors"
+                  className="bg-emerald text-white hover:bg-emerald/90 transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full"
                 >
-                  View My Appointments
+                  View Appointments
                 </button>
                 <button
                   onClick={() => setBookingSuccess(false)}
-                  className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+                  className="bg-white text-charcoal hover:bg-gray-50 border border-charcoal/10 transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full"
                 >
-                  Book Another Session
+                  Book Another
                 </button>
               </div>
             </div>
@@ -162,57 +163,59 @@ export default function BookPage() {
       {!bookingSuccess && (
         <>
           {/* Services Selection */}
-          <section className="section-padding">
+          <section className="py-16 md:py-24 bg-white">
             <div className="container-custom">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              <div className="text-center mb-16 max-w-3xl mx-auto">
+                <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">Pricing</div>
+                <h2 className="text-4xl lg:text-5xl text-charcoal mb-6 font-awesome-serif uppercase tracking-wide">
                   Choose Your Service
                 </h2>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">
                   Select the service that best fits your needs
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {services.map((service) => (
                   <div
                     key={service.id}
-                    className={`bg-white rounded-2xl shadow-soft p-8 text-center border-2 transition-all ${
-                      service.popular ? "ring-2 ring-moss ring-opacity-50" : ""
-                    } border-transparent hover:border-gray-200`}
+                    className={`bg-white rounded-[30px] shadow-soft p-8 text-center border-2 transition-all flex flex-col ${service.popular ? "border-emerald relative" : "border-charcoal/5 hover:border-charcoal/10"
+                      }`}
                   >
                     {service.popular && (
-                      <div className="inline-block bg-moss text-white text-sm px-3 py-1 rounded-full mb-4">
+                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-emerald text-white text-[10px] uppercase tracking-widest font-bold px-4 py-1.5 rounded-full">
                         Start Here
                       </div>
                     )}
 
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-2xl font-awesome-serif text-charcoal mb-2 uppercase tracking-wide">
                       {service.title}
                     </h3>
-                    <div className="mb-4">
-                      <span className="text-3xl font-bold text-moss">
+                    <div className="mb-6">
+                      <span className="text-4xl font-awesome-serif text-emerald">
                         {service.price}
                       </span>
-                      <div className="text-gray-500 mt-1">
+                      <div className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-2 font-semibold">
                         {service.duration} minutes
                       </div>
                     </div>
 
-                    <p className="text-gray-600 mb-6">{service.description}</p>
+                    <p className="text-sm font-montserrat text-charcoal/70 font-medium mb-8 leading-relaxed">
+                      {service.description}
+                    </p>
 
-                    <ul className="text-left text-sm text-gray-600 space-y-2 mb-6">
+                    <ul className="text-left text-sm font-montserrat text-charcoal/70 space-y-3 mb-8 flex-1">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center">
-                          <span className="text-moss mr-2">✓</span>
-                          {feature}
+                        <li key={idx} className="flex items-start">
+                          <span className="text-emerald mr-3 mt-0.5">•</span>
+                          <span className="font-medium">{feature}</span>
                         </li>
                       ))}
                     </ul>
 
                     <button
                       onClick={() => handleServiceClick(service)}
-                      className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                      className="bg-charcoal text-white hover:bg-black transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full mt-auto"
                     >
                       Schedule
                     </button>

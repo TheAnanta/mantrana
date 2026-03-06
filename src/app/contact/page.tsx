@@ -14,27 +14,27 @@ export default function ContactPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-40 bg-white">
-        <div className="container-custom">
+      <section className="pt-40 pb-16 bg-background relative overflow-hidden">
+        <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Get in <span className="text-moss">Touch</span>
+            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-4 uppercase">Reach Out</div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-charcoal mb-6 font-awesome-serif uppercase tracking-widest">
+              Get in Touch
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-              Ready to begin your journey? I'm here to help and answer any
-              questions you may have.
+            <p className="text-lg md:text-xl font-awesome-serif uppercase tracking-wide text-charcoal/80">
+              Ready to begin your journey? I'm here to help and answer any questions you may have.
             </p>
           </div>
         </div>
       </section>
 
       {/* Contact Options */}
-      <section className="section-padding bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Form */}
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-8">
+              <h2 className="text-3xl lg:text-4xl text-charcoal mb-8 font-awesome-serif uppercase tracking-wide">
                 Send a Message
               </h2>
               <form className="space-y-6">
@@ -42,7 +42,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="firstName"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase"
                     >
                       First Name *
                     </label>
@@ -51,13 +51,13 @@ export default function ContactPage() {
                       id="firstName"
                       name="firstName"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent"
+                      className="w-full px-4 py-3 border border-charcoal/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald focus:border-transparent bg-background font-montserrat text-sm"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="lastName"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase"
                     >
                       Last Name *
                     </label>
@@ -66,7 +66,7 @@ export default function ContactPage() {
                       id="lastName"
                       name="lastName"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent"
+                      className="w-full px-4 py-3 border border-charcoal/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald focus:border-transparent bg-background font-montserrat text-sm"
                     />
                   </div>
                 </div>
@@ -74,7 +74,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase"
                   >
                     Email Address *
                   </label>
@@ -83,14 +83,14 @@ export default function ContactPage() {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent"
+                    className="w-full px-4 py-3 border border-charcoal/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald focus:border-transparent bg-background font-montserrat text-sm"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase"
                   >
                     Phone Number
                   </label>
@@ -98,39 +98,33 @@ export default function ContactPage() {
                     type="tel"
                     id="phone"
                     name="phone"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent"
+                    className="w-full px-4 py-3 border border-charcoal/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald focus:border-transparent bg-background font-montserrat text-sm"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="service"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase"
                   >
                     Service Interest
                   </label>
                   <select
                     id="service"
                     name="service"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent"
+                    className="w-full px-4 py-3 border border-charcoal/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald focus:border-transparent bg-background font-montserrat text-sm appearance-none"
                   >
                     <option value="">Select a service</option>
-                    <option value="individual-therapy">
-                      Individual Therapy
-                    </option>
-                    <option value="life-coaching">Life Coaching</option>
-                    <option value="group-workshops">Group Workshops</option>
-                    <option value="specialized-programs">
-                      Specialized Programs
-                    </option>
-                    <option value="consultation">Free Consultation</option>
+                    <option value="individual-therapy">Individual Therapy</option>
+                    <option value="couples-therapy">Couples Therapy</option>
+                    <option value="behavioural-coaching">Behavioural Coaching</option>
                   </select>
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase"
                   >
                     Message *
                   </label>
@@ -140,33 +134,33 @@ export default function ContactPage() {
                     rows={5}
                     required
                     placeholder="Tell me a bit about what you're looking for or any questions you have..."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-charcoal/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald focus:border-transparent bg-background resize-none font-montserrat text-sm"
                   ></textarea>
                 </div>
 
-                <div className="flex items-center">
+                <div className="flex items-start mt-2">
                   <input
                     id="privacy"
                     name="privacy"
                     type="checkbox"
                     required
-                    className="h-4 w-4 text-moss focus:ring-moss border-gray-300 rounded"
+                    className="h-4 w-4 text-emerald focus:ring-emerald border-charcoal/20 rounded mt-1"
                   />
                   <label
                     htmlFor="privacy"
-                    className="ml-2 block text-sm text-gray-700"
+                    className="ml-3 block text-xs font-montserrat text-charcoal/70"
                   >
                     I agree to the{" "}
                     <Link
                       href="/privacy"
-                      className="text-moss hover:text-moss/80 underline"
+                      className="text-emerald hover:text-emerald/80 underline"
                     >
                       Privacy Policy
                     </Link>{" "}
                     and{" "}
                     <Link
                       href="/terms"
-                      className="text-moss hover:text-moss/80 underline"
+                      className="text-emerald hover:text-emerald/80 underline"
                     >
                       Terms of Service
                     </Link>
@@ -175,7 +169,7 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="btn-pill btn-primary w-full text-lg py-4"
+                  className="bg-charcoal text-white hover:bg-black transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full mt-4"
                 >
                   Send Message
                 </button>
@@ -184,69 +178,69 @@ export default function ContactPage() {
 
             {/* Contact Information */}
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-8">
+              <h2 className="text-3xl lg:text-4xl text-charcoal mb-8 font-awesome-serif uppercase tracking-wide">
                 Contact Information
               </h2>
 
               <div className="space-y-8 mb-12">
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-moss/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                    <span className="text-moss text-xl">📧</span>
+                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                    <span className="text-xl opacity-70">📧</span>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">
+                  <div className="pt-1">
+                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
                       Email
                     </h3>
-                    <p className="text-gray-600">hello@mantrana.com</p>
-                    <p className="text-gray-600">info@mantrana.com</p>
+                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">hello@mantrana.com</p>
+                    <p className="text-sm font-montserrat text-charcoal/80 font-medium">info@mantrana.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-moss/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                    <span className="text-moss text-xl">📱</span>
+                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                    <span className="text-xl opacity-70">📱</span>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">
+                  <div className="pt-1">
+                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
                       Phone
                     </h3>
-                    <p className="text-gray-600">+91 8328438589</p>
-                    <p className="text-sm text-gray-500">
-                      Available Mon-Fri, 9 AM - 6 PM IST
+                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">+91 8328438589</p>
+                    <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
+                      Mon-Fri, 9 AM - 6 PM IST
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-moss/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                    <span className="text-moss text-xl">💬</span>
+                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                    <span className="text-xl opacity-70">💬</span>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">
+                  <div className="pt-1">
+                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
                       WhatsApp
                     </h3>
-                    <p className="text-gray-600">+91 8328438589</p>
+                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">+91 8328438589</p>
                     <Link
                       href="https://wa.me/918328438589"
-                      className="text-moss hover:text-moss/80 text-sm"
+                      className="text-xs font-montserrat tracking-widest uppercase text-emerald mt-1 font-semibold hover:text-emerald/80 inline-block"
                     >
-                      Send WhatsApp Message →
+                      Send Message →
                     </Link>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-moss/10 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                    <span className="text-moss text-xl">📍</span>
+                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                    <span className="text-xl opacity-70">📍</span>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">
+                  <div className="pt-1">
+                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
                       Location
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">
                       Visakhapatnam, Andhra Pradesh
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
                       Online sessions available worldwide
                     </p>
                   </div>
@@ -254,26 +248,26 @@ export default function ContactPage() {
               </div>
 
               {/* Quick Actions */}
-              <div className="bg-moss/20 rounded-3xl p-12">
-                <h3 className="text-2xl font-bold text-gray-900 mb-8">
+              <div className="bg-background rounded-[30px] p-8 lg:p-12 shadow-soft">
+                <h3 className="text-2xl font-awesome-serif text-charcoal uppercase tracking-wider mb-8 text-center">
                   Quick Actions
                 </h3>
                 <div className="space-y-4">
                   <Link
                     href="/book"
-                    className="btn-pill btn-primary bg-moss hover:bg-teal w-full text-center block"
+                    className="bg-emerald hover:bg-emerald/90 text-white transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full text-center block"
                   >
                     Book a Session
                   </Link>
                   <Link
                     href="mailto:hello@mantrana.com"
-                    className="btn-pill btn-secondary text-black/70 w-full text-center block"
+                    className="bg-white hover:bg-gray-50 border border-charcoal/10 text-charcoal transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full text-center block"
                   >
                     Send Email
                   </Link>
                   <Link
                     href="https://wa.me/918328438589"
-                    className="btn-pill btn-secondary text-black/70 w-full text-center block"
+                    className="bg-white hover:bg-gray-50 border border-charcoal/10 text-charcoal transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full text-center block"
                   >
                     WhatsApp Chat
                   </Link>
@@ -285,18 +279,19 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">FAQ</div>
+            <h2 className="text-4xl lg:text-5xl text-charcoal mb-6 font-awesome-serif uppercase tracking-wide">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">
               It's natural to have questions before you start — here's where clarity begins.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-4xl mx-auto space-y-6">
             {[
               {
                 question: "What can I expect in the first session?",
@@ -359,11 +354,11 @@ export default function ContactPage() {
                   "If you feel stuck, overwhelmed, or repeatedly trying to change something internally — and haven't yet found clarity - therapy with me may be helpful. You can also start with one session to see if it feels like the right fit.",
               },
             ].map((faq, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-soft">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <div key={index} className="bg-white rounded-[20px] p-8 shadow-soft border border-charcoal/5">
+                <h3 className="text-xl font-awesome-serif text-charcoal mb-4 uppercase tracking-wider">
                   {faq.question}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -371,45 +366,65 @@ export default function ContactPage() {
       </section>
 
       {/* Office Hours */}
-      <section className="section-padding bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
+              <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">Schedule</div>
+              <h2 className="text-4xl lg:text-5xl text-charcoal mb-8 font-awesome-serif uppercase tracking-wide">
                 Office Hours & Availability
               </h2>
-              <div className="space-y-6">
-                <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="font-medium text-gray-900">
+              <div className="space-y-6 mb-10">
+                <div className="flex justify-between items-center py-4 border-b border-charcoal/10">
+                  <span className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider">
                     Monday - Friday
                   </span>
-                  <span className="text-gray-600">9:00 AM - 6:00 PM IST</span>
+                  <span className="text-sm font-montserrat text-charcoal/80 font-medium">9:00 AM - 6:00 PM IST</span>
                 </div>
-                <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="font-medium text-gray-900">Saturday</span>
-                  <span className="text-gray-600">10:00 AM - 4:00 PM IST</span>
+                <div className="flex justify-between items-center py-4 border-b border-charcoal/10">
+                  <span className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider">Saturday</span>
+                  <span className="text-sm font-montserrat text-charcoal/80 font-medium">10:00 AM - 4:00 PM IST</span>
                 </div>
-                <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <span className="font-medium text-gray-900">Sunday</span>
-                  <span className="text-gray-600">By appointment only</span>
+                <div className="flex justify-between items-center py-4 border-b border-charcoal/10">
+                  <span className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider">Sunday</span>
+                  <span className="text-sm font-montserrat text-charcoal/80 font-medium">By appointment only</span>
                 </div>
               </div>
-              <div className="mt-8 p-6 bg-gray-50 rounded-xl">
-                <h3 className="font-bold text-gray-900 mb-2">Response Times</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• Email inquiries: Within 24 hours</li>
-                  <li>• WhatsApp messages: Within 2-4 hours</li>
-                  <li>• Booking requests: Same day confirmation</li>
+              <div className="p-8 bg-background rounded-[20px] shadow-sm">
+                <h3 className="text-lg font-awesome-serif text-charcoal uppercase tracking-wider mb-4">Response Times</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <span className="text-emerald mr-3">•</span>
+                    <span className="text-sm font-montserrat text-charcoal/80 font-medium">Email inquiries: Within 24 hours</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-emerald mr-3">•</span>
+                    <span className="text-sm font-montserrat text-charcoal/80 font-medium">WhatsApp messages: Within 2-4 hours</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-emerald mr-3">•</span>
+                    <span className="text-sm font-montserrat text-charcoal/80 font-medium">Booking requests: Same day confirmation</span>
+                  </li>
                 </ul>
               </div>
             </div>
-            <div className="bg-moss/20 rounded-3xl h-96 lg:h-[540px] shadow-soft flex items-center justify-center">
-              <div className="text-center text-moss">
-                <div className="text-4xl mb-4">⏰</div>
-                <h3 className="text-2xl font-bold mb-2">
+            <div className="bg-emerald rounded-[30px] h-96 lg:h-[540px] shadow-soft flex items-center justify-center relative overflow-hidden">
+              <img
+                src="/images/diwali-backdrop-d.png"
+                className="absolute -top-[30%] -left-[10%] w-[400px] opacity-[0.1] pointer-events-none select-none"
+                alt="Decorative"
+              />
+              <img
+                src="/images/diwali-backdrop.png"
+                className="absolute -bottom-[30%] -right-[10%] w-[400px] opacity-[0.1] pointer-events-none select-none"
+                alt="Decorative"
+              />
+              <div className="text-center text-white relative z-10 px-8">
+                <div className="text-5xl mb-6">⏰</div>
+                <h3 className="text-3xl font-awesome-serif uppercase tracking-wider mb-4">
                   Available for Support
                 </h3>
-                <p className="text-black/50">
+                <p className="text-base font-montserrat uppercase tracking-widest text-white/80 font-semibold">
                   Ready to help you on your journey
                 </p>
               </div>

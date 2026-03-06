@@ -20,30 +20,13 @@ export default function Header() {
   const route = usePathname();
   const isHomePage = route === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolledBeyondThreshold, setIsScrolledBeyondThreshold] =
-    useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Check if scrollY is greater than the viewport height
-      if (window.scrollY > window.innerHeight) {
-        setIsScrolledBeyondThreshold(true);
-      } else {
-        setIsScrolledBeyondThreshold(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
-    <header
-      className={` top-0 w-full z-50 ${
-        isHomePage && !isScrolledBeyondThreshold
-          ? "absolute bg-transparent"
-          : "fixed top-0 shadow-md bg-white"
-      }`}
-    >
+    <header className={`fixed top-0 w-full z-50 shadow-sm bg-background transition-all`}>
+      <div className="bg-emerald text-white text-center py-2 text-xs md:text-sm tracking-wide">
+        Discover clarity and balance in your life. <Link href="/book" className="underline font-semibold ml-1 hover:text-teal transition-colors">Book a session today.</Link>
+      </div>
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
@@ -52,16 +35,8 @@ export default function Header() {
               xmlns="http://www.w3.org/2000/svg"
               version="1.2"
               viewBox="0 0 434 523"
-              className={`size-10 ${
-                isHomePage && !isScrolledBeyondThreshold ? "invisible" : ""
-              }`}
-              style={{
-                fill: isHomePage
-                  ? isScrolledBeyondThreshold
-                    ? "black"
-                    : "white"
-                  : "#D56989",
-              }}
+              className="size-10"
+              style={{ fill: "var(--teal)" }}
             >
               <g id="Layer 1">
                 <path
@@ -96,13 +71,7 @@ export default function Header() {
               item.hasDropdown ? (
                 <div key={item.name} className="relative group">
                   <button
-                    className={`${
-                      isHomePage
-                        ? isScrolledBeyondThreshold
-                          ? "text-black/60 hover:text-teal group-hover:text-teal"
-                          : "text-black/60 hover:text-black group-hover:text-black hidden"
-                        : "text-gray-700 hover:text-moss group-hover:text-moss"
-                    } transition-colors duration-300 font-medium flex items-center`}
+                    className="text-charcoal/80 hover:text-emerald group-hover:text-emerald transition-colors duration-300 font-medium flex items-center"
                   >
                     {item.name}
                     <svg
@@ -140,13 +109,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`${
-                    isHomePage
-                      ? isScrolledBeyondThreshold
-                        ? "text-black/60 hover:text-teal"
-                        : "text-black/60 hover:text-black hidden"
-                      : "text-gray-700 hover:text-moss"
-                  } transition-colors duration-300 font-medium`}
+                  className="text-charcoal/80 hover:text-emerald transition-colors duration-300 font-medium"
                 >
                   {item.name}
                 </Link>
@@ -154,9 +117,7 @@ export default function Header() {
             )}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 mr-auto rounded-md text-white/60 hover:text-white focus:outline-none ${
-                !isMenuOpen ? "" : "invisible"
-              } ${isHomePage && !isScrolledBeyondThreshold ? "" : "hidden"}`}
+              className={`p-2 mr-auto rounded-md text-charcoal/60 hover:text-charcoal focus:outline-none ${!isMenuOpen ? "" : "invisible"} lg:hidden`}
             >
               <svg
                 className="h-6 w-6"
@@ -183,15 +144,13 @@ export default function Header() {
             </button>
 
             <div
-              className={`p-12 lg:flex flex-col hidden w-full max-w-xl h-screen bg-white fixed top-0 transition-all duration-300 z-40 ${
-                isMenuOpen ? "-left-8" : "-left-[38rem]"
-              }`}
+              className={`p-12 lg:flex flex-col hidden w-full max-w-xl h-screen bg-white fixed top-0 transition-all duration-300 z-40 ${isMenuOpen ? "-left-8" : "-left-[38rem]"
+                }`}
             >
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`p-2 mr-auto rounded-md text-black/60 hover:text-black focus:outline-none ${
-                  isMenuOpen ? "" : "invisible"
-                }`}
+                className={`p-2 mr-auto rounded-md text-black/60 hover:text-black focus:outline-none ${isMenuOpen ? "" : "invisible"
+                  }`}
               >
                 <svg
                   className="h-6 w-6"
@@ -221,13 +180,7 @@ export default function Header() {
                   <div key={item.name} className="relative group my-6">
                     <Link
                       href={"/about"}
-                      className={`${
-                        isHomePage
-                          ? isScrolledBeyondThreshold
-                            ? "text-black/60 hover:text-teal group-hover:text-teal"
-                            : "text-black/60 hover:text-black group-hover:text-black"
-                          : "text-gray-700 hover:text-moss group-hover:text-moss"
-                      } transition-colors duration-300 text-xl font-semibold flex items-center`}
+                      className="text-charcoal/80 hover:text-emerald group-hover:text-emerald transition-colors duration-300 text-xl font-semibold flex items-center"
                     >
                       {item.name}
                     </Link>
@@ -250,13 +203,7 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`${
-                      isHomePage
-                        ? isScrolledBeyondThreshold
-                          ? "text-black/60 hover:text-teal"
-                          : "text-black/60 hover:text-black"
-                        : "text-gray-700 hover:text-moss"
-                    } transition-colors duration-300 my-6 text-xl font-semibold`}
+                    className="text-charcoal/80 hover:text-emerald transition-colors duration-300 my-6 text-xl font-semibold"
                   >
                     {item.name}
                   </Link>
@@ -268,21 +215,15 @@ export default function Header() {
               <>
                 {user ? (
                   <div className="flex items-center space-x-4 ml-4">
-                    {(!isHomePage || isScrolledBeyondThreshold) && (
-                      <Link
-                        href="/book"
-                        className={
-                          !isHomePage
-                            ? "!text-sm p-3 px-6 hover:bg-amaranth bg-[#D56989] rounded-full text-white ml-4  transition-colors duration-300 font-medium"
-                            : "!text-sm p-3 px-6 bg-teal rounded-full text-white ml-4"
-                        }
-                      >
-                        Book a Session
-                      </Link>
-                    )}
+                    <Link
+                      href="/book"
+                      className="!text-sm p-3 px-6 bg-teal hover:opacity-90 rounded-full text-white ml-4 transition-all duration-300 font-medium"
+                    >
+                      Book a Session
+                    </Link>
                     <Link
                       href="/account"
-                      className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium"
+                      className="text-charcoal/70 hover:text-emerald transition-colors duration-300 font-medium"
                     >
                       <img
                         src={user.photoURL}
@@ -295,26 +236,16 @@ export default function Header() {
                   <div className="flex items-center space-x-4 ml-4">
                     <Link
                       href="/login"
-                      className={
-                        !isHomePage || isScrolledBeyondThreshold
-                          ? "text-black border-2 !text-sm p-3 px-6 rounded-full hover:bg-black/10 transition-colors duration-300 font-medium"
-                          : "text-white border-2 !text-sm p-3 px-6 rounded-full hover:bg-black/10 transition-colors duration-300 font-medium"
-                      }
+                      className="text-charcoal border-2 border-charcoal/20 !text-sm p-3 px-6 rounded-full hover:bg-charcoal/5 transition-colors duration-300 font-medium"
                     >
                       Sign In
                     </Link>
-                    {(!isHomePage || isScrolledBeyondThreshold) && (
-                      <Link
-                        href="/book"
-                        className={
-                          !isHomePage
-                            ? "!text-sm p-3 px-6 hover:bg-amaranth bg-[#D56989] rounded-full text-white ml-4  transition-colors duration-300 font-medium"
-                            : "!text-sm p-3 px-6 bg-teal rounded-full text-white ml-4"
-                        }
-                      >
-                        Book a Session
-                      </Link>
-                    )}
+                    <Link
+                      href="/book"
+                      className="!text-sm p-3 px-6 hover:opacity-90 bg-teal rounded-full text-white ml-4 transition-colors duration-300 font-medium"
+                    >
+                      Book a Session
+                    </Link>
                   </div>
                 )}
               </>
@@ -361,7 +292,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2"
+                  className="text-charcoal/70 hover:text-emerald transition-colors duration-300 font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -381,7 +312,7 @@ export default function Header() {
                       </Link>
                       <Link
                         href="/account"
-                        className="text-gray-700 hover:text-moss transition-colors duration-300 font-medium py-2"
+                        className="text-charcoal/70 hover:text-emerald transition-colors duration-300 font-medium py-2"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <img
@@ -420,6 +351,6 @@ export default function Header() {
           </div>
         )}
       </nav>
-    </header>
+    </header >
   );
 }

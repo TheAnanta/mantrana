@@ -34,19 +34,19 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
+    <footer className="bg-black border-t border-white/10 text-white">
       <div className="container-custom py-16 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <div className="text-3xl font-bold text-moss mb-4">Mantrana</div>
-            <p className="text-gray-600 text-lg leading-relaxed mb-6 max-w-md">
+            <div className="text-3xl font-bold text-white mb-6 font-awesome-serif uppercase tracking-widest">Mantrana</div>
+            <p className="text-white/70 text-sm md:text-base leading-relaxed mb-8 max-w-md font-montserrat font-medium">
               Psychotherapist &amp; Behavioral Specialist. Providing
               compassionate guidance through digital-age challenges, life
               transitions, and inner struggles—helping you find clarity and
               strength.
             </p>
-            <div className="text-sm text-gray-500">
+            <div className="text-xs text-white/50 font-montserrat uppercase tracking-wider">
               <p className="mb-2">
                 &copy; 2024 Mantrana by Mohana Rupa. All rights reserved.
               </p>
@@ -55,16 +55,16 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">
+          <div className="lg:col-span-1">
+            <h3 className="text-sm font-semibold text-white/50 mb-6 uppercase tracking-widest font-montserrat">
               Quick Links
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {navigation.main.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-600 hover:text-moss transition-colors duration-300"
+                    className="text-white/80 hover:text-white hover:ml-2 transition-all duration-300 font-montserrat text-sm uppercase tracking-wider font-semibold"
                   >
                     {item.name}
                   </Link>
@@ -74,14 +74,16 @@ export default function Footer() {
           </div>
 
           {/* Legal & Connect */}
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">Legal</h3>
-            <ul className="space-y-3 mb-8">
+          <div className="lg:col-span-1">
+            <h3 className="text-sm font-semibold text-white/50 mb-6 uppercase tracking-widest font-montserrat">
+              Legal
+            </h3>
+            <ul className="space-y-4 mb-10">
               {navigation.legal.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-600 hover:text-moss transition-colors duration-300"
+                    className="text-white/80 hover:text-white hover:ml-2 transition-all duration-300 font-montserrat text-sm uppercase tracking-wider font-semibold"
                   >
                     {item.name}
                   </Link>
@@ -91,15 +93,15 @@ export default function Footer() {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-sm font-semibold text-gray-900 mb-4">
+              <h4 className="text-sm font-semibold text-white/50 mb-6 uppercase tracking-widest font-montserrat">
                 Connect
               </h4>
-              <div className="flex space-x-4">
+              <div className="flex space-x-6">
                 {navigation.social.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-gray-400 hover:text-moss transition-colors duration-300"
+                    className="text-white/60 hover:text-white hover:-translate-y-1 transition-all duration-300"
                     aria-label={item.name}
                   >
                     <svg
@@ -114,24 +116,22 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Newsletter Section */}
-        <div className="mt-16 pt-8 border-t border-gray-200">
-          <div className="max-w-md">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          {/* Newsletter Section */}
+          <div className="lg:col-span-1 flex flex-col justify-start">
+            <h3 className="text-sm font-semibold text-white/50 mb-6 uppercase tracking-widest font-montserrat">
               Stay Connected
             </h3>
-            <p className="text-gray-600 mb-4">
-              Get wellness tips and updates from Mantrana.
+            <p className="text-white/80 text-sm mb-6 leading-relaxed font-montserrat font-medium">
+              Join our newsletter for wellness tips and updates from Mantrana.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3">
+            <form className="flex flex-col gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent"
+                className="px-5 py-4 border border-white/20 bg-white/5 rounded-none focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white text-sm font-montserrat placeholder:text-white/40"
               />
-              <button type="submit" className="btn-pill btn-primary">
+              <button type="submit" className="bg-white text-black font-semibold uppercase tracking-widest text-sm px-6 py-4 hover:bg-gray-200 transition-colors">
                 Subscribe
               </button>
             </form>

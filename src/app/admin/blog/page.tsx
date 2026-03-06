@@ -105,12 +105,12 @@ export default function BlogManagementPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Blog Posts</h1>
-          <p className="text-gray-600">Create and manage your blog content</p>
+          <h1 className="text-2xl font-bold text-charcoal font-awesome-serif">Blog Posts</h1>
+          <p className="text-charcoal/60">Create and manage your blog content</p>
         </div>
         <button
           onClick={() => setShowNewPostModal(true)}
-          className="bg-moss text-white px-4 py-2 rounded-lg hover:bg-moss/90 transition-colors"
+          className="bg-teal text-white px-4 py-2 rounded-lg hover:bg-emerald transition-colors"
         >
           + New Post
         </button>
@@ -122,11 +122,10 @@ export default function BlogManagementPage() {
           <button
             key={filterOption}
             onClick={() => setFilter(filterOption)}
-            className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
-              filter === filterOption
-                ? 'bg-moss text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${filter === filterOption
+              ? 'bg-teal text-white'
+              : 'bg-white text-charcoal border border-teal/20 hover:bg-teal/5'
+              }`}
           >
             {filterOption}
           </button>
@@ -136,7 +135,7 @@ export default function BlogManagementPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white p-4 rounded-lg shadow-soft">
-          <div className="text-2xl font-bold text-gray-900">{posts.length}</div>
+          <div className="text-2xl font-bold text-charcoal">{posts.length}</div>
           <div className="text-sm text-gray-600">Total Posts</div>
         </div>
         <div className="bg-white p-4 rounded-lg shadow-soft">
@@ -144,7 +143,7 @@ export default function BlogManagementPage() {
           <div className="text-sm text-gray-600">Published</div>
         </div>
         <div className="bg-white p-4 rounded-lg shadow-soft">
-          <div className="text-2xl font-bold text-gray-600">{posts.filter(p => p.status === 'draft').length}</div>
+          <div className="text-2xl font-bold text-charcoal">{posts.filter(p => p.status === 'draft').length}</div>
           <div className="text-sm text-gray-600">Drafts</div>
         </div>
         <div className="bg-white p-4 rounded-lg shadow-soft">
@@ -156,33 +155,33 @@ export default function BlogManagementPage() {
       {/* Posts List */}
       <div className="bg-white rounded-lg shadow-soft overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">
+          <h3 className="text-lg font-medium text-charcoal font-awesome-serif">
             {filteredPosts.length} posts
           </h3>
         </div>
-        
+
         <div className="divide-y divide-gray-200">
           {filteredPosts.map((post) => (
             <div key={post.id} className="p-6 hover:bg-gray-50">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-2">
-                    <h4 className="text-lg font-medium text-gray-900">
+                    <h4 className="text-lg font-medium text-charcoal">
                       {post.title}
                     </h4>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(post.status)}`}>
                       {post.status}
                     </span>
                   </div>
-                  
+
                   <p className="text-gray-600 mb-3">{post.excerpt}</p>
-                  
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                    <span className="bg-moss/10 text-moss px-2 py-1 rounded">{post.category}</span>
+
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-charcoal/40">
+                    <span className="bg-teal/10 text-teal px-2 py-1 rounded">{post.category}</span>
                     <span>{post.readTime}</span>
                     {post.publishedAt && <span>Published: {new Date(post.publishedAt).toLocaleDateString()}</span>}
                   </div>
-                  
+
                   {post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {post.tags.map(tag => (
@@ -193,11 +192,11 @@ export default function BlogManagementPage() {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="flex flex-col space-y-2 ml-4">
                   <button
                     onClick={() => setEditingPost(post)}
-                    className="text-moss hover:text-moss/80 text-sm font-medium"
+                    className="text-teal hover:text-teal/80 text-sm font-medium"
                   >
                     Edit
                   </button>
@@ -218,10 +217,10 @@ export default function BlogManagementPage() {
               </div>
             </div>
           ))}
-          
+
           {filteredPosts.length === 0 && (
             <div className="p-6 text-center">
-              <p className="text-gray-500">No posts found for the selected filter.</p>
+              <p className="text-charcoal/40">No posts found for the selected filter.</p>
             </div>
           )}
         </div>
@@ -232,11 +231,11 @@ export default function BlogManagementPage() {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900">
+              <h3 className="text-lg font-medium text-charcoal font-awesome-serif">
                 {editingPost ? 'Edit Post' : 'Create New Post'}
               </h3>
             </div>
-            
+
             <div className="p-6">
               <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -247,11 +246,11 @@ export default function BlogManagementPage() {
                     <input
                       type="text"
                       defaultValue={editingPost?.title || ''}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                      className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                       placeholder="Enter post title"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       URL Slug
@@ -259,12 +258,12 @@ export default function BlogManagementPage() {
                     <input
                       type="text"
                       defaultValue={editingPost?.slug || ''}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                      className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                       placeholder="url-friendly-title"
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Excerpt
@@ -276,15 +275,15 @@ export default function BlogManagementPage() {
                     placeholder="Brief description of the post"
                   />
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Category
                     </label>
-                    <select 
+                    <select
                       defaultValue={editingPost?.category || ''}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                      className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                     >
                       <option value="">Select category</option>
                       <option value="Mental Health">Mental Health</option>
@@ -293,21 +292,21 @@ export default function BlogManagementPage() {
                       <option value="Career Growth">Career Growth</option>
                     </select>
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Status
                     </label>
-                    <select 
+                    <select
                       defaultValue={editingPost?.status || 'draft'}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                      className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                     >
                       <option value="draft">Draft</option>
                       <option value="published">Published</option>
                       <option value="scheduled">Scheduled</option>
                     </select>
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Read Time
@@ -315,12 +314,12 @@ export default function BlogManagementPage() {
                     <input
                       type="text"
                       defaultValue={editingPost?.readTime || ''}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                      className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                       placeholder="5 min read"
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Tags (comma-separated)
@@ -332,13 +331,13 @@ export default function BlogManagementPage() {
                     placeholder="anxiety, mental-health, wellness"
                   />
                 </div>
-                
+
                 {/* Simple Rich Text Editor */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Content
                   </label>
-                  
+
                   {/* Toolbar */}
                   <div className="border border-gray-300 rounded-t-lg p-2 bg-gray-50 flex space-x-2">
                     <button type="button" className="px-2 py-1 text-sm border border-gray-200 rounded hover:bg-gray-100">
@@ -363,21 +362,21 @@ export default function BlogManagementPage() {
                       Image
                     </button>
                   </div>
-                  
+
                   <textarea
                     defaultValue={editingPost?.content || ''}
-                    className="w-full px-3 py-3 border border-gray-300 border-t-0 rounded-b-lg focus:outline-none focus:ring-moss focus:border-moss"
+                    className="w-full px-3 py-3 border border-gray-300 border-t-0 rounded-b-lg focus:outline-none focus:ring-teal focus:border-teal"
                     rows={12}
                     placeholder="Write your blog post content here. You can use HTML tags for formatting."
                   />
-                  
+
                   <div className="mt-2 text-sm text-gray-500">
                     💡 <strong>Tip:</strong> You can use HTML tags like &lt;p&gt;, &lt;h2&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;a&gt; for formatting.
                   </div>
                 </div>
               </form>
             </div>
-            
+
             <div className="flex justify-end space-x-3 p-6 border-t border-gray-200">
               <button
                 onClick={() => {
@@ -404,7 +403,7 @@ export default function BlogManagementPage() {
                   setShowNewPostModal(false)
                   setEditingPost(null)
                 }}
-                className="px-4 py-2 bg-moss text-white rounded-lg hover:bg-moss/90 transition-colors"
+                className="px-4 py-2 bg-teal text-white rounded-lg hover:bg-teal/90 transition-colors"
               >
                 Publish
               </button>

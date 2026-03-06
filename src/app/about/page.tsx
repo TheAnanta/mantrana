@@ -15,32 +15,34 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-40">
-        <div className="container-custom">
+      <section className="pt-40 pb-16 bg-background relative overflow-hidden">
+        <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              About <span className={`text-moss font-elsie`}>Mantrana</span>
+            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-4 uppercase">Our Story</div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-charcoal mb-6 font-awesome-serif uppercase tracking-widest">
+              About <span className="text-emerald">Mantrana</span>
             </h1>
           </div>
         </div>
       </section>
 
       {/* Personal Journey Section */}
-      <section className="section-padding bg-white" id="about-me">
+      <section className="py-16 md:py-24 bg-white" id="about-me">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="bg-gradient-to-br from-azure to-lavender rounded-3xl h-96 lg:h-128 shadow-soft">
+            <div className="bg-teal/10 rounded-[30px] h-96 lg:h-[32rem] shadow-soft overflow-hidden">
               <img
                 src="/images/mohana_rupa.png"
                 alt="Mohana Rupa Nekkanti"
-                className="object-cover w-full h-full rounded-3xl object-[20%]"
+                className="object-cover w-full h-full object-[20%]"
               />
             </div>
             <div>
-              <h2 className="text-4xl lg:text-5xl text-gray-900 mb-8 font-elsie">
+              <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">The Founder</div>
+              <h2 className="text-4xl lg:text-5xl text-charcoal mb-8 font-awesome-serif uppercase tracking-wide">
                 Meet Mohana Rupa Nekkanti
               </h2>
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+              <div className="space-y-6 text-sm md:text-base font-montserrat text-charcoal/80 leading-relaxed font-medium">
                 <p>
                   Namaste!
                   <br />I am Mohana Rupa Nekkanti, founder of Mantrana therapy.
@@ -59,7 +61,7 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-16" id="my-story">
-            <div className="space-y-6 text-lg text-gray-600 leading-relaxed max-w-4xl">
+            <div className="space-y-6 text-sm md:text-base font-montserrat text-charcoal/80 leading-relaxed font-medium max-w-4xl">
               <p>
                 My journey started in engineering, where my love for
                 problem-solving grew. But it was my curiosity about the human
@@ -94,13 +96,14 @@ export default function AboutPage() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="section-padding bg-gray-50" id="about-mantrana">
+      <section className="py-16 md:py-24 bg-background" id="about-mantrana">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">The Philosophy</div>
+            <h2 className="text-4xl lg:text-5xl text-charcoal mb-6 font-awesome-serif uppercase tracking-wide">
               About Mantrana Therapy
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-sm md:text-base text-charcoal/80 leading-relaxed font-montserrat font-medium mb-8">
               The name Mantrana is derived from Sanskrit, meaning{" "}
               <strong>counsel, guidance, or thoughtful conversation</strong>. It
               perfectly captures the essence of therapy as I see it—not about
@@ -110,42 +113,42 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-soft text-center">
-              <div className="w-16 h-16 bg-moss/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl text-moss">💭</span>
+            <div className="bg-white rounded-[30px] p-8 lg:p-12 shadow-soft hover:shadow-medium transition-shadow duration-300 text-center">
+              <div className="w-16 h-16 bg-teal/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl text-teal">💭</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-awesome-serif text-charcoal uppercase tracking-wider mb-4">
                 Safe Space
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-charcoal/80 leading-relaxed font-montserrat text-sm font-medium">
                 A dedicated space to pause, reflect, and realign. Here, you
                 won't be told what to do; instead, you will be gently guided to
                 discover how you want to live.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-soft text-center">
-              <div className="w-16 h-16 bg-moss/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl text-moss">🧘</span>
+            <div className="bg-white rounded-[30px] p-8 lg:p-12 shadow-soft hover:shadow-medium transition-shadow duration-300 text-center">
+              <div className="w-16 h-16 bg-emerald/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl text-emerald">🧘</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-awesome-serif text-charcoal uppercase tracking-wider mb-4">
                 Integrated Approach
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-charcoal/80 leading-relaxed font-montserrat text-sm font-medium">
                 Blending evidence-based techniques such as NLP, Hypnosis, and
                 Cognitive Restructuring with timeless insights inspired by
                 Indian wisdom traditions.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-soft text-center">
-              <div className="w-16 h-16 bg-moss/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl text-moss">⚖️</span>
+            <div className="bg-white rounded-[30px] p-8 lg:p-12 shadow-soft hover:shadow-medium transition-shadow duration-300 text-center">
+              <div className="w-16 h-16 bg-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl text-terracotta">⚖️</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-awesome-serif text-charcoal uppercase tracking-wider mb-4">
                 Creating Balance
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-charcoal/80 leading-relaxed font-montserrat text-sm font-medium">
                 Each session creates balance—between reflection and action,
                 challenges and strengths, inner struggles and new possibilities.
               </p>
@@ -155,19 +158,20 @@ export default function AboutPage() {
       </section>
 
       {/* Credentials Section */}
-      <section className="section-padding bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
+              <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">Background</div>
+              <h2 className="text-4xl lg:text-5xl text-charcoal mb-8 font-awesome-serif uppercase tracking-wide">
                 Qualifications & Experience
               </h2>
-              <div className="space-y-6">
-                <div className="border-l-4 border-moss pl-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <div className="space-y-8">
+                <div className="border-l-[3px] border-emerald pl-6">
+                  <h3 className="text-lg font-awesome-serif text-charcoal mb-3 uppercase tracking-wider">
                     Education & Certifications
                   </h3>
-                  <ul className="space-y-2 text-gray-600">
+                  <ul className="space-y-3 text-sm md:text-base font-montserrat text-charcoal/80 font-medium">
                     <li>• Ph.D. in Applied Psychology</li>
                     <li>
                       • Master Practitioner in Neuro Linguistic Programming
@@ -183,11 +187,11 @@ export default function AboutPage() {
                   </ul>
                 </div>
 
-                <div className="border-l-4 border-amaranth pl-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <div className="border-l-[3px] border-terracotta pl-6">
+                  <h3 className="text-lg font-awesome-serif text-charcoal mb-3 uppercase tracking-wider">
                     Professional Experience
                   </h3>
-                  <ul className="space-y-2 text-gray-600">
+                  <ul className="space-y-3 text-sm md:text-base font-montserrat text-charcoal/80 font-medium">
                     <li>• Nearly 10 years of teaching experience</li>
                     <li>• Over 5 years of research in Applied Psychology</li>
                     <li>• Specialized work with young adults</li>
@@ -203,10 +207,11 @@ export default function AboutPage() {
             </div>
 
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
+              <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">Expertise</div>
+              <h2 className="text-4xl lg:text-5xl text-charcoal mb-8 font-awesome-serif uppercase tracking-wide">
                 Specialized Areas
               </h2>
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed mb-6">
+              <div className="space-y-6 text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed mb-8">
                 <p>
                   As a Behavioural Specialist, I work with individuals to
                   understand and transform patterns of thought and action that
@@ -215,51 +220,51 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-2">
+                <div className="bg-background rounded-2xl p-6 border border-black/5">
+                  <h3 className="font-awesome-serif text-charcoal mb-2 uppercase tracking-wide">
                     Digital and Social Media Habits
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-charcoal/80 font-montserrat text-sm font-medium">
                     Reducing screen time, managing online distractions, and
                     building healthier tech use.
                   </p>
                 </div>
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-2">
+                <div className="bg-background rounded-2xl p-6 border border-black/5">
+                  <h3 className="font-awesome-serif text-charcoal mb-2 uppercase tracking-wide">
                     Stress and Anxiety Responses
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-charcoal/80 font-montserrat text-sm font-medium">
                     Learning new ways to cope with challenges and pressure.
                   </p>
                 </div>
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-2">
+                <div className="bg-background rounded-2xl p-6 border border-black/5">
+                  <h3 className="font-awesome-serif text-charcoal mb-2 uppercase tracking-wide">
                     Unhelpful Thinking Patterns
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-charcoal/80 font-montserrat text-sm font-medium">
                     Breaking cycles of overthinking, procrastination, or
                     negative self-talk.
                   </p>
                 </div>
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-2">
+                <div className="bg-background rounded-2xl p-6 border border-black/5">
+                  <h3 className="font-awesome-serif text-charcoal mb-2 uppercase tracking-wide">
                     Relationship and Communication Habits
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-charcoal/80 font-montserrat text-sm font-medium">
                     Improving how you connect, respond, and express yourself.
                   </p>
                 </div>
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <h3 className="font-bold text-gray-900 mb-2">
+                <div className="bg-background rounded-2xl p-6 border border-black/5">
+                  <h3 className="font-awesome-serif text-charcoal mb-2 uppercase tracking-wide">
                     Lifestyle Choices
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-charcoal/80 font-montserrat text-sm font-medium">
                     Cultivating routines that support balance, well-being, and
                     resilience.
                   </p>
                 </div>
               </div>
-              <p className="text-gray-600 leading-relaxed mt-6">
+              <p className="text-charcoal/80 font-montserrat text-sm font-medium leading-relaxed mt-8">
                 These are just examples—any behaviour that creates distress,
                 imbalance, or limits growth can be explored and modified in
                 therapy.
@@ -270,16 +275,17 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="section-padding bg-gradient-to-r from-moss to-citron">
+      <section className="py-16 md:py-24 bg-emerald text-white">
         <div className="container-custom text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8">
+          <div className="text-xs tracking-widest font-medium font-montserrat text-white/50 mb-2 uppercase">Core Values</div>
+          <h2 className="text-4xl lg:text-5xl font-awesome-serif text-white mb-8 uppercase tracking-wide">
             Why Mantrana?
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base font-montserrat uppercase tracking-wider text-white/80 max-w-3xl mx-auto mb-16 leading-relaxed font-medium">
             Because a meaningful conversation can change the way you see
             yourself, your challenges, and your path forward.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-6xl mx-auto">
             {[
               {
                 title: "Non-Judgmental",
@@ -302,11 +308,12 @@ export default function AboutPage() {
                   "Not just conversation, but a space for meaningful change",
               },
             ].map((value, index) => (
-              <div key={index} className="text-center">
-                <h3 className="text-xl font-bold text-white mb-3">
+              <div key={index} className="text-center group">
+                <div className="h-0.5 w-12 bg-white/20 mx-auto mb-6 group-hover:w-24 group-hover:bg-white transition-all duration-300"></div>
+                <h3 className="text-lg font-awesome-serif text-white mb-4 uppercase tracking-wider">
                   {value.title}
                 </h3>
-                <p className="text-white/90 leading-relaxed">
+                <p className="text-white/70 font-montserrat text-sm leading-relaxed font-medium">
                   {value.description}
                 </p>
               </div>
@@ -316,28 +323,40 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Ready to Begin Your Journey?
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Take the first step towards healing and personal growth. I'm here to
-            support you every step of the way.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/book"
-              className="btn-pill btn-primary text-lg px-10 py-5"
-            >
-              Book a Session
-            </Link>
-            <Link
-              href="/contact"
-              className="btn-pill btn-secondary text-lg px-10 py-5"
-            >
-              Get in Touch
-            </Link>
+      <section className="bg-black text-white py-24 md:py-32 relative overflow-hidden">
+        <img
+          src="/images/diwali-backdrop-d.png"
+          className="absolute -top-[30%] -left-[10%] w-[600px] opacity-[0.15] pointer-events-none select-none"
+          alt="Decorative"
+        />
+        <img
+          src="/images/diwali-backdrop.png"
+          className="absolute -bottom-[30%] -right-[10%] w-[600px] opacity-[0.15] pointer-events-none select-none"
+          alt="Decorative"
+        />
+        <div className="container-custom text-center relative z-10">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-5xl lg:text-7xl font-awesome-serif text-white mb-8 uppercase tracking-wide leading-tight">
+              Ready to Begin Your Journey?
+            </h2>
+            <p className="text-base md:text-lg font-montserrat uppercase tracking-wider text-white/80 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+              Take the first step towards healing and personal growth. I'm here to
+              support you every step of the way.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Link
+                href="/book"
+                className="bg-white hover:bg-gray-100 text-charcoal transition-colors font-semibold text-sm uppercase tracking-widest px-12 py-5 rounded-full"
+              >
+                Book a Session
+              </Link>
+              <Link
+                href="/contact"
+                className="border-2 border-white/50 hover:border-white text-white transition-colors font-semibold text-sm uppercase tracking-widest px-12 py-5 rounded-full"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </div>
         </div>
       </section>

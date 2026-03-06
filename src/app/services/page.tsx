@@ -168,16 +168,17 @@ We are open to collaborate with individuals, groups, and organizations passionat
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-40 pb-16 bg-lavender">
-        <div className="container-custom">
+      <section className="pt-40 pb-16 bg-background relative overflow-hidden">
+        <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-4 uppercase">How We Can Help</div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-charcoal mb-6 font-awesome-serif uppercase tracking-widest">
               Services
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+            <p className="text-xl md:text-2xl font-awesome-serif uppercase tracking-wide text-charcoal/80 mb-6">
               Healing begins with understanding.
             </p>
-            <p className="text-lg text-gray-600 mt-6 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-sm md:text-base font-montserrat text-charcoal/70 font-medium leading-relaxed max-w-3xl mx-auto">
               In this fast-paced digital world, where mental well-being is often
               overlooked, Mantrana offers a space for reflection, dialogue, and
               growth. Our services are thoughtfully designed to help
@@ -189,74 +190,74 @@ We are open to collaborate with individuals, groups, and organizations passionat
       </section>
 
       {/* Services Overview */}
-      <section className="section-padding !pt-[4rem] bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container-custom">
-          <div className="mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+          <div className="mb-16 text-center max-w-3xl mx-auto">
+            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">Offerings</div>
+            <h2 className="text-4xl lg:text-5xl text-charcoal mb-6 font-awesome-serif uppercase tracking-wide">
               Our Services
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
+            <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">
               Each service is designed with your healing and growth in mind,
               offering professional support for every stage of your wellness
               journey.
             </p>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-24">
             {services.map((service, index) => (
               <div
                 key={service.id}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 ${
-                  index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
-                }`}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
+                  }`}
               >
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                   <div className="flex items-center mb-6">
                     <div className="text-4xl mr-4">{service.icon}</div>
                     <div>
-                      <h3 className="text-3xl lg:text-4xl font-bold text-gray-900">
+                      <h3 className="text-3xl lg:text-4xl font-awesome-serif text-charcoal uppercase tracking-wider">
                         {service.title}
                       </h3>
                       {service.subtitle && (
-                        <p className="text-lg text-gray-500 italic mt-2">
+                        <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/60 mt-3 font-semibold">
                           {service.subtitle}
                         </p>
                       )}
                     </div>
                   </div>
-                  <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium mb-6 leading-relaxed">
                     {service.description}
                   </p>
 
                   {service.content && (
-                    <div className="text-gray-600 mb-6 leading-relaxed whitespace-pre-line">
+                    <div className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium mb-6 leading-relaxed whitespace-pre-line">
                       {service.content}
                     </div>
                   )}
 
                   {service.features.length > 0 && (
-                    <div className="mb-6">
-                      <h4 className="text-xl font-bold text-gray-900 mb-3">
+                    <div className="mb-8">
+                      <h4 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-4">
                         I support individuals who:
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-3">
                         {service.features.map((feature, idx) => (
                           <li key={idx} className="flex items-start">
-                            <span className="text-moss mr-2">•</span>
-                            <span className="text-gray-600">{feature}</span>
+                            <span className="text-emerald mr-3">•</span>
+                            <span className="text-sm font-montserrat text-charcoal/80 font-medium">{feature}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                   )}
 
-                  <Link href="/book" className="btn-pill btn-primary">
+                  <Link href="/book" className="bg-charcoal text-white hover:bg-black transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full inline-block">
                     Book This Service
                   </Link>
                 </div>
 
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                  <div className="bg-gradient-to-br from-amaranth/70 to-lavender rounded-3xl h-64 lg:h-[540px] overflow-hidden">
+                  <div className="bg-background rounded-[30px] h-80 lg:h-[600px] overflow-hidden shadow-soft">
                     <img
                       src={service.image}
                       className="w-full h-full object-cover object-top"
@@ -270,64 +271,63 @@ We are open to collaborate with individuals, groups, and organizations passionat
       </section>
 
       {/* Packages Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">Pricing</div>
+            <h2 className="text-4xl lg:text-5xl text-charcoal mb-6 font-awesome-serif uppercase tracking-wide">
               Booking
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Begin with Clarity. Your first 40-minute session is only ₹299/— a
+            <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">
+              Begin with Clarity. Your first 40-minute session is only ₹299 — a
               gentle step to understand your needs and plan your path forward.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {packages.map((pkg, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-8 shadow-soft relative ${
-                  pkg.popular
-                    ? "ring-2 ring-moss shadow-medium transform scale-105"
-                    : ""
-                }`}
+                className={`bg-white rounded-[30px] p-8 lg:p-12 transition-shadow duration-300 relative ${pkg.popular
+                  ? "ring-2 ring-emerald shadow-medium transform md:-translate-y-2 z-10"
+                  : "shadow-soft hover:shadow-medium"
+                  }`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-moss text-white px-4 py-2 rounded-full text-sm font-medium">
+                    <span className="bg-emerald text-white px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-widest">
                       Start Here
                     </span>
                   </div>
                 )}
 
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-awesome-serif text-charcoal uppercase tracking-wider mb-4">
                     {pkg.name}
                   </h3>
-                  <div className="mb-3">
-                    <span className="text-3xl font-bold text-moss">
+                  <div className="mb-4">
+                    <span className="text-4xl font-awesome-serif text-emerald">
                       {pkg.price}
                     </span>
                   </div>
-                  <p className="text-gray-600">{pkg.description}</p>
+                  <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">{pkg.description}</p>
                 </div>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-4 mb-10">
                   {pkg.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
-                      <span className="text-moss mr-2">✓</span>
-                      <span className="text-gray-600">{feature}</span>
+                      <span className="text-emerald font-bold mr-3">✓</span>
+                      <span className="text-sm font-montserrat text-charcoal/80 font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link
                   href="/book"
-                  className={`btn-pill w-full text-center block ${
-                    pkg.popular
-                      ? "btn-primary bg-moss "
-                      : "btn-secondary bg-moss/30 text-moss"
-                  }`}
+                  className={`w-full text-center block font-semibold text-xs uppercase tracking-widest px-8 py-5 rounded-full transition-colors ${pkg.popular
+                    ? "bg-emerald hover:bg-emerald/90 text-white "
+                    : "bg-background hover:bg-gray-100 text-charcoal"
+                    }`}
                 >
                   Choose This Package
                 </Link>
@@ -335,9 +335,9 @@ We are open to collaborate with individuals, groups, and organizations passionat
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <p className="text-gray-600">
-              <strong>Timings:</strong> Sessions available from 10:00 AM to 7:00
+          <div className="text-center mt-12">
+            <p className="text-sm font-montserrat text-charcoal/80 font-medium tracking-wide">
+              <strong>TIMINGS:</strong> Sessions available from 10:00 AM to 7:00
               PM
             </p>
           </div>
@@ -345,28 +345,40 @@ We are open to collaborate with individuals, groups, and organizations passionat
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-moss to-citron">
-        <div className="container-custom text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            Ready to Start Your Healing Journey?
-          </h2>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Take the first step towards better mental health and personal
-            growth. Book your first session today.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/book"
-              className="btn-pill bg-white text-moss hover:bg-gray-50 text-lg px-10 py-5"
-            >
-              Book a Session
-            </Link>
-            <Link
-              href="/contact"
-              className="btn-pill border-2 border-white text-white hover:bg-white hover:text-moss text-lg px-10 py-5"
-            >
-              Get in Touch
-            </Link>
+      <section className="bg-black text-white py-24 md:py-32 relative overflow-hidden">
+        <img
+          src="/images/diwali-backdrop-d.png"
+          className="absolute -top-[30%] -left-[10%] w-[600px] opacity-[0.15] pointer-events-none select-none"
+          alt="Decorative"
+        />
+        <img
+          src="/images/diwali-backdrop.png"
+          className="absolute -bottom-[30%] -right-[10%] w-[600px] opacity-[0.15] pointer-events-none select-none"
+          alt="Decorative"
+        />
+        <div className="container-custom text-center relative z-10">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-5xl lg:text-7xl font-awesome-serif text-white mb-8 uppercase tracking-wide leading-tight">
+              Ready to Start Your Healing Journey?
+            </h2>
+            <p className="text-base md:text-lg font-montserrat uppercase tracking-wider text-white/80 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+              Take the first step towards better mental health and personal
+              growth. Book your first session today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Link
+                href="/book"
+                className="bg-white hover:bg-gray-100 text-charcoal transition-colors font-semibold text-sm uppercase tracking-widest px-12 py-5 rounded-full"
+              >
+                Book a Session
+              </Link>
+              <Link
+                href="/contact"
+                className="border-2 border-white/50 hover:border-white text-white transition-colors font-semibold text-sm uppercase tracking-widest px-12 py-5 rounded-full"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </div>
         </div>
       </section>

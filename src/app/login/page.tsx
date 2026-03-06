@@ -38,7 +38,7 @@ export default function LoginPage() {
         <Header />
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <div className="animate-spin h-8 w-8 border-b-2 border-moss mx-auto mb-4"></div>
+            <div className="animate-spin h-8 w-8 border-b-2 border-teal mx-auto mb-4"></div>
             <p className="text-gray-600">Loading...</p>
           </div>
         </div>
@@ -55,11 +55,11 @@ export default function LoginPage() {
     <main className="min-h-screen">
       <Header />
 
-      <section className="py-24 bg-gray-50 pt-40">
+      <section className="py-24 bg-background pt-40">
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto bg-white rounded-lg shadow-soft p-8">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-moss mb-2">Welcome</h1>
+              <h1 className="text-3xl font-bold text-emerald mb-2 font-awesome-serif">Welcome</h1>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
                 Sign in to your account
               </h2>
@@ -78,7 +78,7 @@ export default function LoginPage() {
               <button
                 onClick={handleGoogleSignIn}
                 disabled={isSigningIn}
-                className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-moss disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {isSigningIn ? (
                   <div className="flex items-center">

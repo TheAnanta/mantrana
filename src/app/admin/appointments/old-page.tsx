@@ -97,7 +97,7 @@ export default function AppointmentsPage() {
   const filteredAppointments = appointments.filter(appointment => {
     const today = new Date().toISOString().split('T')[0]
     const appointmentDate = appointment.date
-    
+
     switch (filter) {
       case 'today':
         return appointmentDate === today
@@ -115,12 +115,12 @@ export default function AppointmentsPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Appointments</h1>
-          <p className="text-gray-600">Manage your client appointments and schedule</p>
+          <h1 className="text-2xl font-bold text-charcoal font-awesome-serif">Appointments</h1>
+          <p className="text-charcoal/60">Manage your client appointments and schedule</p>
         </div>
         <button
           onClick={() => setShowNewAppointmentModal(true)}
-          className="bg-moss text-white px-4 py-2 rounded-lg hover:bg-moss/90 transition-colors"
+          className="bg-teal text-white px-4 py-2 rounded-lg hover:bg-emerald transition-colors"
         >
           + New Appointment
         </button>
@@ -132,11 +132,10 @@ export default function AppointmentsPage() {
           <button
             key={filterOption}
             onClick={() => setFilter(filterOption as any)}
-            className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
-              filter === filterOption
-                ? 'bg-moss text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${filter === filterOption
+              ? 'bg-teal text-white'
+              : 'bg-white text-charcoal border border-teal/20 hover:bg-teal/5'
+              }`}
           >
             {filterOption}
           </button>
@@ -146,11 +145,11 @@ export default function AppointmentsPage() {
       {/* Appointments List */}
       <div className="bg-white rounded-lg shadow-soft overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">
+          <h3 className="text-lg font-medium text-charcoal">
             {filteredAppointments.length} appointments
           </h3>
         </div>
-        
+
         <div className="divide-y divide-gray-200">
           {filteredAppointments.map((appointment) => (
             <div
@@ -161,14 +160,14 @@ export default function AppointmentsPage() {
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3">
-                    <h4 className="text-lg font-medium text-gray-900">
+                    <h4 className="text-lg font-medium text-charcoal">
                       {appointment.clientName}
                     </h4>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(appointment.status)}`}>
                       {appointment.status}
                     </span>
                   </div>
-                  
+
                   <div className="mt-1 space-y-1">
                     <p className="text-sm text-gray-600">
                       <span className="font-medium">Service:</span> {appointment.service}
@@ -186,9 +185,9 @@ export default function AppointmentsPage() {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
-                  <button className="text-moss hover:text-moss/80 text-sm font-medium">
+                  <button className="text-teal hover:text-emerald text-sm font-medium">
                     Edit
                   </button>
                   <button className="text-red-600 hover:text-red-700 text-sm font-medium">
@@ -198,7 +197,7 @@ export default function AppointmentsPage() {
               </div>
             </div>
           ))}
-          
+
           {filteredAppointments.length === 0 && (
             <div className="p-6 text-center">
               <p className="text-gray-500">No appointments found for the selected filter.</p>
@@ -211,8 +210,8 @@ export default function AppointmentsPage() {
       {showNewAppointmentModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Schedule New Appointment</h3>
-            
+            <h3 className="text-lg font-medium text-charcoal mb-4 font-awesome-serif">Schedule New Appointment</h3>
+
             <form className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -220,33 +219,33 @@ export default function AppointmentsPage() {
                 </label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                  className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                   placeholder="Enter client name"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email
                 </label>
                 <input
                   type="email"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                  className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                   placeholder="client@email.com"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Phone
                 </label>
                 <input
                   type="tel"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                  className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                   placeholder="+91 98765 43210"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Service
@@ -259,7 +258,7 @@ export default function AppointmentsPage() {
                   <option value="Group Workshop">Group Workshop</option>
                 </select>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -267,7 +266,7 @@ export default function AppointmentsPage() {
                   </label>
                   <input
                     type="date"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                    className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                   />
                 </div>
                 <div>
@@ -276,23 +275,23 @@ export default function AppointmentsPage() {
                   </label>
                   <input
                     type="time"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                    className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Notes (optional)
                 </label>
                 <textarea
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-moss focus:border-moss"
+                  className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
                   rows={3}
                   placeholder="Add any notes or special requirements"
                 />
               </div>
             </form>
-            
+
             <div className="flex justify-end space-x-3 mt-6">
               <button
                 onClick={() => setShowNewAppointmentModal(false)}
@@ -305,7 +304,7 @@ export default function AppointmentsPage() {
                   // Here you would save the appointment
                   setShowNewAppointmentModal(false)
                 }}
-                className="px-4 py-2 bg-moss text-white rounded-lg hover:bg-moss/90 transition-colors"
+                className="px-4 py-2 bg-teal text-white rounded-lg hover:bg-emerald transition-colors"
               >
                 Schedule Appointment
               </button>

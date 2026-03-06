@@ -34,14 +34,14 @@ export default function AdminLoginPage() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-moss mb-2">Mantrana</h1>
-            <h2 className="text-2xl font-bold text-gray-900">Admin Panel</h2>
+            <h1 className="text-3xl font-bold text-teal mb-2 font-awesome-serif">Mantrana</h1>
+            <h2 className="text-2xl font-bold text-charcoal">Admin Panel</h2>
             <p className="mt-2 text-sm text-gray-600">
               Sign in to manage your practice
             </p>
           </div>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
@@ -54,13 +54,13 @@ export default function AdminLoginPage() {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-moss focus:border-moss focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-2 border border-teal/20 placeholder-charcoal/40 text-charcoal rounded-lg focus:outline-none focus:ring-teal focus:border-teal focus:z-10 sm:text-sm"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            
+
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Password
@@ -71,7 +71,7 @@ export default function AdminLoginPage() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-moss focus:border-moss focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-2 border border-teal/20 placeholder-charcoal/40 text-charcoal rounded-lg focus:outline-none focus:ring-teal focus:border-teal focus:z-10 sm:text-sm"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-moss hover:bg-moss/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-moss disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal hover:bg-emerald focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center">

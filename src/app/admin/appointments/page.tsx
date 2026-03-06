@@ -51,7 +51,7 @@ export default function AppointmentsPage() {
   const filteredAppointments = appointments.filter(appointment => {
     const today = new Date().toISOString().split('T')[0]
     const appointmentDate = appointment.date
-    
+
     switch (filter) {
       case 'today':
         return appointmentDate === today
@@ -86,8 +86,8 @@ export default function AppointmentsPage() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="animate-spin h-8 w-8 border-b-2 border-moss mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading appointments...</p>
+          <div className="animate-spin h-8 w-8 border-b-2 border-teal mx-auto mb-4"></div>
+          <p className="text-charcoal/60">Loading appointments...</p>
         </div>
       </div>
     )
@@ -98,8 +98,8 @@ export default function AppointmentsPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Appointments</h1>
-          <p className="text-gray-600">Manage your client appointments and schedule</p>
+          <h1 className="text-2xl font-bold text-charcoal font-awesome-serif">Appointments</h1>
+          <p className="text-charcoal/60">Manage your client appointments and schedule</p>
         </div>
         <div className="text-sm text-gray-500">
           Real-time updates enabled ⚡
@@ -109,7 +109,7 @@ export default function AppointmentsPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg p-4 shadow-soft">
-          <div className="text-2xl font-bold text-gray-900">{appointments.length}</div>
+          <div className="text-2xl font-bold text-charcoal">{appointments.length}</div>
           <div className="text-sm text-gray-600">Total Appointments</div>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-soft">
@@ -146,11 +146,10 @@ export default function AppointmentsPage() {
           <button
             key={filterOption.key}
             onClick={() => setFilter(filterOption.key as any)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-              filter === filterOption.key
-                ? 'bg-moss text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors ${filter === filterOption.key
+                ? 'bg-teal text-white'
+                : 'bg-teal/5 text-charcoal hover:bg-teal/10'
+              }`}
           >
             {filterOption.label}
           </button>
@@ -162,7 +161,7 @@ export default function AppointmentsPage() {
         {filteredAppointments.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-gray-400 text-6xl mb-4">📅</div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No appointments found</h3>
+            <h3 className="text-xl font-semibold text-charcoal mb-2 font-awesome-serif">No appointments found</h3>
             <p className="text-gray-600">
               {filter === 'all' ? 'No appointments have been booked yet.' : `No ${filter} appointments found.`}
             </p>
@@ -172,19 +171,19 @@ export default function AppointmentsPage() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/40 uppercase tracking-wider">
                     Client
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/40 uppercase tracking-wider">
                     Service
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/40 uppercase tracking-wider">
                     Date & Time
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/40 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-charcoal/40 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -194,20 +193,20 @@ export default function AppointmentsPage() {
                   <tr key={appointment.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium text-charcoal">
                           {appointment.clientName}
                         </div>
-                        <div className="text-sm text-gray-500">{appointment.clientEmail}</div>
-                        <div className="text-sm text-gray-500">{appointment.clientPhone}</div>
+                        <div className="text-sm text-charcoal/40">{appointment.clientEmail}</div>
+                        <div className="text-sm text-charcoal/40">{appointment.clientPhone}</div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{appointment.service}</div>
-                      <div className="text-sm text-gray-500">{appointment.duration} minutes</div>
+                      <div className="text-sm text-charcoal">{appointment.service}</div>
+                      <div className="text-sm text-charcoal/40">{appointment.duration} minutes</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{formatDate(appointment.date)}</div>
-                      <div className="text-sm text-gray-500">{formatTime(appointment.time)}</div>
+                      <div className="text-sm text-charcoal">{formatDate(appointment.date)}</div>
+                      <div className="text-sm text-charcoal/40">{formatTime(appointment.time)}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(appointment.status)}`}>
@@ -240,7 +239,7 @@ export default function AppointmentsPage() {
                         )}
                         <button
                           onClick={() => setSelectedAppointment(appointment)}
-                          className="text-moss hover:text-moss/80"
+                          className="text-teal hover:text-emerald"
                         >
                           View
                         </button>
@@ -259,7 +258,7 @@ export default function AppointmentsPage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Appointment Details</h2>
+              <h2 className="text-2xl font-bold text-charcoal font-awesome-serif">Appointment Details</h2>
               <button
                 onClick={() => setSelectedAppointment(null)}
                 className="text-gray-400 hover:text-gray-600"
@@ -298,7 +297,7 @@ export default function AppointmentsPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Duration</label>
-                  <p className="text-sm text-gray-900">{selectedAppointment.duration} minutes</p>
+                  <p className="text-sm text-charcoal">{selectedAppointment.duration} minutes</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Status</label>
@@ -311,7 +310,7 @@ export default function AppointmentsPage() {
               {selectedAppointment.notes && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
-                  <p className="text-sm text-gray-900 bg-gray-50 p-3 rounded-lg">
+                  <p className="text-sm text-charcoal bg-background p-3 border border-teal/10 rounded-lg">
                     {selectedAppointment.notes}
                   </p>
                 </div>

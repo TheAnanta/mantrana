@@ -9,26 +9,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Brand colors following 60-30-10 rule
+        // New Brand colors
+        background: '#FDFBF7',
+        teal: '#8DA399',
+        emerald: '#2C3E36',
+        terracotta: '#B87D67',
+        charcoal: '#202324',
+        // Keeping primary for backward compatibility if needed, but redefining
         primary: {
-          50: '#F4DFE6',  // Lavender Blush (60% - dominant)
-          100: '#E0A3BB', // Amaranth Pink (30% - secondary)
-          200: '#D6E6E7', // Azure 
-          300: '#C5CC82', // Citron
-          400: '#97A13B', // Moss Green (10% - accent)
+          50: '#FDFBF7',
+          100: '#8DA399',
+          200: '#2C3E36',
+          300: '#B87D67',
+          400: '#202324',
         },
-        lavender: '#F4DFE6',
+        lavender: '#F4DFE6', // Keeping old ones for now to avoid breakages during migration
         amaranth: '#E0A3BB',
         azure: '#D6E6E7',
         citron: '#C5CC82',
         moss: '#97A13B',
-        teal: '#80a39b',
       },
       fontFamily: {
-        'gilroy': ['Gilroy', 'system-ui', 'sans-serif'],
-        'google-sans': ['Gilroy', 'system-ui', 'sans-serif'],
-        'google-sans-display': ['Gilroy', 'system-ui', 'sans-serif'],
-        'elsie': ['Gilroy', 'serif'],
+        'montserrat': ['var(--font-montserrat)', 'sans-serif'],
+        'awesome-serif': ['var(--font-awesome-serif)', 'serif'],
+        // Fallbacks
+        'gilroy': ['var(--font-montserrat)', 'sans-serif'],
+        'google-sans': ['var(--font-montserrat)', 'sans-serif'],
+        'elsie': ['var(--font-awesome-serif)', 'serif'],
       },
       spacing: {
         '18': '4.5rem',

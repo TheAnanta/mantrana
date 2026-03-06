@@ -153,20 +153,20 @@ export default async function BlogPostPage({
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
-              <Link href="/" className="hover:text-moss transition-colors">
+              <Link href="/" className="hover:text-emerald transition-colors">
                 Home
               </Link>
               <span>/</span>
-              <Link href="/blog" className="hover:text-moss transition-colors">
+              <Link href="/blog" className="hover:text-emerald transition-colors">
                 Blog
               </Link>
               <span>/</span>
-              <span className="text-gray-900">{post.title}</span>
+              <span className="text-charcoal">{post.title}</span>
             </nav>
 
             {/* Category and Meta */}
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-sm font-medium text-moss bg-moss/10 px-3 py-1 rounded-full">
+              <span className="text-sm font-medium text-emerald bg-emerald/10 px-3 py-1 rounded-full">
                 {post.category}
               </span>
               <span className="text-sm text-gray-500">{post.publishedAt}</span>
@@ -175,17 +175,17 @@ export default async function BlogPostPage({
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-8 leading-tight font-awesome-serif">
               {post.title}
             </h1>
 
             {/* Author */}
             <div className="flex items-center mb-8">
-              <div className="w-12 h-12 bg-moss/10 rounded-full flex items-center justify-center mr-4">
-                <span className="text-moss font-semibold">MR</span>
+              <div className="w-12 h-12 bg-emerald/10 rounded-full flex items-center justify-center mr-4">
+                <span className="text-emerald font-semibold">MR</span>
               </div>
               <div>
-                <p className="font-medium text-gray-900">{post.author.name}</p>
+                <p className="font-medium text-charcoal">{post.author.name}</p>
                 <p className="text-sm text-gray-500">{post.author.role}</p>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default async function BlogPostPage({
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-moss hover:text-white transition-colors cursor-pointer"
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald hover:text-white transition-colors cursor-pointer"
                   >
                     #{tag}
                   </span>
@@ -245,14 +245,14 @@ export default async function BlogPostPage({
             {/* Author Bio */}
             <div className="mt-12 p-8 bg-lavender/10 rounded-2xl">
               <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-moss/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-moss font-semibold text-lg">MR</span>
+                <div className="w-16 h-16 bg-emerald/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-emerald font-semibold text-lg">MR</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-xl font-bold text-charcoal mb-2">
                     {post.author.name}
                   </h3>
-                  <p className="text-moss font-medium mb-3">
+                  <p className="text-emerald font-medium mb-3">
                     {post.author.role}
                   </p>
                   <p className="text-gray-700 leading-relaxed">
@@ -271,7 +271,7 @@ export default async function BlogPostPage({
           <div className="max-w-4xl mx-auto flex justify-between items-center">
             <Link
               href="/blog"
-              className="flex items-center gap-3 text-moss hover:text-moss/80 transition-colors"
+              className="flex items-center gap-3 text-emerald hover:text-emerald/80 transition-colors"
             >
               <svg
                 className="w-5 h-5"
@@ -321,15 +321,15 @@ export default async function BlogPostPage({
               {relatedPosts.map((relatedPost) => (
                 <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
                   <article className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                    <div className="bg-azure/30 h-48 relative">
+                    <div className="bg-teal/20 h-48 relative">
                       <div className="absolute bottom-4 left-4">
-                        <span className="text-xs font-medium text-moss bg-white/90 px-3 py-1 rounded-full">
+                        <span className="text-xs font-medium text-emerald bg-white/90 px-3 py-1 rounded-full">
                           {relatedPost.category}
                         </span>
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight hover:text-moss transition-colors">
+                      <h3 className="text-xl font-bold text-charcoal mb-3 leading-tight hover:text-emerald transition-colors">
                         {relatedPost.title}
                       </h3>
                       <div className="flex items-center justify-between">

@@ -13,11 +13,11 @@ export default function TermsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-lavender via-white to-azure">
+      <section className="pt-32 pb-16 bg-background">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Terms & <span className="text-moss">Conditions</span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 font-awesome-serif">
+              Terms & <span className="text-teal">Conditions</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
               Guidelines for using our therapy and counselling services
@@ -36,7 +36,7 @@ export default function TermsPage() {
 
             <div className="space-y-12">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Introduction
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -49,7 +49,7 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Services Provided
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -60,35 +60,35 @@ export default function TermsPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>Individual therapy sessions</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>Couples and relationship counselling</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>Behavioral modification programs</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>Life coaching and personal development</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>Online and in-person consultations</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Client Responsibilities
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Accurate Information
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -99,7 +99,7 @@ export default function TermsPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Active Participation
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -111,7 +111,7 @@ export default function TermsPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Respectful Conduct
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -125,12 +125,12 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Appointment Booking and Attendance
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Scheduling
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -140,7 +140,7 @@ export default function TermsPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Cancellation Policy
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -151,7 +151,7 @@ export default function TermsPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Late Arrivals
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -164,40 +164,40 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Payment Terms
                 </h2>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Payment is due at the time of booking or before the
                       scheduled session
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       We accept various payment methods including credit/debit
                       cards, UPI, and bank transfers
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Session packages must be paid in full at the time of
                       purchase
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Package sessions are valid for 6 months from the date of
                       purchase
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Pricing is subject to change, but booked sessions honor the
                       price at the time of booking
@@ -207,7 +207,7 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Confidentiality
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -217,33 +217,33 @@ export default function TermsPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       When there is a risk of harm to yourself or others
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>When required by law or court order</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>In cases of suspected child or elder abuse</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>When you provide written consent to share information</span>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Limitations and Disclaimers
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Not Emergency Services
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -254,7 +254,7 @@ export default function TermsPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       No Guarantees
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -265,7 +265,7 @@ export default function TermsPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-charcoal mb-2">
                       Professional Relationship
                     </h3>
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -279,7 +279,7 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Termination of Services
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
@@ -290,25 +290,25 @@ export default function TermsPage() {
                 </p>
                 <ul className="space-y-3 text-lg text-gray-600">
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Non-payment of fees or repeated cancellations
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Inappropriate or threatening behavior
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       When therapy is not beneficial or appropriate for your needs
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-moss mr-3">•</span>
+                    <span className="text-teal mr-3">•</span>
                     <span>
                       Conflict of interest or ethical concerns
                     </span>
@@ -317,7 +317,7 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Intellectual Property
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -330,7 +330,7 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Liability Limitation
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -342,7 +342,7 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Changes to Terms
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -354,7 +354,7 @@ export default function TermsPage() {
               </div>
 
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Governing Law
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -365,8 +365,8 @@ export default function TermsPage() {
                 </p>
               </div>
 
-              <div className="bg-lavender/20 rounded-2xl p-8 mt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <div className="bg-teal/10 rounded-2xl p-8 mt-12">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif">
                   Questions About These Terms?
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">

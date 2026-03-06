@@ -102,8 +102,8 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-moss to-moss/80 rounded-lg p-6 text-white">
-        <h1 className="text-2xl font-bold mb-2">Welcome back, Mohana! 👋</h1>
+      <div className="bg-gradient-to-r from-teal to-emerald rounded-lg p-6 text-white">
+        <h1 className="text-2xl font-bold mb-2 font-awesome-serif">Welcome back, Mohana! 👋</h1>
         <p className="text-moss-100">
           Here's what's happening with your practice today.
         </p>
@@ -120,7 +120,7 @@ export default function AdminDashboard() {
               <p className="text-sm font-medium text-gray-600">
                 Total Appointments
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-charcoal">
                 {stats.totalAppointments}
               </p>
             </div>
@@ -136,7 +136,7 @@ export default function AdminDashboard() {
               <p className="text-sm font-medium text-gray-600">
                 Today's Appointments
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-charcoal">
                 {stats.appointmentsToday}
               </p>
             </div>
@@ -150,7 +150,7 @@ export default function AdminDashboard() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Testimonials</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-charcoal">
                 {stats.totalTestimonials}
               </p>
             </div>
@@ -164,7 +164,7 @@ export default function AdminDashboard() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Blog Posts</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-charcoal">
                 {stats.totalBlogPosts}
               </p>
             </div>
@@ -173,14 +173,14 @@ export default function AdminDashboard() {
 
         <div className="bg-white rounded-lg p-6 shadow-soft">
           <div className="flex items-center">
-            <div className="p-2 bg-moss/20 rounded-lg">
+            <div className="p-2 bg-teal/20 rounded-lg">
               <span className="text-2xl">👁️</span>
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">
                 Page Views (30d)
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-charcoal">
                 {stats.pageViews.toLocaleString()}
               </p>
             </div>
@@ -189,14 +189,14 @@ export default function AdminDashboard() {
 
         <div className="bg-white rounded-lg p-6 shadow-soft">
           <div className="flex items-center">
-            <div className="p-2 bg-amaranth/20 rounded-lg">
+            <div className="p-2 bg-terracotta/20 rounded-lg">
               <span className="text-2xl">👥</span>
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">
                 New Clients (30d)
               </p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-charcoal">
                 {stats.newClients}
               </p>
             </div>
@@ -207,7 +207,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Quick Actions */}
         <div className="bg-white rounded-lg p-6 shadow-soft">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-charcoal mb-4 font-awesome-serif">
             Quick Actions
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -215,11 +215,11 @@ export default function AdminDashboard() {
               <Link
                 key={action.title}
                 href={action.href}
-                className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-all duration-200 hover:border-moss"
+                className="p-4 border border-teal/10 rounded-lg hover:shadow-md transition-all duration-200 hover:border-teal"
               >
                 <div className="flex items-center mb-2">
                   <span className="text-2xl mr-3">{action.icon}</span>
-                  <h3 className="font-medium text-gray-900">{action.title}</h3>
+                  <h3 className="font-medium text-charcoal">{action.title}</h3>
                 </div>
                 <p className="text-sm text-gray-600">{action.description}</p>
               </Link>
@@ -229,17 +229,17 @@ export default function AdminDashboard() {
 
         {/* Recent Activity */}
         <div className="bg-white rounded-lg p-6 shadow-soft">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <h2 className="text-lg font-semibold text-charcoal mb-4 font-awesome-serif">
             Recent Activity
           </h2>
           <div className="space-y-4">
             {recentActivity.map((activity, index) => (
               <div key={index} className="flex items-start">
                 <div className="flex-shrink-0">
-                  <div className="w-2 h-2 bg-moss rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-teal rounded-full mt-2"></div>
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm text-gray-900">{activity.message}</p>
+                  <p className="text-sm text-charcoal">{activity.message}</p>
                   <p className="text-xs text-gray-500">{activity.time}</p>
                 </div>
               </div>
@@ -248,7 +248,7 @@ export default function AdminDashboard() {
           <div className="mt-4 pt-4 border-t border-gray-200">
             <Link
               href="/admin/analytics"
-              className="text-sm text-moss font-medium hover:text-moss/80"
+              className="text-sm text-teal font-medium hover:text-emerald"
             >
               View all activity →
             </Link>
@@ -271,7 +271,7 @@ export default function AdminDashboard() {
                 Anxiety management session
               </p>
             </div>
-            <span className="text-sm font-medium text-moss">10:00 AM</span>
+            <span className="text-sm font-medium text-teal">10:00 AM</span>
           </div>
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <div>
@@ -282,7 +282,7 @@ export default function AdminDashboard() {
                 Career transition planning
               </p>
             </div>
-            <span className="text-sm font-medium text-moss">2:00 PM</span>
+            <span className="text-sm font-medium text-teal">2:00 PM</span>
           </div>
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <div>
@@ -291,7 +291,7 @@ export default function AdminDashboard() {
               </p>
               <p className="text-sm text-gray-600">Communication workshop</p>
             </div>
-            <span className="text-sm font-medium text-moss">4:00 PM</span>
+            <span className="text-sm font-medium text-teal">4:00 PM</span>
           </div>
         </div>
         <div className="mt-4 pt-4 border-t border-gray-200">
