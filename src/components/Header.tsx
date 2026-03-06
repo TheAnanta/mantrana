@@ -25,7 +25,8 @@ export default function Header() {
   return (
     <header className={`fixed top-0 w-full z-50 shadow-sm bg-background transition-all`}>
       <div className="bg-emerald text-white text-center py-2 text-xs md:text-sm tracking-wide">
-        Discover clarity and balance in your life. <Link href="/book" className="underline font-semibold ml-1 hover:text-teal transition-colors">Book a session today.</Link>
+        Discover clarity and balance in your life. <Link href="/book" className="underline font-semibold ml-1 mr-1 hover:text-teal transition-colors">Book a session today.</Link>{" "}|{" "}
+        ✨ Special Offer: First session only at ₹299! Book now to get started.
       </div>
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">

@@ -30,10 +30,10 @@ export default function BookPage() {
     {
       id: "first-session",
       title: "First Session",
-      duration: 40,
+      duration: 30,
       price: "₹299",
       description:
-        "Your first 40-minute session — a gentle step to understand your needs and plan your path forward.",
+        "Your first 30-minute session — a gentle step to understand your needs and plan your path forward.",
       features: [
         "Understand your needs",
         "Plan your therapy journey",
@@ -120,7 +120,7 @@ export default function BookPage() {
             Book Your Session
           </h1>
           <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed max-w-3xl mx-auto mb-4">
-            Begin with Clarity. Your first 40-minute session is only ₹299/— a
+            Begin with Clarity. Your first 30-minute session is only ₹299/— a
             gentle step to understand your needs and plan your path forward.
           </p>
           <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
