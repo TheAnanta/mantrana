@@ -162,19 +162,19 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
     const [hours, minutes] = timeString.split(":");
     const startHour = parseInt(hours);
     const startMin = parseInt(minutes);
-    
+
     const endMin = startMin + duration;
     const endHour = startHour + Math.floor(endMin / 60);
     const finalEndMin = endMin % 60;
-    
+
     const startAmpm = startHour >= 12 ? "pm" : "am";
     const endAmpm = endHour >= 12 ? "pm" : "am";
     const start12 = startHour % 12 || 12;
     const end12 = endHour % 12 || 12;
-    
+
     const startTime = `${start12}:${String(startMin).padStart(2, '0')}${startAmpm}`;
     const endTime = `${end12}:${String(finalEndMin).padStart(2, '0')}${endAmpm}`;
-    
+
     return `${startTime} - ${endTime}`;
   };
 
@@ -186,15 +186,15 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
     const startDayOfWeek = firstDay.getDay();
-    
+
     return { daysInMonth, startDayOfWeek, year, month };
   };
 
   const isToday = (date: Date) => {
     const today = new Date();
     return date.getDate() === today.getDate() &&
-           date.getMonth() === today.getMonth() &&
-           date.getFullYear() === today.getFullYear();
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
   };
 
   const isDateAvailable = (date: Date) => {
@@ -209,8 +209,8 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
     if (!selectedDate) return false;
     const selected = new Date(selectedDate + 'T00:00:00');
     return date.getDate() === selected.getDate() &&
-           date.getMonth() === selected.getMonth() &&
-           date.getFullYear() === selected.getFullYear();
+      date.getMonth() === selected.getMonth() &&
+      date.getFullYear() === selected.getFullYear();
   };
 
   const handleDateClick = (date: Date) => {
@@ -243,7 +243,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
-      <div 
+      <div
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
         onClick={handleClose}
       ></div>
@@ -252,7 +252,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
       <div className="flex min-h-full items-center justify-center p-4">
         <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-5xl overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr]">
-            
+
             {/* Left Sidebar - Brand Info */}
             <div className="bg-white border-r border-gray-200 p-8 lg:p-12">
               <div className="mb-8">
@@ -260,7 +260,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                   <span className="text-2xl">🧠</span>
                 </div>
                 <h3 className="text-sm font-semibold text-gray-500 mb-2">
-                  Mantrana by Mohana Rupa
+                  Mantrana | Therapy by Mohana Rupa
                 </h3>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
                   {service.title}
@@ -293,7 +293,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
 
             {/* Right Content Area */}
             <div className="p-8 lg:p-12 max-h-[80vh] overflow-y-auto">
-              
+
               {/* Close Button */}
               <button
                 onClick={handleClose}
@@ -355,22 +355,22 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                           {(() => {
                             const { daysInMonth, startDayOfWeek, year, month } = getDaysInMonth(currentMonth);
                             const days = [];
-                            
+
                             // Adjust startDayOfWeek: Sunday = 0, but we want Monday = 0
                             const adjustedStart = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
-                            
+
                             // Empty cells before first day
                             for (let i = 0; i < adjustedStart; i++) {
                               days.push(<div key={`empty-${i}`} className="aspect-square" />);
                             }
-                            
+
                             // Days of the month
                             for (let day = 1; day <= daysInMonth; day++) {
                               const date = new Date(year, month, day);
                               const isAvailable = isDateAvailable(date);
                               const isTodayDate = isToday(date);
                               const isSelected = isDateSelected(date);
-                              
+
                               days.push(
                                 <button
                                   key={day}
@@ -378,11 +378,11 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                                   disabled={!isAvailable}
                                   className={`
                                     aspect-square rounded-full flex items-center justify-center text-sm font-medium transition-all relative
-                                    ${isSelected 
-                                      ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                                    ${isSelected
+                                      ? 'bg-blue-600 text-white hover:bg-blue-700'
                                       : isAvailable
-                                      ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
-                                      : 'text-gray-400 cursor-not-allowed'
+                                        ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                                        : 'text-gray-400 cursor-not-allowed'
                                     }
                                     ${isTodayDate && !isSelected ? 'ring-2 ring-blue-600 ring-offset-2' : ''}
                                   `}
@@ -394,7 +394,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                                 </button>
                               );
                             }
-                            
+
                             return days;
                           })()}
                         </div>
@@ -447,7 +447,7 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                     </svg>
                     Back
                   </button>
-                  
+
                   <h1 className="text-3xl font-bold text-gray-900 mb-2">
                     Enter Details
                   </h1>

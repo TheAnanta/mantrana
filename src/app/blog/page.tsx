@@ -3,7 +3,7 @@ import Footer from '@/components/Footer'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Blog | Mantrana by Mohana Rupa',
+  title: 'Blog | Mantrana | Therapy by Mohana Rupa',
   description: 'Insights and articles on mental health, personal growth, and wellness from Mohana Rupa.',
 }
 

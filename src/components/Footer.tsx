@@ -48,7 +48,7 @@ export default function Footer() {
             </p>
             <div className="text-xs text-white/50 font-montserrat uppercase tracking-wider">
               <p className="mb-2">
-                &copy; 2024 Mantrana by Mohana Rupa. All rights reserved.
+                &copy; 2024 Mantrana | Therapy by Mohana Rupa. All rights reserved.
               </p>
               <p>Thriving in Balance • Guidance • Clarity</p>
             </div>

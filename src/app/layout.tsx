@@ -38,7 +38,7 @@ const awesomeSerif = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Mantrana by Mohana Rupa | Professional Therapy & Counselling",
+  title: "Mantrana | Therapy by Mohana Rupa | Professional Therapy & Counselling",
   description:
     "Professional therapy, counselling, and coaching services by Mohana Rupa. Expert guidance for mental wellness, personal growth, and inner clarity.",
   keywords: [

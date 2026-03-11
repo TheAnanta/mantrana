@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Terms & Conditions | Mantrana by Mohana Rupa",
+  title: "Terms & Conditions | Mantrana | Therapy by Mohana Rupa",
   description:
     "Read the terms and conditions for using Mantrana therapy and counselling services. Understand your rights and responsibilities.",
 };

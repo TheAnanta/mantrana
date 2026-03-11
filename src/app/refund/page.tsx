@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Refund Policy | Mantrana by Mohana Rupa",
+  title: "Refund Policy | Mantrana | Therapy by Mohana Rupa",
   description:
     "Understand our refund and cancellation policy for therapy sessions and packages. We are committed to fair and transparent practices.",
 };

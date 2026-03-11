@@ -29,7 +29,7 @@ function HeroSection() {
           <div className="flex items-center justify-center w-full max-w-2xl mx-auto mb-10 md:mb-12">
             <div className="flex-1 h-[1px] bg-charcoal"></div>
             <p className="px-6 md:px-8 text-sm md:text-base text-charcoal tracking-[0.3em] font-montserrat uppercase font-medium whitespace-nowrap">
-              By Mohana Rupa
+              Therapy By Mohana Rupa
             </p>
             <div className="flex-1 h-[1px] bg-charcoal"></div>
           </div>
@@ -76,7 +76,7 @@ function AboutSection() {
           <div className="order-2 lg:order-1 relative">
             <div className="text-xs tracking-widest font-montserrat text-black/60 mb-2 uppercase font-medium">Meet</div>
             <h2 className={`text-4xl lg:text-5xl tracking-wide text-charcoal mb-1 font-awesome-serif uppercase leading-tight`}>
-              Mohana
+              Dr. Mohana
             </h2>
             <h2 className={`text-4xl lg:text-5xl tracking-wide text-charcoal mb-4 font-awesome-serif uppercase leading-tight`}>
               Rupa Nekkanti
@@ -88,7 +88,7 @@ function AboutSection() {
               <p>
                 Namaste!
                 <br /><br />
-                I am Mohana Rupa Nekkanti, founder of Mantrana therapy. I am
+                I am Dr. Mohana Rupa Nekkanti, founder of Mantrana therapy. I am
                 a Psychotherapist and Behavioural Specialist with a Ph.D. in
                 Applied Psychology and advanced certifications in Clinical
                 Hypnosis and Neuro-Linguistic Programming.

@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Services | Mantrana by Mohana Rupa",
+  title: "Services | Mantrana | Therapy by Mohana Rupa",
   description:
     "Healing begins with understanding. Individual therapy, couples therapy, behavioural coaching, digital well-being therapy, trainings, and community mental wellness advocacy.",
 };

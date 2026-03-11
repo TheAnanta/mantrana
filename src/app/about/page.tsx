@@ -40,12 +40,12 @@ export default function AboutPage() {
             <div>
               <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">The Founder</div>
               <h2 className="text-4xl lg:text-5xl text-charcoal mb-8 font-awesome-serif uppercase tracking-wide">
-                Meet Mohana Rupa Nekkanti
+                Meet Dr. Mohana Rupa Nekkanti
               </h2>
               <div className="space-y-6 text-sm md:text-base font-montserrat text-charcoal/80 leading-relaxed font-medium">
                 <p>
                   Namaste!
-                  <br />I am Mohana Rupa Nekkanti, founder of Mantrana therapy.
+                  <br />I am Dr. Mohana Rupa Nekkanti, founder of Mantrana therapy.
                   I am a Psychotherapist and Behavioural Specialist with a Ph.D.
                   in Applied Psychology and advanced certifications in Clinical
                   Hypnosis and Neuro-Linguistic Programming.
