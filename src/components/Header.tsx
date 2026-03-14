@@ -247,7 +247,7 @@ export default function Header() {
                       className="text-charcoal/70 hover:text-emerald transition-colors duration-300 font-medium"
                     >
                       <img
-                        src={user.photoURL}
+                        src={user.photoURL || undefined}
                         className="size-12 object-cover rounded-full"
                         referrerPolicy="no-referrer"
                       />
@@ -337,7 +337,7 @@ export default function Header() {
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <img
-                          src={user.photoURL}
+                          src={user.photoURL || undefined}
                           className="size-12 object-cover rounded-full inline-block mr-2"
                         />
                       </Link>

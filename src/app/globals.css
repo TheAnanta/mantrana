@@ -38,3 +38,18 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
+
+/* Tiptap Editor Styles */
+.tiptap {
+  @apply focus:outline-none min-h-[500px];
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  @apply text-charcoal/20 font-bold pointer-events-none float-left h-0;
+  content: attr(data-placeholder);
+}
+
+.tiptap p.is-empty::before {
+  @apply text-charcoal/10 font-medium pointer-events-none float-left h-0;
+  content: attr(data-placeholder);
+}

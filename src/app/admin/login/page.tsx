@@ -19,6 +19,7 @@ export default function AdminLoginPage() {
 
     try {
       await signInWithEmail(email, password)
+      localStorage.setItem('admin_authenticated', 'true')
       router.push('/admin')
     } catch (err: any) {
       setError(err.message || 'Failed to sign in. Please check your credentials.')

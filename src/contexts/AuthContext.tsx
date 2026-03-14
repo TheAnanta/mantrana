@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             uid: firebaseUser.uid,
             email: firebaseUser.email || '',
             displayName: firebaseUser.displayName || '',
-            photoURL: firebaseUser.photoURL || undefined
+            photoURL: firebaseUser.photoURL || null
           })
         }
         

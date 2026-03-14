@@ -113,6 +113,12 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   return posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 }
 
+export const getBlogPost = async (postId: string): Promise<BlogPost | null> => {
+  const postRef = ref(database, `blog/${postId}`)
+  const snapshot = await get(postRef)
+  return snapshot.exists() ? snapshot.val() : null
+}
+
 export const getBlogPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   const blogRef = ref(database, 'blog')
   const snapshot = await get(blogRef)
