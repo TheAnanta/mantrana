@@ -1,6 +1,11 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { getApprovedTestimonials, getAllBlogPosts } from "@/lib/firebase-utils";
+import { Testimonial, BlogPost } from "@/types";
 
 // Hero Section Component
 function HeroSection() {
@@ -236,28 +241,24 @@ function ServicesSection() {
 
 // Testimonials Section
 function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Aruna M.",
-      text: "Mohana's guidance helped me overcome my anxiety and find peace within myself. The sessions were transformative.",
-      rating: 5,
-    },
-    {
-      name: "Raj K.",
-      text: "Professional, compassionate, and incredibly insightful. My life coaching sessions have changed my perspective completely.",
-      rating: 5,
-    },
-    {
-      name: "Sneha P.",
-      text: "I was struggling with digital burnout. The cognitive restructuring tools provided here completely reshaped my daily life.",
-      rating: 5,
-    },
-    {
-      name: "Vivek S.",
-      text: "Highly recommended for anyone navigating life transitions. The blend of modern therapy and wisdom is unique and effective.",
-      rating: 5,
-    },
-  ];
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        const data = await getApprovedTestimonials();
+        setTestimonials(data.filter(t => t.featured).slice(0, 4));
+      } catch (error) {
+        console.error("Failed to fetch testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchTestimonials();
+  }, []);
+
+  if (loading && testimonials.length === 0) return null;
 
   return (
     <section className="py-16 md:py-24 bg-white" id="testimonials">
@@ -274,7 +275,7 @@ function TestimonialsSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-background rounded-[30px] p-8 lg:p-12 transition-shadow duration-300">
+            <div key={testimonial.id || index} className="bg-background rounded-[30px] p-8 lg:p-12 transition-shadow duration-300">
               <div className="flex mb-6 text-[#DDA74A]">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <svg
@@ -302,35 +303,24 @@ function TestimonialsSection() {
 
 // Blog Preview Section
 function BlogSection() {
-  const blogPosts = [
-    {
-      title: "Understanding Anxiety: A Guide to Managing Daily Stress",
-      excerpt:
-        "Learn practical techniques to manage anxiety and create a more peaceful daily routine.",
-      category: "Mental Health",
-      readTime: "5 min read",
-      slug: "understanding-anxiety-managing-daily-stress",
-      color: "bg-terracotta",
-    },
-    {
-      title: "The Power of Mindfulness in Relationships",
-      excerpt:
-        "Discover how mindfulness practices can improve communication and deepen connections.",
-      category: "Relationships",
-      readTime: "7 min read",
-      slug: "power-of-mindfulness-in-relationships",
-      color: "bg-teal",
-    },
-    {
-      title: "Building Resilience: Tools for Life's Challenges",
-      excerpt:
-        "Explore strategies to build emotional resilience and navigate life's ups and downs.",
-      category: "Personal Growth",
-      readTime: "6 min read",
-      slug: "building-resilience-tools-for-challenges",
-      color: "bg-emerald",
-    },
-  ];
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const data = await getAllBlogPosts();
+        setPosts(data.filter(p => p.status === 'published').slice(0, 3));
+      } catch (error) {
+        console.error("Failed to fetch blog posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPosts();
+  }, []);
+
+  if (loading && posts.length === 0) return null;
 
   return (
     <section className="py-16 md:py-24 bg-background">
@@ -346,10 +336,15 @@ function BlogSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <Link key={index} href={`/blog/${post.slug}`}>
+          {posts.map((post, index) => (
+            <Link key={post.id || index} href={`/blog/${post.slug}`}>
               <article className="bg-white rounded-[30px] overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 cursor-pointer h-full flex flex-col border border-black/5">
-                <div className={`h-48 relative overflow-hidden ${post.color}`}>
+                <div className={`h-48 relative overflow-hidden bg-emerald/10`}>
+                  {post.image ? (
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-emerald/20 flex items-center justify-center text-emerald/40 font-awesome-serif text-4xl">M</div>
+                  )}
                   <div className="absolute bottom-4 left-4">
                     <span className="text-xs font-semibold tracking-wider uppercase text-charcoal bg-white px-4 py-1.5 rounded-full shadow-sm">
                       {post.category}
@@ -358,7 +353,9 @@ function BlogSection() {
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-semibold tracking-widest uppercase text-charcoal/50">Recent</span>
+                    <span className="text-xs font-semibold tracking-widest uppercase text-charcoal/50">
+                      {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'Recent'}
+                    </span>
                     <span className="text-xs font-semibold tracking-widest uppercase text-charcoal/50">
                       {post.readTime}
                     </span>

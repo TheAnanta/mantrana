@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { subscribeToAppointments, updateAppointment } from '@/lib/firebase-utils'
+import { subscribeToAppointments, updateAppointment, createAppointment, sendAppointmentNotification } from '@/lib/firebase-utils'
 import { Appointment } from '@/types'
 
 export default function AppointmentsPage() {
@@ -33,6 +33,10 @@ export default function AppointmentsPage() {
   const handleStatusUpdate = async (appointmentId: string, newStatus: Appointment['status']) => {
     try {
       await updateAppointment(appointmentId, { status: newStatus })
+      
+      if (newStatus === 'completed' || newStatus === 'cancelled') {
+        await sendAppointmentNotification(appointmentId, newStatus)
+      }
     } catch (error) {
       console.error('Failed to update appointment status:', error)
     }
@@ -101,8 +105,16 @@ export default function AppointmentsPage() {
           <h1 className="text-2xl font-bold text-charcoal font-awesome-serif">Appointments</h1>
           <p className="text-charcoal/60">Manage your client appointments and schedule</p>
         </div>
-        <div className="text-sm text-gray-500">
-          Real-time updates enabled ⚡
+        <div className="flex space-x-3 items-center">
+          <button
+            onClick={() => setShowNewAppointmentModal(true)}
+            className="bg-teal text-white px-4 py-2 rounded-lg hover:bg-emerald transition-colors"
+          >
+            + Schedule Appointment
+          </button>
+          <div className="text-sm text-gray-500">
+            Real-time updates enabled ⚡
+          </div>
         </div>
       </div>
 
@@ -339,6 +351,90 @@ export default function AppointmentsPage() {
               >
                 Close
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* New Appointment Modal */}
+      {showNewAppointmentModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-[20px] shadow-2xl max-w-md w-full overflow-hidden border border-charcoal/5 animate-in zoom-in-95 duration-200">
+            <div className="p-8">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-charcoal font-awesome-serif">New Appointment</h2>
+                <button 
+                  onClick={() => setShowNewAppointmentModal(false)}
+                  className="text-charcoal/20 hover:text-charcoal transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const appointmentData = {
+                  clientName: formData.get('name') as string,
+                  clientEmail: formData.get('email') as string,
+                  clientPhone: formData.get('phone') as string,
+                  service: formData.get('service') as string,
+                  date: formData.get('date') as string,
+                  time: formData.get('time') as string,
+                  duration: 60,
+                  userId: 'admin',
+                };
+
+                try {
+                  await createAppointment(appointmentData);
+                  setShowNewAppointmentModal(false);
+                } catch (error) {
+                  console.error('Failed to create appointment:', error);
+                }
+              }} className="space-y-5">
+                <div>
+                  <label className="block text-xs font-bold text-charcoal/40 mb-2 uppercase tracking-widest font-montserrat">Client Name</label>
+                  <input name="name" type="text" required className="w-full px-4 py-3 bg-background border border-charcoal/10 rounded-xl focus:ring-2 focus:ring-teal/20 focus:border-teal outline-none transition-all font-montserrat" placeholder="Full name" />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-charcoal/40 mb-2 uppercase tracking-widest font-montserrat">Date</label>
+                    <input name="date" type="date" required className="w-full px-4 py-3 bg-background border border-charcoal/10 rounded-xl focus:ring-2 focus:ring-teal/20 focus:border-teal outline-none transition-all font-montserrat" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-charcoal/40 mb-2 uppercase tracking-widest font-montserrat">Time</label>
+                    <input name="time" type="time" required className="w-full px-4 py-3 bg-background border border-charcoal/10 rounded-xl focus:ring-2 focus:ring-teal/20 focus:border-teal outline-none transition-all font-montserrat" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-charcoal/40 mb-2 uppercase tracking-widest font-montserrat">Service Type</label>
+                  <select name="service" required className="w-full px-4 py-3 bg-background border border-charcoal/10 rounded-xl focus:ring-2 focus:ring-teal/20 focus:border-teal outline-none transition-all font-montserrat appearance-none">
+                    <option value="Individual Therapy">Individual Therapy</option>
+                    <option value="Life Coaching">Life Coaching</option>
+                    <option value="Couples Therapy">Couples Therapy</option>
+                  </select>
+                </div>
+
+                <div className="flex gap-3 mt-8">
+                  <button 
+                    type="button" 
+                    onClick={() => setShowNewAppointmentModal(false)} 
+                    className="flex-1 px-6 py-4 text-charcoal/60 bg-gray-100 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-gray-200 transition-all font-montserrat"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit" 
+                    className="flex-1 px-6 py-4 bg-teal text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-emerald transition-all shadow-lg shadow-teal/20 font-montserrat"
+                  >
+                    Create
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

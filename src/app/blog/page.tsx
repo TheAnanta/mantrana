@@ -1,111 +1,44 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
-
-export const metadata = {
-  title: 'Blog | Mantrana | Therapy by Mohana Rupa',
-  description: 'Insights and articles on mental health, personal growth, and wellness from Mohana Rupa.',
-}
-
-interface BlogPost {
-  slug: string
-  title: string
-  excerpt: string
-  category: string
-  readTime: string
-  publishedAt: string
-  author: {
-    name: string
-    role: string
-  }
-  image: string
-}
-
-// Sample blog posts data
-const blogPosts: BlogPost[] = [
-  {
-    slug: 'understanding-anxiety-managing-daily-stress',
-    title: 'Understanding Anxiety: A Guide to Managing Daily Stress',
-    excerpt: 'Learn practical techniques to manage anxiety and create a more peaceful daily routine with evidence-based strategies.',
-    category: 'Mental Health',
-    readTime: '5 min read',
-    publishedAt: 'Nov 15, 2024',
-    author: {
-      name: 'Mohana Rupa',
-      role: 'Licensed Therapist & Coach'
-    },
-    image: '/images/anxiety-stress-management.png'
-  },
-  {
-    slug: 'power-of-mindfulness-in-relationships',
-    title: 'The Power of Mindfulness in Relationships',
-    excerpt: 'Discover how mindfulness practices can improve communication and deepen connections with your loved ones.',
-    category: 'Relationships',
-    readTime: '7 min read',
-    publishedAt: 'Nov 12, 2024',
-    author: {
-      name: 'Mohana Rupa',
-      role: 'Licensed Therapist & Coach'
-    },
-    image: '/images/mindfulness-relationships.png'
-  },
-  {
-    slug: 'building-resilience-tools-for-challenges',
-    title: 'Building Resilience: Tools for Life\'s Challenges',
-    excerpt: 'Explore strategies to build emotional resilience and navigate life\'s ups and downs with confidence.',
-    category: 'Personal Growth',
-    readTime: '6 min read',
-    publishedAt: 'Nov 10, 2024',
-    author: {
-      name: 'Mohana Rupa',
-      role: 'Licensed Therapist & Coach'
-    },
-    image: '/images/resilience-personal-growth.png'
-  },
-  {
-    slug: 'emotional-intelligence-workplace-success',
-    title: 'Emotional Intelligence and Workplace Success',
-    excerpt: 'How developing emotional intelligence can transform your professional relationships and career growth.',
-    category: 'Career Growth',
-    readTime: '8 min read',
-    publishedAt: 'Nov 8, 2024',
-    author: {
-      name: 'Mohana Rupa',
-      role: 'Licensed Therapist & Coach'
-    },
-    image: '/images/emotional-intelligence-workplace.png'
-  },
-  {
-    slug: 'healing-trauma-gentle-approaches',
-    title: 'Healing from Trauma: Gentle Approaches to Recovery',
-    excerpt: 'Understanding trauma responses and exploring gentle, effective methods for healing and recovery.',
-    category: 'Mental Health',
-    readTime: '10 min read',
-    publishedAt: 'Nov 5, 2024',
-    author: {
-      name: 'Mohana Rupa',
-      role: 'Licensed Therapist & Coach'
-    },
-    image: '/images/healing-trauma.png'
-  },
-  {
-    slug: 'setting-healthy-boundaries',
-    title: 'Setting Healthy Boundaries in Relationships',
-    excerpt: 'Learn to establish and maintain healthy boundaries that protect your wellbeing while nurturing relationships.',
-    category: 'Relationships',
-    readTime: '6 min read',
-    publishedAt: 'Nov 2, 2024',
-    author: {
-      name: 'Mohana Rupa',
-      role: 'Licensed Therapist & Coach'
-    },
-    image: '/images/healthy-boundaries.png'
-  }
-]
+import { getAllBlogPosts } from '@/lib/firebase-utils'
+import { BlogPost } from '@/types'
 
 const categories = ['All', 'Mental Health', 'Relationships', 'Personal Growth', 'Career Growth']
 
 export default function BlogPage() {
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+  const [activeCategory, setActiveCategory] = useState('All')
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const data = await getAllBlogPosts()
+        // Sort by published date
+        const sorted = data
+          .filter(p => p.status === 'published')
+          .sort((a, b) => {
+            const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0
+            const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0
+            return dateB - dateA
+          })
+        setPosts(sorted)
+      } catch (error) {
+        console.error("Failed to fetch blog posts:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchPosts()
+  }, [])
+
+  const filteredPosts = activeCategory === 'All' 
+    ? posts 
+    : posts.filter(post => post.category === activeCategory)
   return (
     <main>
       <Header />
@@ -133,7 +66,12 @@ export default function BlogPage() {
             {categories.map((category) => (
               <button
                 key={category}
-                className="px-6 py-3 rounded-full text-xs font-montserrat tracking-widest uppercase font-semibold transition-all duration-300 bg-white text-charcoal hover:bg-emerald hover:text-white shadow-sm border border-charcoal/5"
+                onClick={() => setActiveCategory(category)}
+                className={`px-6 py-3 rounded-full text-xs font-montserrat tracking-widest uppercase font-semibold transition-all duration-300 shadow-sm border border-charcoal/5 ${
+                  activeCategory === category 
+                    ? 'bg-emerald text-white' 
+                    : 'bg-white text-charcoal hover:bg-emerald/10'
+                }`}
               >
                 {category}
               </button>
@@ -146,53 +84,65 @@ export default function BlogPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {blogPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex h-full">
-                <article className="bg-white rounded-[20px] overflow-hidden shadow-soft group-hover:shadow-medium transition-all duration-500 border border-charcoal/5 flex flex-col w-full">
-                  {/* Featured Image */}
-                  <div className="h-56 relative overflow-hidden bg-background">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700 ease-in-out"
-                    />
-                    <div className="absolute top-4 right-4">
-                      <span className="text-[10px] font-montserrat tracking-widest uppercase font-bold text-white bg-charcoal/80 backdrop-blur-sm px-4 py-2 rounded-full">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-8 flex flex-col flex-1">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 font-semibold">{post.publishedAt}</span>
-                      <span className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 font-semibold">{post.readTime}</span>
+            {loading ? (
+              <div className="col-span-full text-center py-12">
+                <p className="text-charcoal/40 text-lg font-montserrat">Loading latest insights...</p>
+              </div>
+            ) : filteredPosts.length > 0 ? (
+              filteredPosts.map((post) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex h-full">
+                  <article className="bg-white rounded-[20px] overflow-hidden shadow-soft group-hover:shadow-medium transition-all duration-500 border border-charcoal/5 flex flex-col w-full">
+                    {/* Featured Image */}
+                    <div className="h-56 relative overflow-hidden bg-background">
+                      <img
+                        src={post.image || '/images/default-blog.png'}
+                        alt={post.title}
+                        className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                      />
+                      <div className="absolute top-4 right-4">
+                        <span className="text-[10px] font-montserrat tracking-widest uppercase font-bold text-white bg-charcoal/80 backdrop-blur-sm px-4 py-2 rounded-full">
+                          {post.category}
+                        </span>
+                      </div>
                     </div>
 
-                    <h3 className="text-2xl font-awesome-serif text-charcoal mb-4 uppercase tracking-wide group-hover:text-emerald transition-colors leading-snug">
-                      {post.title}
-                    </h3>
+                    {/* Content */}
+                    <div className="p-8 flex flex-col flex-1">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 font-semibold">
+                          {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Draft'}
+                        </span>
+                        <span className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 font-semibold">{post.readTime}</span>
+                      </div>
 
-                    <p className="text-sm font-montserrat text-charcoal/70 font-medium leading-relaxed mb-8 flex-1">
-                      {post.excerpt}
-                    </p>
+                      <h3 className="text-2xl font-awesome-serif text-charcoal mb-4 uppercase tracking-wide group-hover:text-emerald transition-colors leading-snug">
+                        {post.title}
+                      </h3>
 
-                    <div className="flex items-center justify-between mt-auto pt-6 border-t border-charcoal/10">
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 bg-background rounded-full flex items-center justify-center mr-3 border border-charcoal/10">
-                          <span className="text-emerald font-awesome-serif text-lg">MR</span>
-                        </div>
-                        <div>
-                          <p className="text-xs font-montserrat font-bold tracking-widest uppercase text-charcoal">{post.author.name}</p>
-                          <p className="text-[10px] font-montserrat tracking-widest uppercase text-charcoal/50 mt-1">{post.author.role}</p>
+                      <p className="text-sm font-montserrat text-charcoal/70 font-medium leading-relaxed mb-8 flex-1">
+                        {post.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between mt-auto pt-6 border-t border-charcoal/10">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 bg-background rounded-full flex items-center justify-center mr-3 border border-charcoal/10">
+                            <span className="text-emerald font-awesome-serif text-lg">MR</span>
+                          </div>
+                          <div>
+                            <p className="text-xs font-montserrat font-bold tracking-widest uppercase text-charcoal">{post.author}</p>
+                            <p className="text-[10px] font-montserrat tracking-widest uppercase text-charcoal/50 mt-1">Licensed Therapist & Coach</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </article>
-              </Link>
-            ))}
+                  </article>
+                </Link>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-charcoal/40 text-lg font-montserrat">No articles found in this category.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

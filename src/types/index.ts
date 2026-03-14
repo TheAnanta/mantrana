@@ -49,3 +49,45 @@ export interface BookingData {
   clientPhone: string
   notes?: string
 }
+
+export interface BlogPost {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  content: string
+  category: string
+  status: 'draft' | 'published' | 'scheduled'
+  publishedAt?: string
+  author: string
+  readTime: string
+  image?: string
+  tags: string[]
+  createdAt: string
+  updatedAt: string
+}
+
+export interface Testimonial {
+  id: string
+  name: string
+  text: string
+  rating: number
+  location?: string
+  service?: string
+  date: string
+  status: 'pending' | 'approved' | 'rejected'
+  featured?: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface SiteSettings {
+  announcementBanner: {
+    text: string
+    linkText: string
+    linkUrl: string
+    backgroundColor?: string
+    textColor?: string
+    enabled: boolean
+  }
+}

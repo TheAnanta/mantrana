@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { getSiteSettings } from "@/lib/firebase-utils";
+import { SiteSettings } from "@/types";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -20,14 +22,32 @@ export default function Header() {
   const route = usePathname();
   const isHomePage = route === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
 
+  useEffect(() => {
+    async function fetchSettings() {
+      try {
+        const data = await getSiteSettings();
+        setSettings(data);
+      } catch (error) {
+        console.error("Failed to fetch settings:", error);
+      }
+    }
+    fetchSettings();
+  }, []);
 
   return (
     <header className={`fixed top-0 w-full z-50 shadow-sm bg-background transition-all`}>
-      <div className="bg-emerald text-white text-center py-2 text-xs md:text-sm tracking-wide">
-        Discover clarity and balance in your life. <Link href="/book" className="underline font-semibold ml-1 mr-1 hover:text-teal transition-colors">Book a session today.</Link>{" "}|{" "}
-        ✨ Special Offer: First session only at ₹299! Book now to get started.
-      </div>
+      {settings?.announcementBanner.enabled && (
+        <div
+          className="text-center py-2 text-xs md:text-sm tracking-wide px-4"
+          style={{
+            backgroundColor: settings.announcementBanner.backgroundColor || "#8DA399",
+            color: settings.announcementBanner.textColor || "#FFFFFF",
+          }}
+          dangerouslySetInnerHTML={{ __html: settings.announcementBanner.text }}
+        />
+      )}
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}

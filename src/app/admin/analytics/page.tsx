@@ -2,41 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-
-interface AnalyticsData {
-  pageViews: {
-    total: number
-    thisMonth: number
-    lastMonth: number
-    change: number
-  }
-  visitors: {
-    total: number
-    thisMonth: number
-    lastMonth: number
-    change: number
-  }
-  topPages: Array<{
-    page: string
-    views: number
-    percentage: number
-  }>
-  topSources: Array<{
-    source: string
-    visitors: number
-    percentage: number
-  }>
-  conversions: {
-    appointments: number
-    contactForms: number
-    newsletterSignups: number
-  }
-  monthlyData: Array<{
-    month: string
-    views: number
-    visitors: number
-  }>
-}
+import { getAnalyticsData, AnalyticsData } from '@/lib/firebase-utils'
 
 export default function AnalyticsPage() {
   const router = useRouter()
@@ -51,51 +17,16 @@ export default function AnalyticsPage() {
       return
     }
 
-    // Simulate loading analytics data
-    setTimeout(() => {
-      setData({
-        pageViews: {
-          total: 12847,
-          thisMonth: 2847,
-          lastMonth: 2156,
-          change: 32.1
-        },
-        visitors: {
-          total: 8234,
-          thisMonth: 1743,
-          lastMonth: 1412,
-          change: 23.4
-        },
-        topPages: [
-          { page: 'Home', views: 4256, percentage: 33.1 },
-          { page: 'Services', views: 2847, percentage: 22.2 },
-          { page: 'About', views: 1925, percentage: 15.0 },
-          { page: 'Blog', views: 1456, percentage: 11.3 },
-          { page: 'Testimonials', views: 892, percentage: 6.9 },
-          { page: 'Contact', views: 756, percentage: 5.9 },
-        ],
-        topSources: [
-          { source: 'Google', visitors: 3456, percentage: 45.2 },
-          { source: 'Direct', visitors: 2134, percentage: 27.9 },
-          { source: 'Social Media', visitors: 987, percentage: 12.9 },
-          { source: 'Referrals', visitors: 654, percentage: 8.6 },
-          { source: 'Email', visitors: 423, percentage: 5.5 },
-        ],
-        conversions: {
-          appointments: 23,
-          contactForms: 45,
-          newsletterSignups: 89
-        },
-        monthlyData: [
-          { month: 'Jul', views: 1890, visitors: 1234 },
-          { month: 'Aug', views: 2156, visitors: 1412 },
-          { month: 'Sep', views: 2234, visitors: 1456 },
-          { month: 'Oct', views: 2456, visitors: 1598 },
-          { month: 'Nov', views: 2847, visitors: 1743 },
-          { month: 'Dec', views: 2234, visitors: 1456 }, // Partial month
-        ]
-      })
-    }, 500)
+    const fetchData = async () => {
+      try {
+        const analyticsData = await getAnalyticsData(timeRange)
+        setData(analyticsData)
+      } catch (error) {
+        console.error("Failed to fetch analytics:", error)
+      }
+    }
+
+    fetchData()
   }, [router, timeRange])
 
   if (!data) {
@@ -207,7 +138,7 @@ export default function AnalyticsPage() {
         <div className="bg-white p-6 rounded-lg shadow-soft">
           <h3 className="text-lg font-medium text-charcoal mb-4">Top Pages</h3>
           <div className="space-y-4">
-            {data.topPages.map((page, index) => (
+            {data.topPages.map((page: any, index: number) => (
               <div key={page.page} className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <span className="text-sm font-medium text-charcoal/40">#{index + 1}</span>
@@ -233,7 +164,7 @@ export default function AnalyticsPage() {
         <div className="bg-white p-6 rounded-lg shadow-soft">
           <h3 className="text-lg font-medium text-charcoal mb-4">Traffic Sources</h3>
           <div className="space-y-4">
-            {data.topSources.map((source, index) => (
+            {data.topSources.map((source: any, index: number) => (
               <div key={source.source} className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <span className="text-sm font-medium text-charcoal/40">#{index + 1}</span>
@@ -260,8 +191,8 @@ export default function AnalyticsPage() {
       <div className="bg-white p-6 rounded-lg shadow-soft">
         <h3 className="text-lg font-medium text-charcoal mb-6">Monthly Trends</h3>
         <div className="flex items-end justify-between h-48 space-x-2">
-          {data.monthlyData.map((month, index) => {
-            const maxViews = Math.max(...data.monthlyData.map(m => m.views))
+          {data.monthlyData.map((month: any, index: number) => {
+            const maxViews = Math.max(...data.monthlyData.map((m: any) => m.views))
             const height = (month.views / maxViews) * 100
 
             return (

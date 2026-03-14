@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { User as FirebaseUser, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { User as FirebaseUser, onAuthStateChanged, signInWithPopup, signOut, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, googleProvider } from '@/lib/firebase'
 import { createUser, getUser } from '@/lib/firebase-utils'
 import { User } from '@/types'
@@ -11,6 +11,7 @@ interface AuthContextType {
   firebaseUser: FirebaseUser | null
   loading: boolean
   signInWithGoogle: () => Promise<void>
+  signInWithEmail: (email: string, pass: string) => Promise<void>
   logout: () => Promise<void>
 }
 
@@ -66,6 +67,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }
 
+  const signInWithEmail = async (email: string, pass: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, pass)
+    } catch (error) {
+      console.error('Error signing in with Email:', error)
+      throw error
+    }
+  }
+
   const logout = async () => {
     try {
       await signOut(auth)
@@ -80,6 +90,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     firebaseUser,
     loading,
     signInWithGoogle,
+    signInWithEmail,
     logout
   }
 

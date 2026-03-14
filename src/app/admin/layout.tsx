@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: "📊" },
@@ -10,6 +11,7 @@ const navigation = [
   { name: "Testimonials", href: "/admin/testimonials", icon: "💬" },
   { name: "Blog Posts", href: "/admin/blog", icon: "📝" },
   { name: "Analytics", href: "/admin/analytics", icon: "📈" },
+  { name: "Settings", href: "/admin/settings", icon: "⚙️" },
 ];
 
 export default function AdminLayout({
@@ -19,6 +21,16 @@ export default function AdminLayout({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, logout } = useAuth();
+
+  const userInitials = user?.displayName
+    ? user.displayName
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+    : "AD";
 
   // Don't show sidebar on login page
   if (pathname === "/admin/login") {
@@ -70,10 +82,10 @@ export default function AdminLayout({
               </Link>
               <button
                 className="w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md text-charcoal/60 hover:bg-teal/5 hover:text-charcoal"
-                onClick={() => {
-                  // Simple logout - in a real app, this would clear auth tokens
+                onClick={async () => {
                   if (confirm("Are you sure you want to logout?")) {
-                    window.location.href = "/admin/login";
+                    await logout();
+                    router.push("/admin/login");
                   }
                 }}
               >
@@ -128,9 +140,9 @@ export default function AdminLayout({
             <div className="ml-4 flex items-center md:ml-6">
               <div className="relative">
                 <div className="flex items-center space-x-3">
-                  <span className="text-sm text-gray-700">Welcome, Mohana</span>
+                  <span className="text-sm text-gray-700">Welcome, {user?.displayName || "Admin"}</span>
                   <div className="h-8 w-8 bg-teal/20 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-medium text-teal">MR</span>
+                    <span className="text-sm font-medium text-teal">{userInitials}</span>
                   </div>
                 </div>
               </div>

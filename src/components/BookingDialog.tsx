@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { TimeSlot, Service } from "@/types";
@@ -254,36 +255,39 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
           <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr]">
 
             {/* Left Sidebar - Brand Info */}
-            <div className="bg-white border-r border-gray-200 p-8 lg:p-12">
+            <div className="bg-white border-r border-charcoal/5 p-8 lg:p-12">
               <div className="mb-8">
-                <div className="w-16 h-16 rounded-full bg-moss/10 flex items-center justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-teal/10 flex items-center justify-center mb-6">
                   <span className="text-2xl">🧠</span>
                 </div>
-                <h3 className="text-sm font-semibold text-gray-500 mb-2">
+                <h3 className="text-xs font-semibold text-charcoal/40 mb-2 uppercase tracking-widest font-montserrat">
                   Mantrana | Therapy by Mohana Rupa
                 </h3>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                <h2 className="text-3xl font-bold text-charcoal mb-4 font-awesome-serif uppercase tracking-wider">
                   {service.title}
                 </h2>
-                <div className="flex items-center text-gray-600 mb-4">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center text-charcoal/60 mb-6 font-montserrat font-medium">
+                  <svg className="w-5 h-5 mr-3 text-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>{service.duration} min</span>
                 </div>
                 {selectedSlot && (
-                  <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-start mb-2">
-                      <svg className="w-5 h-5 mr-2 text-gray-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          {formatTimeRange(selectedSlot.time, service.duration)}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {formatDate(selectedSlot.date)}
-                        </p>
+                  <div className="mt-8 p-6 bg-background rounded-2xl border border-charcoal/5 shadow-inner">
+                    <div className="font-montserrat">
+                      <p className="text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-3">Selected Slot</p>
+                      <div className="flex items-start">
+                        <svg className="w-5 h-5 mr-3 text-emerald flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <div>
+                          <p className="text-base font-bold text-charcoal">
+                            {formatTimeRange(selectedSlot.time, service.duration)}
+                          </p>
+                          <p className="text-sm text-charcoal/60 font-medium">
+                            {formatDate(selectedSlot.date)}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -292,12 +296,12 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
             </div>
 
             {/* Right Content Area */}
-            <div className="p-8 lg:p-12 max-h-[80vh] overflow-y-auto">
+            <div className="p-8 lg:p-12 max-h-[85vh] overflow-y-auto bg-white">
 
               {/* Close Button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                className="absolute top-6 right-6 text-charcoal/20 hover:text-charcoal transition-colors p-2 hover:bg-charcoal/5 rounded-full"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -307,51 +311,53 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
               {/* Step 1: Date & Time Selection */}
               {currentStep === "date-time-selection" && (
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                    Select a Date & Time
-                  </h1>
-                  <p className="text-gray-600 mb-8">
-                    Choose an available time slot for your session
-                  </p>
+                  <div className="mb-10">
+                    <h1 className="text-4xl font-bold text-charcoal mb-3 font-awesome-serif uppercase tracking-wider">
+                      Select Date & Time
+                    </h1>
+                    <p className="text-charcoal/60 font-montserrat font-medium">
+                      Choose an available time slot for your session
+                    </p>
+                  </div>
 
-                  <div className="grid grid-cols-1 gap-8">
+                  <div className="grid grid-cols-1 gap-10">
                     {/* Custom Calendar */}
                     <div>
-                      <div className="bg-white rounded-lg border border-gray-200 p-4">
+                      <div className="bg-white rounded-[20px] border border-charcoal/5 p-6 shadow-soft">
                         {/* Calendar Header */}
-                        <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center justify-between mb-8">
                           <button
                             onClick={previousMonth}
-                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            className="p-3 hover:bg-emerald/10 text-emerald rounded-xl transition-all"
                           >
-                            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                             </svg>
                           </button>
-                          <h3 className="text-lg font-semibold text-gray-900">
+                          <h3 className="text-xl font-bold text-charcoal font-awesome-serif tracking-wide">
                             {currentMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                           </h3>
                           <button
                             onClick={nextMonth}
-                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            className="p-3 hover:bg-emerald/10 text-emerald rounded-xl transition-all"
                           >
-                            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                             </svg>
                           </button>
                         </div>
 
                         {/* Day Labels */}
-                        <div className="grid grid-cols-7 gap-2 mb-2">
+                        <div className="grid grid-cols-7 gap-3 mb-4">
                           {["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"].map((day) => (
-                            <div key={day} className="text-center text-xs font-semibold text-gray-600 py-2">
+                            <div key={day} className="text-center text-[10px] font-bold text-charcoal/30 py-2 tracking-widest font-montserrat">
                               {day}
                             </div>
                           ))}
                         </div>
 
                         {/* Calendar Days */}
-                        <div className="grid grid-cols-7 gap-2">
+                        <div className="grid grid-cols-7 gap-3">
                           {(() => {
                             const { daysInMonth, startDayOfWeek, year, month } = getDaysInMonth(currentMonth);
                             const days = [];
@@ -377,19 +383,19 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                                   onClick={() => handleDateClick(date)}
                                   disabled={!isAvailable}
                                   className={`
-                                    aspect-square rounded-full flex items-center justify-center text-sm font-medium transition-all relative
+                                    aspect-square rounded-full flex items-center justify-center text-sm font-bold transition-all relative font-montserrat
                                     ${isSelected
-                                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                                      ? 'bg-emerald text-white shadow-lg shadow-emerald/20 translate-y-[-2px]'
                                       : isAvailable
-                                        ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
-                                        : 'text-gray-400 cursor-not-allowed'
+                                        ? 'bg-emerald/5 text-emerald hover:bg-emerald hover:text-white hover:translate-y-[-2px]'
+                                        : 'text-charcoal/10 cursor-not-allowed'
                                     }
-                                    ${isTodayDate && !isSelected ? 'ring-2 ring-blue-600 ring-offset-2' : ''}
+                                    ${isTodayDate && !isSelected ? 'ring-2 ring-emerald ring-offset-2' : ''}
                                   `}
                                 >
                                   {day}
                                   {isTodayDate && !isSelected && (
-                                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></span>
+                                    <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-emerald rounded-full"></span>
                                   )}
                                 </button>
                               );
@@ -403,31 +409,33 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
 
                     {/* Time Slots */}
                     {selectedDate && (
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-3">
-                          Available Times
+                      <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <label className="block text-xs font-bold text-charcoal/40 mb-5 uppercase tracking-widest font-montserrat">
+                          Available Times for {formatDate(selectedDate)}
                         </label>
                         {loadingSlots ? (
-                          <div className="text-center py-8">
-                            <div className="animate-spin h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
-                            <p className="text-gray-600">Loading slots...</p>
+                          <div className="text-center py-12">
+                            <div className="animate-spin h-10 w-10 border-b-2 border-emerald mx-auto mb-4"></div>
+                            <p className="text-charcoal/40 font-montserrat text-sm">Finding best moments...</p>
                           </div>
                         ) : availableSlots.length > 0 ? (
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-80 overflow-y-auto pr-2">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-h-80 overflow-y-auto pr-3 scrollbar-custom">
                             {availableSlots.map((slot, idx) => (
                               <button
                                 key={idx}
                                 onClick={() => handleTimeSlotSelect(slot)}
-                                className="px-4 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+                                className="px-5 py-4 border-2 border-emerald/20 text-emerald rounded-2xl hover:bg-emerald hover:text-white hover:border-emerald transition-all font-bold font-montserrat text-sm"
                               >
                                 {formatTime(slot.time)}
                               </button>
                             ))}
                           </div>
                         ) : (
-                          <p className="text-center py-8 text-gray-500">
-                            No slots available for this date
-                          </p>
+                          <div className="text-center py-12 bg-background rounded-[20px] border border-dashed border-charcoal/10">
+                            <p className="text-charcoal/40 font-montserrat font-medium">
+                              No slots available for this date
+                            </p>
+                          </div>
                         )}
                       </div>
                     )}
@@ -437,71 +445,73 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
 
               {/* Step 2: Enter Details */}
               {currentStep === "enter-details" && selectedSlot && (
-                <div>
+                <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                   <button
                     onClick={handleBackToDateTime}
-                    className="flex items-center text-blue-600 hover:text-blue-700 mb-6"
+                    className="flex items-center text-emerald hover:text-emerald/80 mb-10 font-bold text-xs uppercase tracking-widest transition-all hover:translate-x-[-4px]"
                   >
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                     </svg>
-                    Back
+                    Selection
                   </button>
 
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                    Enter Details
+                  <h1 className="text-4xl font-bold text-charcoal mb-3 font-awesome-serif uppercase tracking-wider">
+                    Your Details
                   </h1>
-                  <p className="text-gray-600 mb-8">
+                  <p className="text-charcoal/60 font-montserrat font-medium mb-10">
                     Please fill in your information to complete the booking
                   </p>
 
                   {error && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <p className="text-red-800 text-sm">{error}</p>
+                    <div className="mb-8 p-5 bg-red-50 border border-red-100 rounded-2xl animate-shake">
+                      <p className="text-red-800 text-sm font-medium font-montserrat">{error}</p>
                     </div>
                   )}
 
-                  <div className="space-y-5">
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        value={bookingForm.clientName}
-                        onChange={(e) =>
-                          setBookingForm((prev) => ({
-                            ...prev,
-                            clientName: e.target.value,
-                          }))
-                        }
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Enter your full name"
-                        required
-                      />
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-xs font-bold text-charcoal/40 mb-3 uppercase tracking-widest font-montserrat">
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          value={bookingForm.clientName}
+                          onChange={(e) =>
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              clientName: e.target.value,
+                            }))
+                          }
+                          className="w-full px-5 py-4 bg-background border border-charcoal/10 rounded-2xl focus:ring-2 focus:ring-emerald/20 focus:border-emerald outline-none transition-all font-montserrat font-medium"
+                          placeholder="Jane Doe"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-charcoal/40 mb-3 uppercase tracking-widest font-montserrat">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          value={bookingForm.clientEmail}
+                          onChange={(e) =>
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              clientEmail: e.target.value,
+                            }))
+                          }
+                          className="w-full px-5 py-4 bg-background border border-charcoal/10 rounded-2xl focus:ring-2 focus:ring-emerald/20 focus:border-emerald outline-none transition-all font-montserrat font-medium"
+                          placeholder="jane@example.com"
+                          required
+                        />
+                      </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        value={bookingForm.clientEmail}
-                        onChange={(e) =>
-                          setBookingForm((prev) => ({
-                            ...prev,
-                            clientEmail: e.target.value,
-                          }))
-                        }
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="email@example.com"
-                        required
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
+                      <label className="block text-xs font-bold text-charcoal/40 mb-3 uppercase tracking-widest font-montserrat">
                         Phone Number *
                       </label>
                       <input
@@ -513,15 +523,15 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                             clientPhone: e.target.value,
                           }))
                         }
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-5 py-4 bg-background border border-charcoal/10 rounded-2xl focus:ring-2 focus:ring-emerald/20 focus:border-emerald outline-none transition-all font-montserrat font-medium"
                         placeholder="+91 XXXXX XXXXX"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-900 mb-2">
-                        Please share anything that will help prepare for our meeting.
+                      <label className="block text-xs font-bold text-charcoal/40 mb-3 uppercase tracking-widest font-montserrat">
+                        Add Notes (Optional)
                       </label>
                       <textarea
                         value={bookingForm.notes}
@@ -532,19 +542,19 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                           }))
                         }
                         rows={4}
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Any specific topics you'd like to discuss..."
+                        className="w-full px-5 py-4 bg-background border border-charcoal/10 rounded-2xl focus:ring-2 focus:ring-emerald/20 focus:border-emerald outline-none transition-all font-montserrat font-medium resize-none"
+                        placeholder="What's on your mind? Share any topics you'd like to discuss..."
                       ></textarea>
                     </div>
 
-                    <div className="pt-4">
-                      <p className="text-sm text-gray-600 mb-4">
-                        By proceeding, you confirm that you have read and agree to our terms of use and privacy notice.
+                    <div className="pt-6">
+                      <p className="text-xs text-charcoal/40 font-montserrat mb-8 font-medium leading-relaxed">
+                        By proceeding, you confirm that you have read and agree to our <Link href="/terms" className="text-emerald hover:underline">Terms of Use</Link> and <Link href="/privacy" className="text-emerald hover:underline">Privacy Notice</Link>.
                       </p>
                       <button
                         onClick={handleBooking}
                         disabled={isBooking}
-                        className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-lg"
+                        className="w-full bg-charcoal text-white py-5 rounded-2xl font-bold hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm uppercase tracking-widest shadow-lg shadow-charcoal/20"
                       >
                         {isBooking ? (
                           <span className="flex items-center justify-center">
@@ -568,10 +578,10 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                               ></path>
                             </svg>
-                            Processing...
+                            Confirming...
                           </span>
                         ) : (
-                          "Schedule Event"
+                          "Book Appointment"
                         )}
                       </button>
                     </div>
@@ -581,30 +591,30 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
 
               {/* Step 3: Success */}
               {currentStep === "success" && (
-                <div className="text-center py-12">
-                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="text-center py-12 animate-in zoom-in duration-500">
+                  <div className="w-24 h-24 bg-emerald/10 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+                    <svg className="w-12 h-12 text-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                  <h1 className="text-4xl font-bold text-charcoal mb-4 font-awesome-serif uppercase tracking-wider">
                     Confirmed!
                   </h1>
-                  <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                    Your appointment has been successfully booked. You will receive a confirmation email shortly.
+                  <p className="text-charcoal/60 font-montserrat font-medium mb-12 max-w-md mx-auto leading-relaxed">
+                    Your session has been successfully booked. A confirmation email with details is on its way to your inbox.
                   </p>
-                  <div className="flex gap-4 justify-center flex-wrap">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={() => router.push("/account")}
-                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                      className="px-8 py-5 bg-emerald text-white rounded-2xl hover:bg-emerald/90 transition-all font-bold text-xs uppercase tracking-widest shadow-lg shadow-emerald/20"
                     >
-                      View My Appointments
+                      View My Dashboard
                     </button>
                     <button
                       onClick={handleClose}
-                      className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                      className="px-8 py-5 bg-background text-charcoal/60 rounded-2xl hover:bg-charcoal/5 transition-all font-bold text-xs uppercase tracking-widest border border-charcoal/10"
                     >
-                      Close
+                      Close Window
                     </button>
                   </div>
                 </div>

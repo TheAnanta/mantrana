@@ -1,8 +1,9 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { getAllAppointments, getAllBlogPosts, getAllTestimonials } from "@/lib/firebase-utils";
+import { useAuth } from "@/contexts/AuthContext";
+import { Appointment } from "@/types";
 
 interface DashboardStats {
   totalAppointments: number;
@@ -15,6 +16,7 @@ interface DashboardStats {
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const { user } = useAuth();
   const [stats, setStats] = useState<DashboardStats>({
     totalAppointments: 0,
     appointmentsToday: 0,
@@ -23,27 +25,68 @@ export default function AdminDashboard() {
     pageViews: 0,
     newClients: 0,
   });
+  const [recentActivity, setRecentActivity] = useState<any[]>([]);
+  const [todayAppointments, setTodayAppointments] = useState<Appointment[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simple auth check - in a real app, this would be proper JWT validation
-    const isAuthenticated = localStorage.getItem("admin_authenticated");
-    if (!isAuthenticated) {
-      router.push("/admin/login");
-      return;
-    }
+    const fetchStats = async () => {
+      try {
+        const [appointments, posts, testimonials] = await Promise.all([
+          getAllAppointments(),
+          getAllBlogPosts(),
+          getAllTestimonials()
+        ]);
 
-    // Simulate loading dashboard stats
-    setTimeout(() => {
-      setStats({
-        totalAppointments: 127,
-        appointmentsToday: 5,
-        totalTestimonials: 6,
-        totalBlogPosts: 12,
-        pageViews: 2847,
-        newClients: 23,
-      });
-    }, 500);
-  }, [router]);
+        const today = new Date().toISOString().split('T')[0];
+        const appointmentsTodayList = appointments.filter(a => a.date === today);
+        
+        setTodayAppointments(appointmentsTodayList);
+
+        setStats({
+          totalAppointments: appointments.length,
+          appointmentsToday: appointmentsTodayList.length,
+          totalTestimonials: testimonials.length,
+          totalBlogPosts: posts.length,
+          pageViews: 2847,
+          newClients: 23,
+        });
+
+        // Construct unified activity feed
+        const activity: any[] = [];
+        
+        // Latest 3 appointments
+        appointments.slice(0, 3).forEach(app => {
+          activity.push({
+            type: "appointment",
+            message: `New appointment booked by ${app.clientName}`,
+            time: new Date(app.createdAt).toLocaleDateString(),
+            timestamp: new Date(app.createdAt).getTime()
+          });
+        });
+
+        // Latest 2 testimonials
+        testimonials.filter(t => t.status === 'pending').slice(0, 2).forEach(test => {
+          activity.push({
+            type: "testimonial",
+            message: `New testimonial pending approval from ${test.name}`,
+            time: new Date(test.createdAt).toLocaleDateString(),
+            timestamp: new Date(test.createdAt).getTime()
+          });
+        });
+
+        // Sort by timestamp
+        setRecentActivity(activity.sort((a, b) => b.timestamp - a.timestamp).slice(0, 5));
+
+      } catch (error) {
+        console.error("Failed to fetch dashboard stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   const quickActions = [
     {
@@ -76,34 +119,12 @@ export default function AdminDashboard() {
     },
   ];
 
-  const recentActivity = [
-    {
-      type: "appointment",
-      message: "New appointment booked by Sarah M.",
-      time: "2 hours ago",
-    },
-    {
-      type: "testimonial",
-      message: "Testimonial submitted by Raj K.",
-      time: "4 hours ago",
-    },
-    {
-      type: "blog",
-      message: 'Blog post "Managing Anxiety" published',
-      time: "1 day ago",
-    },
-    {
-      type: "contact",
-      message: "New contact form submission",
-      time: "2 days ago",
-    },
-  ];
 
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
       <div className="bg-gradient-to-r from-teal to-emerald rounded-lg p-6 text-white">
-        <h1 className="text-2xl font-bold mb-2 font-awesome-serif">Welcome back, Mohana! 👋</h1>
+        <h1 className="text-2xl font-bold mb-2 font-awesome-serif">Welcome back, {user?.displayName?.split(' ')[0] || "Mohana"}! 👋</h1>
         <p className="text-moss-100">
           Here's what's happening with your practice today.
         </p>
@@ -262,37 +283,23 @@ export default function AdminDashboard() {
           Today's Schedule
         </h2>
         <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div>
-              <p className="font-medium text-gray-900">
-                Sarah M. - Individual Therapy
-              </p>
-              <p className="text-sm text-gray-600">
-                Anxiety management session
-              </p>
+          {todayAppointments.length > 0 ? todayAppointments.map((app) => (
+            <div key={app.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div>
+                <p className="font-medium text-gray-900">
+                  {app.clientName} - {app.service}
+                </p>
+                <p className="text-sm text-gray-600">
+                  {app.notes || "No additional notes"}
+                </p>
+              </div>
+              <span className="text-sm font-medium text-teal">{app.time}</span>
             </div>
-            <span className="text-sm font-medium text-teal">10:00 AM</span>
-          </div>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div>
-              <p className="font-medium text-gray-900">
-                John D. - Life Coaching
-              </p>
-              <p className="text-sm text-gray-600">
-                Career transition planning
-              </p>
+          )) : (
+            <div className="text-center py-6 text-gray-500 italic">
+              No appointments scheduled for today.
             </div>
-            <span className="text-sm font-medium text-teal">2:00 PM</span>
-          </div>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div>
-              <p className="font-medium text-gray-900">
-                Couples Session - Ram & Sita
-              </p>
-              <p className="text-sm text-gray-600">Communication workshop</p>
-            </div>
-            <span className="text-sm font-medium text-teal">4:00 PM</span>
-          </div>
+          )}
         </div>
         <div className="mt-4 pt-4 border-t border-gray-200">
           <Link

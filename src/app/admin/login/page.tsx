@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('')
@@ -9,22 +10,19 @@ export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { signInWithEmail } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
 
-    // Simple authentication - in a real app, this would be server-side
-    if (email === 'mohana@mantrana.com' && password === 'mantrana2024') {
-      // Simulate API call
-      setTimeout(() => {
-        localStorage.setItem('admin_authenticated', 'true')
-        router.push('/admin')
-        setIsLoading(false)
-      }, 1000)
-    } else {
-      setError('Invalid email or password')
+    try {
+      await signInWithEmail(email, password)
+      router.push('/admin')
+    } catch (err: any) {
+      setError(err.message || 'Failed to sign in. Please check your credentials.')
+    } finally {
       setIsLoading(false)
     }
   }
