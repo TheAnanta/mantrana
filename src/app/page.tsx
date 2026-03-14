@@ -51,7 +51,7 @@ function HeroSection() {
       </div>
       <img
         src="/images/rupa_doodle.svg"
-        className="absolute top-40 right-0 w-32 md:w-48 lg:w-64"
+        className="absolute top-72 right-0 w-32 md:w-48 lg:w-64"
       />
     </section>
   );
