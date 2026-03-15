@@ -104,11 +104,11 @@ export default function AdminLoginPage() {
             </button>
           </div>
 
-          <div className="text-center">
+          {/* <div className="text-center">
             <p className="text-xs text-gray-500">
               Demo credentials: mohana@mantrana.com / mantrana2024
             </p>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>
