@@ -245,6 +245,31 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
+
+                <div className="flex items-start">
+                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                    <span className="text-xl opacity-70">🌐</span>
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
+                      Social Media
+                    </h3>
+                    <div className="flex space-x-4">
+                      <Link
+                        href="https://www.instagram.com/mantrana_therapy/"
+                        className="text-xs font-montserrat tracking-widest uppercase text-emerald mt-1 font-semibold hover:text-emerald/80 inline-block"
+                      >
+                        Instagram →
+                      </Link>
+                      <Link
+                        href="https://www.linkedin.com/in/mohana-rupa-6a42a0233/"
+                        className="text-xs font-montserrat tracking-widest uppercase text-emerald mt-1 font-semibold hover:text-emerald/80 inline-block"
+                      >
+                        LinkedIn →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Quick Actions */}
@@ -281,11 +306,10 @@ export default function ContactPage() {
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container-custom">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">FAQ</div>
-            <h2 className="text-4xl lg:text-5xl text-charcoal mb-6 font-awesome-serif uppercase tracking-wide">
+          <div className="mb-12">
+            <h3 className="text-2xl lg:text-3xl text-charcoal mb-4 font-awesome-serif uppercase tracking-wide">
               Frequently Asked Questions
-            </h2>
+            </h3>
             <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">
               It's natural to have questions before you start — here's where clarity begins.
             </p>
@@ -326,7 +350,7 @@ export default function ContactPage() {
               {
                 question: "How much does therapy cost?",
                 answer:
-                  "The first 40-minute session costs just ₹299 — a space to understand what brings you here and plan your therapy journey. After that, pricing varies based on the depth of the issue and the mode of therapy. Online sessions are slightly lower, while in-person sessions may differ to include space and resource costs.",
+                  "The first 40-minute session costs just ₹299 — a space to understand what brings you here and plan your therapy journey. After that, pricing depends on the depth of the issue and the mode of therapy. You can connect with me directly to know more about the session fees.",
               },
               {
                 question: "Is therapy only for people in distress?",
