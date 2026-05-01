@@ -151,7 +151,7 @@ We are open to collaborate with individuals, groups, and organizations passionat
     },
     {
       name: "Regular Session",
-      price: "₹2,500",
+      price: "Connect to know more",
       description:
         "Standard 60-minute therapy session for continued support and growth.",
       features: [
@@ -305,11 +305,15 @@ We are open to collaborate with individuals, groups, and organizations passionat
                   <h3 className="text-2xl font-awesome-serif text-charcoal uppercase tracking-wider mb-4">
                     {pkg.name}
                   </h3>
-                  <div className="mb-4">
-                    <span className="text-4xl font-awesome-serif text-emerald">
-                      {pkg.price}
-                    </span>
-                  </div>
+                      {pkg.price === "Connect to know more" ? (
+                        <span className="text-xl font-montserrat text-emerald font-semibold italic">
+                          {pkg.price}
+                        </span>
+                      ) : (
+                        <span className="text-4xl font-awesome-serif text-emerald">
+                          {pkg.price}
+                        </span>
+                      )}
                   <p className="text-sm md:text-base font-montserrat text-charcoal/80 font-medium leading-relaxed">{pkg.description}</p>
                 </div>
 

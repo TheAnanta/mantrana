@@ -45,7 +45,7 @@ export default function BookPage() {
       id: "regular-session",
       title: "Regular Session",
       duration: 60,
-      price: "₹2,500",
+      price: "Connect to know more",
       description:
         "Standard 60-minute therapy session for continued support and growth.",
       features: [
@@ -191,14 +191,18 @@ export default function BookPage() {
                     <h3 className="text-2xl font-awesome-serif text-charcoal mb-2 uppercase tracking-wide">
                       {service.title}
                     </h3>
-                    <div className="mb-6">
-                      <span className="text-4xl font-awesome-serif text-emerald">
-                        {service.price}
-                      </span>
+                      {service.price === "Connect to know more" ? (
+                        <span className="text-xl font-montserrat text-emerald font-semibold italic block mb-4">
+                          {service.price}
+                        </span>
+                      ) : (
+                        <span className="text-4xl font-awesome-serif text-emerald block mb-4">
+                          {service.price}
+                        </span>
+                      )}
                       <div className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-2 font-semibold">
                         {service.duration} minutes
                       </div>
-                    </div>
 
                     <p className="text-sm font-montserrat text-charcoal/70 font-medium mb-8 leading-relaxed">
                       {service.description}

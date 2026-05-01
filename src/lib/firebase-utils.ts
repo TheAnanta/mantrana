@@ -314,37 +314,40 @@ export const getAvailableSlots = async (date: string, service: string): Promise<
   const duration = serviceDurations[service] || 60
   const slots: TimeSlot[] = []
   
-  // Working hours: 9:00 AM to 6:00 PM
-  const startHour = 9
-  const endHour = 18
+  // Working hours: 10:00 AM to 7:00 PM
+  const startHour = 10
+  const endHour = 19
   
   for (let hour = startHour; hour < endHour; hour++) {
-    for (let minute = 0; minute < 60; minute += 30) {
-      const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
+    const time = `${hour.toString().padStart(2, '0')}:00`
+    
+    // Check if this slot conflicts with any booked appointment
+    const isAvailable = !bookedSlots.some(booked => {
+      const bookedStart = timeToMinutes(booked.time)
+      const bookedEnd = bookedStart + booked.duration
+      const slotStart = timeToMinutes(time)
+      const slotEnd = slotStart + duration
       
-      // Check if this slot conflicts with any booked appointment
-      const isAvailable = !bookedSlots.some(booked => {
-        const bookedStart = timeToMinutes(booked.time)
-        const bookedEnd = bookedStart + booked.duration
-        const slotStart = timeToMinutes(time)
-        const slotEnd = slotStart + duration
-        
-        // Check for overlap
-        return (slotStart < bookedEnd && slotEnd > bookedStart)
+      // Check for overlap
+      return (slotStart < bookedEnd && slotEnd > bookedStart)
+    })
+    
+    // Make sure the slot doesn't go beyond working hours
+    const slotEndTime = minutesToTime(timeToMinutes(time) + duration)
+    const slotEndHour = parseInt(slotEndTime.split(':')[0])
+    const slotEndMin = parseInt(slotEndTime.split(':')[1])
+    
+    // Total minutes in slotEndTime
+    const totalEndMinutes = slotEndHour * 60 + slotEndMin
+    const totalWorkingEndMinutes = endHour * 60
+    
+    if (totalEndMinutes <= totalWorkingEndMinutes && isAvailable) {
+      slots.push({
+        date,
+        time,
+        available: true,
+        duration
       })
-      
-      // Make sure the slot doesn't go beyond working hours
-      const slotEndTime = minutesToTime(timeToMinutes(time) + duration)
-      const slotEndHour = parseInt(slotEndTime.split(':')[0])
-      
-      if (slotEndHour <= endHour && isAvailable) {
-        slots.push({
-          date,
-          time,
-          available: true,
-          duration
-        })
-      }
     }
   }
   
