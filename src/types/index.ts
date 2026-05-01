@@ -61,6 +61,7 @@ export interface BlogPost {
   publishedAt?: string
   author: string
   readTime: string
+  aiSummary?: string,
   image?: string
   tags: string[]
   createdAt: string

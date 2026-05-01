@@ -2,116 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import AISummaryToggle from "@/components/AISummaryToggle";
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  category: string;
-  readTime: string;
-  publishedAt: string;
-  author: {
-    name: string;
-    role: string;
-    bio: string;
-  };
-  tags: string[];
-  aiSummary: string;
-  image: string;
-}
-
-// Sample blog post data - in a real app this would come from a CMS or API
-const getBlogPost = (slug: string): BlogPost | null => {
-  const posts: Record<string, BlogPost> = {
-    "understanding-anxiety-managing-daily-stress": {
-      slug: "understanding-anxiety-managing-daily-stress",
-      title: "Understanding Anxiety: A Guide to Managing Daily Stress",
-      excerpt:
-        "Learn practical techniques to manage anxiety and create a more peaceful daily routine with evidence-based strategies.",
-      content: `
-        <p>Anxiety affects millions of people worldwide, yet many struggle to find effective ways to manage their daily stress. In this comprehensive guide, we'll explore practical, evidence-based techniques that can help you develop a more peaceful relationship with anxiety.</p>
-
-        <h2>What is Anxiety?</h2>
-        <p>Anxiety is a natural response to stress, but when it becomes overwhelming or persistent, it can significantly impact our daily lives. Understanding the physiological and psychological aspects of anxiety is the first step toward managing it effectively.</p>
-
-        <h2>Recognizing the Signs</h2>
-        <p>Common symptoms of anxiety include:</p>
-        <ul>
-          <li>Racing thoughts or excessive worry</li>
-          <li>Physical tension in the body</li>
-          <li>Difficulty concentrating</li>
-          <li>Sleep disturbances</li>
-          <li>Irritability or restlessness</li>
-        </ul>
-
-        <h2>Practical Techniques for Managing Anxiety</h2>
-        
-        <h3>1. Breathing Exercises</h3>
-        <p>Deep, controlled breathing can activate your body's relaxation response. Try the 4-7-8 technique: inhale for 4 counts, hold for 7, and exhale for 8.</p>
-
-        <h3>2. Mindfulness and Grounding</h3>
-        <p>Practice the 5-4-3-2-1 grounding technique: identify 5 things you can see, 4 things you can touch, 3 things you can hear, 2 things you can smell, and 1 thing you can taste.</p>
-
-        <h3>3. Progressive Muscle Relaxation</h3>
-        <p>Systematically tense and release different muscle groups to become more aware of physical tension and learn to release it.</p>
-
-        <h3>4. Cognitive Restructuring</h3>
-        <p>Challenge anxious thoughts by asking: Is this thought realistic? What evidence supports or contradicts it? What would I tell a friend in this situation?</p>
-
-        <h2>Creating a Daily Routine</h2>
-        <p>Consistency can be incredibly helpful for managing anxiety. Consider incorporating these elements into your daily routine:</p>
-        <ul>
-          <li>Regular sleep schedule</li>
-          <li>Physical exercise</li>
-          <li>Mindfulness or meditation practice</li>
-          <li>Healthy nutrition</li>
-          <li>Limited caffeine and alcohol</li>
-        </ul>
-
-        <h2>When to Seek Professional Help</h2>
-        <p>If anxiety is significantly impacting your daily life, relationships, or work, it may be time to seek professional support. A licensed therapist can help you develop personalized strategies and, if needed, explore additional treatment options.</p>
-
-        <p>Remember, managing anxiety is a journey, not a destination. Be patient with yourself as you develop these new skills and habits.</p>
-      `,
-      category: "Mental Health",
-      readTime: "5 min read",
-      publishedAt: "Nov 15, 2024",
-      author: {
-        name: "Mohana Rupa",
-        role: "Licensed Therapist & Coach",
-        bio: "Mohana Rupa is a licensed therapist and certified life coach with over 8 years of experience helping individuals overcome anxiety, depression, and life challenges.",
-      },
-      tags: [
-        "anxiety",
-        "stress management",
-        "mental health",
-        "mindfulness",
-        "coping strategies",
-      ],
-      aiSummary:
-        "This article provides a comprehensive guide to understanding and managing anxiety through evidence-based techniques including breathing exercises, mindfulness, and cognitive restructuring. It emphasizes the importance of daily routines and professional support when needed.",
-      image: "/images/anxiety-stress-management.png",
-    },
-  };
-
-  return posts[slug] || null;
-};
-
-const relatedPosts = [
-  {
-    slug: "power-of-mindfulness-in-relationships",
-    title: "The Power of Mindfulness in Relationships",
-    category: "Relationships",
-    readTime: "7 min read",
-  },
-  {
-    slug: "building-resilience-tools-for-challenges",
-    title: "Building Resilience: Tools for Life's Challenges",
-    category: "Personal Growth",
-    readTime: "6 min read",
-  },
-];
+import { getBlogPostBySlug, getAllBlogPosts } from "@/lib/firebase-utils";
 
 export default async function BlogPostPage({
   params,
@@ -119,7 +10,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     return (
@@ -143,6 +34,35 @@ export default async function BlogPostPage({
     );
   }
 
+  // Fetch all posts to find related ones
+  const allPosts = await getAllBlogPosts();
+  const relatedPosts = allPosts
+    .filter(p => p.slug !== slug && p.status === 'published')
+    .filter(p => p.category === post.category || true) // Prioritize same category, but allow others
+    .sort((a, b) => {
+        // Boost posts in the same category
+        if (a.category === post.category && b.category !== post.category) return -1;
+        if (a.category !== post.category && b.category === post.category) return 1;
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    })
+    .slice(0, 2);
+
+  // Ensure tags is always an array to avoid TypeErrors
+  const tags = post.tags || [];
+  
+  // Handle author object/string to fit current design
+  const authorData = typeof post.author === 'string' 
+    ? {
+        name: post.author,
+        role: "Licensed Therapist & Coach",
+        bio: "Mohana Rupa is a licensed therapist and certified life coach with over 8 years of experience helping individuals overcome anxiety, depression, and life challenges."
+      }
+    : {
+        name: (post.author as any).name || 'Mohana Rupa',
+        role: (post.author as any).role || "Licensed Therapist & Coach",
+        bio: (post.author as any).bio || "Mohana Rupa is a licensed therapist and certified life coach..."
+      };
+
   return (
     <main>
       <Header />
@@ -161,7 +81,7 @@ export default async function BlogPostPage({
                 Blog
               </Link>
               <span>/</span>
-              <span className="text-charcoal">{post.title}</span>
+              <span className="text-charcoal truncate">{post.title}</span>
             </nav>
 
             {/* Category and Meta */}
@@ -169,7 +89,9 @@ export default async function BlogPostPage({
               <span className="text-sm font-medium text-emerald bg-emerald/10 px-3 py-1 rounded-full">
                 {post.category}
               </span>
-              <span className="text-sm text-gray-500">{post.publishedAt}</span>
+              <span className="text-sm text-gray-500">
+                {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : new Date(post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </span>
               <span className="text-sm text-gray-500">•</span>
               <span className="text-sm text-gray-500">{post.readTime}</span>
             </div>
@@ -185,13 +107,13 @@ export default async function BlogPostPage({
                 <span className="text-emerald font-semibold">MR</span>
               </div>
               <div>
-                <p className="font-medium text-charcoal">{post.author.name}</p>
-                <p className="text-sm text-gray-500">{post.author.role}</p>
+                <p className="font-medium text-charcoal">{authorData.name}</p>
+                <p className="text-sm text-gray-500">{authorData.role}</p>
               </div>
             </div>
 
             {/* AI Summary Toggle */}
-            <AISummaryToggle aiSummary={post.aiSummary} />
+            {post.aiSummary && <AISummaryToggle aiSummary={post.aiSummary} />}
           </div>
         </div>
       </section>
@@ -202,7 +124,7 @@ export default async function BlogPostPage({
           <div className="max-w-4xl mx-auto">
             <div className="h-96 lg:h-[500px] rounded-2xl overflow-hidden">
               <img
-                src={post.image}
+                src={post.image || '/images/default-blog.png'}
                 alt={post.title}
                 className="w-full h-full object-cover"
               />
@@ -228,19 +150,21 @@ export default async function BlogPostPage({
             />
 
             {/* Tags */}
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald hover:text-white transition-colors cursor-pointer"
-                  >
-                    #{tag}
-                  </span>
-                ))}
+            {tags.length > 0 && (
+              <div className="mt-12 pt-8 border-t border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                  {tags.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-emerald hover:text-white transition-colors cursor-pointer"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Author Bio */}
             <div className="mt-12 p-8 bg-lavender/10 rounded-2xl">
@@ -250,13 +174,13 @@ export default async function BlogPostPage({
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-charcoal mb-2">
-                    {post.author.name}
+                    {authorData.name}
                   </h3>
                   <p className="text-emerald font-medium mb-3">
-                    {post.author.role}
+                    {authorData.role}
                   </p>
                   <p className="text-gray-700 leading-relaxed">
-                    {post.author.bio}
+                    {authorData.bio}
                   </p>
                 </div>
               </div>
@@ -311,53 +235,60 @@ export default async function BlogPostPage({
       </section>
 
       {/* Related Posts */}
-      <section className="py-16 bg-white">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
-              Related Posts
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
-                  <article className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                    <div className="bg-teal/20 h-48 relative">
-                      <div className="absolute bottom-4 left-4">
-                        <span className="text-xs font-medium text-emerald bg-white/90 px-3 py-1 rounded-full">
-                          {relatedPost.category}
-                        </span>
+      {relatedPosts.length > 0 && (
+        <section className="py-16 bg-white">
+          <div className="container-custom">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                Related Posts
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {relatedPosts.map((relatedPost) => (
+                  <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
+                    <article className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                      <div className="bg-teal/20 h-48 relative overflow-hidden">
+                        {relatedPost.image ? (
+                            <img src={relatedPost.image} alt={relatedPost.title} className="w-full h-full object-cover" />
+                        ) : (
+                            <div className="w-full h-full bg-emerald/10" />
+                        )}
+                        <div className="absolute bottom-4 left-4">
+                          <span className="text-xs font-medium text-emerald bg-white/90 px-3 py-1 rounded-full">
+                            {relatedPost.category}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-charcoal mb-3 leading-tight hover:text-emerald transition-colors">
-                        {relatedPost.title}
-                      </h3>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-500">
-                          {relatedPost.readTime}
-                        </span>
-                        <svg
-                          className="w-5 h-5 text-gray-400"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-charcoal mb-3 leading-tight hover:text-emerald transition-colors line-clamp-2">
+                          {relatedPost.title}
+                        </h3>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-500">
+                            {relatedPost.readTime}
+                          </span>
+                          <svg
+                            className="w-5 h-5 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                </Link>
-              ))}
+                    </article>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <Footer />
     </main>
