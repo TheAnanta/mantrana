@@ -1,14 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-
-export const metadata = {
-  title: "Contact Mantrana | Get in Touch with Mohana Rupa",
-  description:
-    "Contact Mohana Rupa for therapy, counselling, and coaching services. Book a session, ask questions, or schedule a free consultation call.",
-};
+import { getSiteSettings } from "@/lib/firebase-utils";
+import { SiteSettings } from "@/types";
 
 export default function ContactPage() {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    async function fetchSettings() {
+      try {
+        const data = await getSiteSettings();
+        setSettings(data);
+      } catch (error) {
+        console.error("Failed to fetch settings:", error);
+      }
+    }
+    fetchSettings();
+  }, []);
+
+  const socialLinks = settings?.socialLinks || {};
+  const contactInfo = settings?.contactInfo || {};
+
+  const socialPlatforms = [
+    { name: "Instagram", href: socialLinks.instagram },
+    { name: "LinkedIn", href: socialLinks.linkedin },
+    { name: "Facebook", href: socialLinks.facebook },
+    { name: "Twitter", href: socialLinks.twitter },
+    { name: "YouTube", href: socialLinks.youtube },
+  ].filter(p => p.href);
+
   return (
     <main>
       <Header />
@@ -183,93 +207,110 @@ export default function ContactPage() {
               </h2>
 
               <div className="space-y-8 mb-12">
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
-                    <span className="text-xl opacity-70">📧</span>
+                {contactInfo.email && (
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                      <span className="text-xl opacity-70">📧</span>
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
+                        Email
+                      </h3>
+                      <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">
+                        <Link href={`mailto:${contactInfo.email}`} className="hover:text-emerald transition-colors">
+                          {contactInfo.email}
+                        </Link>
+                      </p>
+                    </div>
                   </div>
-                  <div className="pt-1">
-                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
-                      Email
-                    </h3>
-                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">hello@mantrana.com</p>
-                    <p className="text-sm font-montserrat text-charcoal/80 font-medium">info@mantrana.com</p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
-                    <span className="text-xl opacity-70">📱</span>
+                {contactInfo.phone && (
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                      <span className="text-xl opacity-70">📱</span>
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
+                        Phone
+                      </h3>
+                      <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">
+                        <Link href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`} className="hover:text-emerald transition-colors">
+                          {contactInfo.phone}
+                        </Link>
+                      </p>
+                      <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
+                        Mon-Fri, 9 AM - 6 PM IST
+                      </p>
+                    </div>
                   </div>
-                  <div className="pt-1">
-                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
-                      Phone
-                    </h3>
-                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">+91 8328438589</p>
-                    <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
-                      Mon-Fri, 9 AM - 6 PM IST
-                    </p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
-                    <span className="text-xl opacity-70">💬</span>
-                  </div>
-                  <div className="pt-1">
-                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
-                      WhatsApp
-                    </h3>
-                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">+91 8328438589</p>
-                    <Link
-                      href="https://wa.me/918328438589"
-                      className="text-xs font-montserrat tracking-widest uppercase text-emerald mt-1 font-semibold hover:text-emerald/80 inline-block"
-                    >
-                      Send Message →
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
-                    <span className="text-xl opacity-70">📍</span>
-                  </div>
-                  <div className="pt-1">
-                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
-                      Location
-                    </h3>
-                    <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">
-                      Visakhapatnam, Andhra Pradesh
-                    </p>
-                    <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
-                      Online sessions available worldwide
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
-                    <span className="text-xl opacity-70">🌐</span>
-                  </div>
-                  <div className="pt-1">
-                    <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
-                      Social Media
-                    </h3>
-                    <div className="flex space-x-4">
+                {socialLinks.whatsapp && (
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                      <span className="text-xl opacity-70">💬</span>
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
+                        WhatsApp
+                      </h3>
                       <Link
-                        href="https://www.instagram.com/mantrana_therapy/"
-                        className="text-xs font-montserrat tracking-widest uppercase text-emerald mt-1 font-semibold hover:text-emerald/80 inline-block"
+                        href={socialLinks.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-montserrat text-charcoal/80 font-medium pb-1 block hover:text-emerald transition-colors"
                       >
-                        Instagram →
-                      </Link>
-                      <Link
-                        href="https://www.linkedin.com/in/mohana-rupa-6a42a0233/"
-                        className="text-xs font-montserrat tracking-widest uppercase text-emerald mt-1 font-semibold hover:text-emerald/80 inline-block"
-                      >
-                        LinkedIn →
+                        Send Message →
                       </Link>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {contactInfo.address && (
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                      <span className="text-xl opacity-70">📍</span>
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
+                        Location
+                      </h3>
+                      <p className="text-sm font-montserrat text-charcoal/80 font-medium pb-1">
+                        {contactInfo.address}
+                      </p>
+                      <p className="text-xs font-montserrat tracking-widest uppercase text-charcoal/50 mt-1 font-semibold">
+                        Online sessions available worldwide
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {socialPlatforms.length > 0 && (
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-background rounded-full flex items-center justify-center mr-4 flex-shrink-0 border border-charcoal/10">
+                      <span className="text-xl opacity-70">🌐</span>
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-sm font-awesome-serif text-charcoal uppercase tracking-wider mb-2">
+                        Social Media
+                      </h3>
+                      <div className="flex flex-wrap gap-x-4 gap-y-2">
+                        {socialPlatforms.map((platform) => (
+                          <Link
+                            key={platform.name}
+                            href={platform.href!}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-montserrat tracking-widest uppercase text-emerald mt-1 font-semibold hover:text-emerald/80 inline-block"
+                          >
+                            {platform.name} →
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Quick Actions */}
@@ -284,18 +325,24 @@ export default function ContactPage() {
                   >
                     Book a Session
                   </Link>
-                  <Link
-                    href="mailto:hello@mantrana.com"
-                    className="bg-white hover:bg-gray-50 border border-charcoal/10 text-charcoal transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full text-center block"
-                  >
-                    Send Email
-                  </Link>
-                  <Link
-                    href="https://wa.me/918328438589"
-                    className="bg-white hover:bg-gray-50 border border-charcoal/10 text-charcoal transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full text-center block"
-                  >
-                    WhatsApp Chat
-                  </Link>
+                  {contactInfo.email && (
+                    <Link
+                      href={`mailto:${contactInfo.email}`}
+                      className="bg-white hover:bg-gray-50 border border-charcoal/10 text-charcoal transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full text-center block"
+                    >
+                      Send Email
+                    </Link>
+                  )}
+                  {socialLinks.whatsapp && (
+                    <Link
+                      href={socialLinks.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white hover:bg-gray-50 border border-charcoal/10 text-charcoal transition-colors font-semibold text-xs uppercase tracking-widest px-8 py-4 rounded-full w-full text-center block"
+                    >
+                      WhatsApp Chat
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

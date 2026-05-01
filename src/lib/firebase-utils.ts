@@ -234,6 +234,19 @@ export const getSiteSettings = async (): Promise<SiteSettings> => {
       backgroundColor: '#8DA399',
       textColor: '#FFFFFF',
       enabled: true
+    },
+    socialLinks: {
+      instagram: "https://instagram.com/mantrana.therapy",
+      facebook: "",
+      linkedin: "",
+      twitter: "",
+      whatsapp: "https://wa.me/91XXXXXXXXXX",
+      youtube: ""
+    },
+    contactInfo: {
+      email: "hello@mantrana.com",
+      phone: "+91 8328438589",
+      address: "Visakhapatnam, Andhra Pradesh"
     }
   }
   return defaultSettings

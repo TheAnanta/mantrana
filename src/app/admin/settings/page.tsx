@@ -195,6 +195,150 @@ export default function SettingsPage() {
           </div>
         </div>
 
+        {/* Social Links Section */}
+        <div className="bg-white p-6 rounded-lg shadow-soft space-y-6">
+          <h2 className="text-lg font-semibold text-charcoal font-awesome-serif flex items-center">
+            <span className="mr-2">🔗</span> Social Media Links
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Instagram URL</label>
+              <input
+                type="url"
+                value={settings?.socialLinks?.instagram || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  socialLinks: { ...(prev.socialLinks || {}), instagram: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="https://instagram.com/..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp URL / Number</label>
+              <input
+                type="text"
+                value={settings?.socialLinks?.whatsapp || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  socialLinks: { ...(prev.socialLinks || {}), whatsapp: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="https://wa.me/..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">LinkedIn URL</label>
+              <input
+                type="url"
+                value={settings?.socialLinks?.linkedin || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  socialLinks: { ...(prev.socialLinks || {}), linkedin: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="https://linkedin.com/in/..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Facebook URL</label>
+              <input
+                type="url"
+                value={settings?.socialLinks?.facebook || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  socialLinks: { ...(prev.socialLinks || {}), facebook: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="https://facebook.com/..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Twitter / X URL</label>
+              <input
+                type="url"
+                value={settings?.socialLinks?.twitter || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  socialLinks: { ...(prev.socialLinks || {}), twitter: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="https://twitter.com/..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">YouTube URL</label>
+              <input
+                type="url"
+                value={settings?.socialLinks?.youtube || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  socialLinks: { ...(prev.socialLinks || {}), youtube: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="https://youtube.com/..."
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Information Section */}
+        <div className="bg-white p-6 rounded-lg shadow-soft space-y-6">
+          <h2 className="text-lg font-semibold text-charcoal font-awesome-serif flex items-center">
+            <span className="mr-2">📞</span> Contact Information
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Primary Email</label>
+              <input
+                type="email"
+                value={settings?.contactInfo?.email || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  contactInfo: { ...(prev.contactInfo || {}), email: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="hello@mantrana.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+              <input
+                type="text"
+                value={settings?.contactInfo?.phone || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  contactInfo: { ...(prev.contactInfo || {}), phone: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="+91 XXXXX XXXXX"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Office Address / Location</label>
+              <input
+                type="text"
+                value={settings?.contactInfo?.address || ''}
+                onChange={(e) => setSettings(prev => prev ? {
+                  ...prev,
+                  contactInfo: { ...(prev.contactInfo || {}), address: e.target.value }
+                } : null)}
+                className="w-full px-3 py-2 border border-teal/20 bg-background rounded-lg focus:outline-none focus:ring-teal focus:border-teal"
+                placeholder="City, State"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="flex justify-end">
           <button
             type="submit"

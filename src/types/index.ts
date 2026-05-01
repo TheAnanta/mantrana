@@ -91,4 +91,17 @@ export interface SiteSettings {
     textColor?: string
     enabled: boolean
   }
+  socialLinks?: {
+    instagram?: string
+    facebook?: string
+    linkedin?: string
+    twitter?: string
+    whatsapp?: string
+    youtube?: string
+  }
+  contactInfo?: {
+    email?: string
+    phone?: string
+    address?: string
+  }
 }
