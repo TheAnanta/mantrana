@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { getApprovedTestimonials, getAllBlogPosts } from "@/lib/firebase-utils";
 import { Testimonial, BlogPost } from "@/types";
+import TestimonialDialog from "@/components/TestimonialDialog";
 
 // Hero Section Component
 function HeroSection() {
@@ -243,6 +244,7 @@ function ServicesSection() {
 function TestimonialsSection() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     async function fetchTestimonials() {
@@ -261,42 +263,87 @@ function TestimonialsSection() {
   if (loading && testimonials.length === 0) return null;
 
   return (
-    <section className="py-16 md:py-24 bg-white" id="testimonials">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <div className="text-xs tracking-widest font-medium font-montserrat text-black/60 mb-2 uppercase">Testimonials</div>
-          <h2 className="text-4xl lg:text-5xl font-awesome-serif text-charcoal mb-6 uppercase tracking-wide">
-            What Clients Say
-          </h2>
-          <p className="text-sm md:text-base font-montserrat uppercase tracking-wider text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
-            Real stories from people who have experienced positive
-            transformation through our services.
-          </p>
+    <section className="py-20 md:py-32 bg-white relative overflow-hidden" id="testimonials">
+      {/* Decorative background element */}
+      <div className="absolute -top-24 -right-24 w-64 h-64 bg-teal/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-terracotta/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div className="container-custom relative z-10">
+        <div className="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+          <div className="max-w-2xl">
+            <div className="text-xs tracking-[0.3em] font-bold font-montserrat text-teal mb-4 uppercase">Voices of Healing</div>
+            <h2 className="text-4xl lg:text-5xl font-awesome-serif text-charcoal mb-6 uppercase tracking-wider leading-tight">
+              Transformative Journeys
+            </h2>
+            <p className="text-base font-montserrat text-charcoal/70 max-w-xl leading-relaxed">
+              Real stories from people who have found clarity, strength, and inner balance through our compassionate guidance.
+            </p>
+          </div>
+          <button
+            onClick={() => setIsDialogOpen(true)}
+            className="group flex items-center gap-3 bg-charcoal text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-teal transition-all duration-500 shadow-xl shadow-charcoal/10"
+          >
+            <span>Share Your Story</span>
+            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={testimonial.id || index} className="bg-background rounded-[30px] p-8 lg:p-12 transition-shadow duration-300">
-              <div className="flex mb-6 text-[#DDA74A]">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className="w-5 h-5 fill-current"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
+
+        {testimonials.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={testimonial.id || index} className="bg-background rounded-[30px] p-8 lg:p-12 transition-shadow duration-300 border border-charcoal/5">
+                <div className="flex mb-6 text-[#DDA74A]">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className="w-5 h-5 fill-current"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-charcoal/80 mb-8 leading-relaxed font-montserrat italic font-medium">
+                  "{testimonial.text}"
+                </p>
+                <div className="flex items-center justify-between">
+                  <p className="font-semibold text-charcoal font-montserrat uppercase tracking-wider text-sm">
+                    — {testimonial.name}
+                  </p>
+                  {testimonial.service && (
+                    <span className="text-[10px] font-bold text-teal uppercase tracking-widest bg-teal/5 px-3 py-1 rounded-full">
+                      {testimonial.service}
+                    </span>
+                  )}
+                </div>
               </div>
-              <p className="text-charcoal/80 mb-8 leading-relaxed font-montserrat italic font-medium">
-                "{testimonial.text}"
-              </p>
-              <p className="font-semibold text-charcoal font-montserrat uppercase tracking-wider text-sm">
-                — {testimonial.name}
-              </p>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-background rounded-[40px] p-20 text-center border-2 border-dashed border-charcoal/10">
+            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-sm">
+              <span className="text-3xl">✨</span>
             </div>
-          ))}
-        </div>
+            <h3 className="text-2xl font-awesome-serif text-charcoal uppercase mb-4 tracking-wide">Ready to hear from you</h3>
+            <p className="text-charcoal/50 font-montserrat max-w-md mx-auto mb-10">
+              We haven't featured any testimonials yet. Be the first to share your experience with Mantrana!
+            </p>
+            <button
+              onClick={() => setIsDialogOpen(true)}
+              className="text-teal font-bold uppercase tracking-widest text-xs border-b-2 border-teal/20 pb-1 hover:border-teal transition-all"
+            >
+              Submit the first testimonial →
+            </button>
+          </div>
+        )}
       </div>
+
+      <TestimonialDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
     </section>
   );
 }
