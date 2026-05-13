@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
@@ -23,7 +23,7 @@ export default function AdminLayout({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
-   const router = useRouter();
+  const router = useRouter();
   const { user, logout, loading } = useAuth();
   const [isVerifying, setIsVerifying] = useState(true);
 
@@ -60,13 +60,13 @@ export default function AdminLayout({
 
   const userInitials = user?.displayName
     ? user.displayName
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
     : "AD";
 
-   // Don't show sidebar on login page
+  // Don't show sidebar on login page
   if (pathname === "/admin/login") {
     return children;
   }
@@ -103,8 +103,8 @@ export default function AdminLayout({
                   key={item.name}
                   href={item.href}
                   className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors ${isActive
-                      ? "bg-teal/10 text-teal"
-                      : "text-charcoal/60 hover:bg-teal/5 hover:text-charcoal"
+                    ? "bg-teal/10 text-teal"
+                    : "text-charcoal/60 hover:bg-teal/5 hover:text-charcoal"
                     }`}
                   onClick={() => setIsSidebarOpen(false)}
                 >
