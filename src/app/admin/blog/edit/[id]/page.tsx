@@ -5,8 +5,11 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { getBlogPost, updateBlogPost, uploadImage } from '@/lib/firebase-utils'
 import { BlogPost } from '@/types'
+import { useAuth } from '@/contexts/AuthContext'
+import { auth } from '@/lib/firebase'
+import { getIdToken } from 'firebase/auth'
 import BlogEditor from '@/components/admin/blog/Editor'
-import { ArrowLeft, Save, Globe, Eye, Image as ImageIcon, X, ChevronRight, Settings, Layout } from 'lucide-react'
+import { ArrowLeft, Save, Globe, Eye, Image as ImageIcon, X, ChevronRight, Settings, Layout, LogOut } from 'lucide-react'
 
 interface EditPostPageProps {
   params: Promise<{ id: string }>
@@ -25,13 +28,13 @@ export default function EditPostPage({ params }: EditPostPageProps) {
   const [existingImage, setExistingImage] = useState('')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  const [uploading, setUploading] = useState(false)
+   const [uploading, setUploading] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const { logout, user, loading: authLoading } = useAuth()
 
-  useEffect(() => {
+   useEffect(() => {
     // Auth check
-    const isAuthenticated = localStorage.getItem('admin_authenticated')
-    if (!isAuthenticated) {
+    if (!authLoading && !user && !localStorage.getItem('admin_authenticated')) {
       router.push('/admin/login')
       return
     }
@@ -56,7 +59,71 @@ export default function EditPostPage({ params }: EditPostPageProps) {
     }
 
     fetchPost()
-  }, [id, router])
+  }, [id, router, user, authLoading])
+
+  useEffect(() => {
+    // Proactive session check every 5 minutes while editing
+    const sessionCheckInterval = setInterval(async () => {
+      if (auth.currentUser) {
+        try {
+          await getIdToken(auth.currentUser, true)
+          console.log("Session verified")
+        } catch (error) {
+          console.error("Session expired during editing:", error)
+          alert("Your session seems to have expired. To avoid losing your work, please copy your content and log in again in a new tab.")
+        }
+      }
+    }, 5 * 60 * 1000)
+
+    return () => clearInterval(sessionCheckInterval)
+  }, [])
+
+  // Auto-save logic
+  useEffect(() => {
+    if (loading) return // Don't auto-save while initial loading
+
+    const autoSaveInterval = setInterval(() => {
+      if (title || content) {
+        const draftData = {
+          title,
+          content,
+          excerpt,
+          category,
+          status,
+          updatedAt: new Date().toISOString()
+        }
+        localStorage.setItem(`blog_edit_draft_${id}`, JSON.stringify(draftData))
+        console.log(`Draft for post ${id} auto-saved`)
+      }
+    }, 2 * 60 * 1000)
+
+    return () => clearInterval(autoSaveInterval)
+  }, [id, title, content, excerpt, category, status, loading])
+
+  // Restore draft after fetch
+  useEffect(() => {
+    if (!loading) {
+      const savedDraft = localStorage.getItem(`blog_edit_draft_${id}`)
+      if (savedDraft) {
+        try {
+          const draft = JSON.parse(savedDraft)
+          const timeAgo = Math.floor((new Date().getTime() - new Date(draft.updatedAt).getTime()) / 60000)
+          
+          if (confirm(`We found unsaved changes for this post from ${timeAgo} minutes ago. Would you like to restore them?`)) {
+            setTitle(draft.title || title)
+            setContent(draft.content || content)
+            setExcerpt(draft.excerpt || excerpt)
+            setCategory(draft.category || category)
+            setStatus(draft.status || status)
+          } else {
+            localStorage.removeItem(`blog_edit_draft_${id}`)
+          }
+        } catch (e) {
+          console.error("Failed to parse draft:", e)
+        }
+      }
+    }
+  }, [loading, id])
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -120,13 +187,26 @@ export default function EditPostPage({ params }: EditPostPageProps) {
         author: 'Mohana Rupa',
       }
 
-      await updateBlogPost(id, postData)
+       await updateBlogPost(id, postData)
+      localStorage.removeItem(`blog_edit_draft_${id}`)
       router.push('/admin/blog')
-    } catch (error) {
+     } catch (error: any) {
       console.error("Failed to update post:", error)
-      alert("Failed to update post. Please check console for details.")
+      if (error.code === 'auth/network-request-failed' || error.code === 'auth/user-token-expired' || error.message?.includes('auth')) {
+        alert("Your session might have expired. Please try logging out and back in.")
+      } else {
+        alert("Failed to update post. Please check your internet connection or console for details.")
+      }
     } finally {
       setUploading(false)
+    }
+  }
+
+  const handleLogout = async () => {
+    if (confirm("Are you sure you want to logout? Any unsaved changes will be lost.")) {
+      localStorage.removeItem('admin_authenticated')
+      await logout()
+      router.push('/admin/login')
     }
   }
 
@@ -200,12 +280,22 @@ export default function EditPostPage({ params }: EditPostPageProps) {
             )}
           </button>
 
-          <button 
+           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className={`p-3 rounded-full transition-all ml-4 ${isSidebarOpen ? 'bg-charcoal text-white' : 'bg-charcoal/5 text-charcoal/40 hover:bg-charcoal/10'}`}
             title="Post Settings"
           >
             <Settings size={20} />
+          </button>
+
+          <div className="w-[1px] h-4 bg-charcoal/10 mx-2" />
+
+          <button 
+            onClick={handleLogout}
+            className="p-3 rounded-full bg-charcoal/5 text-charcoal/40 hover:bg-red-50 hover:text-red-500 transition-all"
+            title="Sign Out"
+          >
+            <LogOut size={20} />
           </button>
         </div>
       </header>

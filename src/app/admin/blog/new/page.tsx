@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createBlogPost, uploadImage } from '@/lib/firebase-utils'
+import { useAuth } from '@/contexts/AuthContext'
+import { auth } from '@/lib/firebase'
+import { getIdToken } from 'firebase/auth'
 import BlogEditor from '@/components/admin/blog/Editor'
-import { ArrowLeft, Save, Globe, Eye, Image as ImageIcon, X, ChevronRight, Settings, Layout } from 'lucide-react'
+import { ArrowLeft, Save, Globe, Eye, Image as ImageIcon, X, ChevronRight, Settings, Layout, LogOut } from 'lucide-react'
 
 export default function NewPostPage() {
   const router = useRouter()
@@ -16,16 +19,76 @@ export default function NewPostPage() {
   const [status, setStatus] = useState<'draft' | 'published'>('draft')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  const [uploading, setUploading] = useState(false)
+   const [uploading, setUploading] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const { logout, user, loading } = useAuth()
 
-  useEffect(() => {
+    useEffect(() => {
     // Auth check
-    const isAuthenticated = localStorage.getItem('admin_authenticated')
-    if (!isAuthenticated) {
+    if (!loading && !user && !localStorage.getItem('admin_authenticated')) {
       router.push('/admin/login')
     }
-  }, [router])
+  }, [user, loading, router])
+
+  useEffect(() => {
+    // Proactive session check every 5 minutes while editing
+    const sessionCheckInterval = setInterval(async () => {
+      if (auth.currentUser) {
+        try {
+          await getIdToken(auth.currentUser, true)
+          console.log("Session verified")
+        } catch (error) {
+          console.error("Session expired during editing:", error)
+          alert("Your session seems to have expired. To avoid losing your work, please copy your content and log in again in a new tab.")
+        }
+      }
+    }, 5 * 60 * 1000)
+
+    return () => clearInterval(sessionCheckInterval)
+  }, [])
+
+  // Auto-save logic
+  useEffect(() => {
+    const autoSaveInterval = setInterval(() => {
+      if (title || content || excerpt) {
+        const draftData = {
+          title,
+          content,
+          excerpt,
+          category,
+          status,
+          updatedAt: new Date().toISOString()
+        }
+        localStorage.setItem('blog_new_draft', JSON.stringify(draftData))
+        console.log("Draft auto-saved to local storage")
+      }
+    }, 2 * 60 * 1000)
+
+    return () => clearInterval(autoSaveInterval)
+  }, [title, content, excerpt, category, status])
+
+  // Restore draft on mount
+  useEffect(() => {
+    const savedDraft = localStorage.getItem('blog_new_draft')
+    if (savedDraft) {
+      try {
+        const draft = JSON.parse(savedDraft)
+        const timeAgo = Math.floor((new Date().getTime() - new Date(draft.updatedAt).getTime()) / 60000)
+        
+        if (confirm(`We found an unsaved draft from ${timeAgo} minutes ago. Would you like to restore it?`)) {
+          setTitle(draft.title || '')
+          setContent(draft.content || '')
+          setExcerpt(draft.excerpt || '')
+          setCategory(draft.category || 'Mental Health')
+          setStatus(draft.status || 'draft')
+        } else {
+          localStorage.removeItem('blog_new_draft')
+        }
+      } catch (e) {
+        console.error("Failed to parse draft:", e)
+      }
+    }
+  }, [])
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -89,13 +152,26 @@ export default function NewPostPage() {
         author: 'Mohana Rupa',
       }
 
-      await createBlogPost(postData)
+       await createBlogPost(postData)
+      localStorage.removeItem('blog_new_draft')
       router.push('/admin/blog')
-    } catch (error) {
+     } catch (error: any) {
       console.error("Failed to create post:", error)
-      alert("Failed to save post. Please check console for details.")
+      if (error.code === 'auth/network-request-failed' || error.code === 'auth/user-token-expired' || error.message?.includes('auth')) {
+        alert("Your session might have expired. Please try logging out and back in.")
+      } else {
+        alert("Failed to save post. Please check your internet connection or console for details.")
+      }
     } finally {
       setUploading(false)
+    }
+  }
+
+  const handleLogout = async () => {
+    if (confirm("Are you sure you want to logout? Any unsaved changes will be lost.")) {
+      localStorage.removeItem('admin_authenticated')
+      await logout()
+      router.push('/admin/login')
     }
   }
 
@@ -151,12 +227,22 @@ export default function NewPostPage() {
             )}
           </button>
 
-          <button 
+           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className={`p-3 rounded-full transition-all ml-4 ${isSidebarOpen ? 'bg-charcoal text-white' : 'bg-charcoal/5 text-charcoal/40 hover:bg-charcoal/10'}`}
             title="Post Settings"
           >
             <Settings size={20} />
+          </button>
+
+          <div className="w-[1px] h-4 bg-charcoal/10 mx-2" />
+
+          <button 
+            onClick={handleLogout}
+            className="p-3 rounded-full bg-charcoal/5 text-charcoal/40 hover:bg-red-50 hover:text-red-500 transition-all"
+            title="Sign Out"
+          >
+            <LogOut size={20} />
           </button>
         </div>
       </header>

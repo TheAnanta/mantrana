@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
+import { auth } from "@/lib/firebase";
+import { getIdToken } from "firebase/auth";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: "📊" },
@@ -21,8 +23,40 @@ export default function AdminLayout({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
-  const { user, logout } = useAuth();
+   const router = useRouter();
+  const { user, logout, loading } = useAuth();
+  const [isVerifying, setIsVerifying] = useState(true);
+
+  useEffect(() => {
+    const verifySession = async () => {
+      if (pathname === "/admin/login") {
+        setIsVerifying(false);
+        return;
+      }
+
+      if (!loading) {
+        if (!user && !localStorage.getItem('admin_authenticated')) {
+          router.push("/admin/login");
+          return;
+        }
+
+        if (user && auth.currentUser) {
+          try {
+            // Force token refresh to verify session is still live in Firebase
+            await getIdToken(auth.currentUser, true);
+          } catch (error) {
+            console.error("Session verification failed:", error);
+            localStorage.removeItem('admin_authenticated');
+            await logout();
+            router.push("/admin/login");
+          }
+        }
+        setIsVerifying(false);
+      }
+    };
+
+    verifySession();
+  }, [user, loading, pathname, router, logout]);
 
   const userInitials = user?.displayName
     ? user.displayName
@@ -32,9 +66,20 @@ export default function AdminLayout({
         .toUpperCase()
     : "AD";
 
-  // Don't show sidebar on login page
+   // Don't show sidebar on login page
   if (pathname === "/admin/login") {
     return children;
+  }
+
+  if (isVerifying || loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="flex flex-col items-center">
+          <div className="h-12 w-12 border-4 border-teal/20 border-t-teal rounded-full animate-spin"></div>
+          <p className="mt-4 text-charcoal/40 font-medium">Verifying session...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -84,6 +129,7 @@ export default function AdminLayout({
                 className="w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md text-charcoal/60 hover:bg-teal/5 hover:text-charcoal"
                 onClick={async () => {
                   if (confirm("Are you sure you want to logout?")) {
+                    localStorage.removeItem('admin_authenticated');
                     await logout();
                     router.push("/admin/login");
                   }
@@ -144,6 +190,31 @@ export default function AdminLayout({
                   <div className="h-8 w-8 bg-teal/20 rounded-full flex items-center justify-center">
                     <span className="text-sm font-medium text-teal">{userInitials}</span>
                   </div>
+                  <button
+                    onClick={async () => {
+                      if (confirm("Are you sure you want to logout?")) {
+                        localStorage.removeItem('admin_authenticated');
+                        await logout();
+                        router.push("/admin/login");
+                      }
+                    }}
+                    className="p-2 text-charcoal/40 hover:text-red-500 transition-colors"
+                    title="Logout"
+                  >
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
