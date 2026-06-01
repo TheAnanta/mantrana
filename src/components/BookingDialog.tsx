@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { TimeSlot, Service } from "@/types";
+import { createAppointment } from "@/lib/firebase-utils";
 
 type BookingStep = "date-time-selection" | "enter-details" | "success";
 
@@ -82,6 +83,29 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
     setError("");
   };
 
+  const getGoogleCalendarUrl = () => {
+    if (!selectedSlot || !service) return "";
+    
+    const [hours, minutes] = selectedSlot.time.split(":").map(Number);
+    const startDate = new Date(selectedSlot.date);
+    startDate.setHours(hours, minutes, 0, 0);
+    
+    const endDate = new Date(startDate.getTime() + selectedSlot.duration * 60000);
+    
+    const formatToGCalString = (date: Date) => {
+      return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    };
+    
+    const startStr = formatToGCalString(startDate);
+    const endStr = formatToGCalString(endDate);
+    
+    const title = encodeURIComponent(`${service.title} - Therapy with Mohana Rupa`);
+    const details = encodeURIComponent(`Therapy & Counselling Session with Mohana Rupa at Mantrana.\n\nName: ${bookingForm.clientName}\nEmail: ${bookingForm.clientEmail}\nPhone: ${bookingForm.clientPhone}\nNotes: ${bookingForm.notes || "None"}\n\nJoin session via link provided in email or dashboard.`);
+    const location = encodeURIComponent("Online (Google Meet / Video Call)");
+    
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startStr}/${endStr}&details=${details}&location=${location}`;
+  };
+
   const handleBooking = async () => {
     if (
       !service ||
@@ -108,31 +132,23 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
     setError("");
 
     try {
-      const response = await fetch("/api/appointments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: user.uid,
-          service: service.title,
-          date: selectedSlot.date,
-          time: selectedSlot.time,
-          duration: selectedSlot.duration,
-          clientName: bookingForm.clientName,
-          clientEmail: bookingForm.clientEmail,
-          clientPhone: bookingForm.clientPhone,
-          notes: bookingForm.notes,
-        }),
+      const appointment = await createAppointment({
+        userId: user.uid,
+        service: service.title,
+        date: selectedSlot.date,
+        time: selectedSlot.time,
+        duration: selectedSlot.duration,
+        clientName: bookingForm.clientName,
+        clientEmail: bookingForm.clientEmail,
+        clientPhone: bookingForm.clientPhone,
+        notes: bookingForm.notes,
       });
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (appointment && appointment.id) {
         setCurrentStep("success");
         sessionStorage.removeItem('pendingBooking');
       } else {
-        setError(data.error || "Failed to book appointment");
+        setError("Failed to book appointment");
       }
     } catch (error) {
       console.error("Booking error:", error);
@@ -604,6 +620,17 @@ export default function BookingDialog({ isOpen, onClose, service }: BookingDialo
                     Your session has been successfully booked. A confirmation email with details is on its way to your inbox.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a
+                      href={getGoogleCalendarUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-8 py-5 bg-teal text-white rounded-2xl hover:bg-teal/90 transition-all font-bold text-xs uppercase tracking-widest shadow-lg shadow-teal/20 flex items-center justify-center gap-2"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      Add to Google Calendar
+                    </a>
                     <button
                       onClick={() => router.push("/account")}
                       className="px-8 py-5 bg-emerald text-white rounded-2xl hover:bg-emerald/90 transition-all font-bold text-xs uppercase tracking-widest shadow-lg shadow-emerald/20"
